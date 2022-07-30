@@ -22,4 +22,6 @@ sudo apt install mc inotify-tools netcat-openbsd flex bison readline-common ncur
 ```
 
 Disable avahi:
-```sudo systemctl disable avahi-daemon.service avahi-daemon.socket```
+```
+sudo systemctl disable avahi-daemon.service avahi-daemon.socket
+```
