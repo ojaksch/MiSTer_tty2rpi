@@ -1,4 +1,4 @@
-# Setting a the Raspberry Pi
+# Setting up a the Raspberry Pi
 
 In this HowTo I assume that you are already familiar with setting up a Raspberry Pi.
 
@@ -16,8 +16,10 @@ and boot up your RPi. Follow the instruction there and setup your user and passw
 
 Update your Raspberry Pi OS and install the following packages (**needs to be reviewed**):
 
-```sudo apt install mc inotify-tools netcat-openbsd flex bison readline-common ncurses-base libreadline-dev libgif-dev \
- libtiff-dev libjpeg62-turbo-dev libexif-dev xorg xserver-xorg-video-fbdev openbox libsdl-image1.2-dev imagemagick vlc feh```
+```
+sudo apt install mc inotify-tools netcat-openbsd flex bison readline-common ncurses-base libreadline-dev libgif-dev \  
+ libtiff-dev libjpeg62-turbo-dev libexif-dev xorg xserver-xorg-video-fbdev openbox libsdl-image1.2-dev imagemagick vlc feh
+```
 
 Disable avahi:
 ```sudo systemctl disable avahi-daemon.service avahi-daemon.socket```
