@@ -11,8 +11,8 @@ Table of Contents
 
 # Hardware
 
-You obviously need a Rasoberry Pi. This is descibed in it's own chapter chapter.  
-I'm using [this display](https://www.amazon.de/dp/B08R5MFN5P) (not an affiliate link) as it's BIG in size, using HMDI and sound amd fits my idea of a Marquee display. 
+You obviously need a Rasoberry Pi. This is descibed in it's own chapter.  
+I'm using [this display](https://www.amazon.de/dp/B08R5MFN5P) (not an affiliate link) as it's BIG in size, using HMDI and sound and fits my idea of a Marquee display. 
 **Any** HDMI display will do in principle, but you'll need to have and use appropriate media files then.
 
 ---
