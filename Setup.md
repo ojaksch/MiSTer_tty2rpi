@@ -2,6 +2,7 @@
 Table of Contents  
 [Setting up a the Raspberry Pi](#software)  
 [Media](#media)  
+[Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
 
 ---
@@ -48,6 +49,14 @@ PATHPIC="${HOME}/p5-fullset"
 PATHVID="${HOME}/Video_Marquees_V1.1"
 ```
 for RPi's SD in your created user's home.
+
+---
+
+# Bugs and things still to do
+
+- No bugs for now (Yikes!)
+
+- Revise and publish the documentation for MAME
 
 ---
 
