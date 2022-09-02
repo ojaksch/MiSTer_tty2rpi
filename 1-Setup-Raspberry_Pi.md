@@ -1,7 +1,7 @@
 
 Table of Contents  
 [Hardware](#hardware)  
-[Setting up a the Raspberry Pi](#software)  
+[Setting up the Raspberry Pi](#software)  
 [The INI files](#the-ini-files)  
 [Media](#media)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
@@ -17,7 +17,7 @@ I'm using [this display](https://www.amazon.de/dp/B08R5MFN5P) (not an affiliate 
 
 ---
 
-# Setting up a the Raspberry Pi
+# Setting up the Raspberry Pi
 
 In this HowTo I assume that you are already familiar with setting up a Raspberry Pi.
 
