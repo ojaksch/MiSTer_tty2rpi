@@ -1,3 +1,6 @@
+Table of Contents..
+[Software](#Setting up a the Raspberry Pi)..
+
 # Setting up a the Raspberry Pi
 
 In this HowTo I assume that you are already familiar with setting up a Raspberry Pi.
