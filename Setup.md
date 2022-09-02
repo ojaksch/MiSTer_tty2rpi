@@ -1,6 +1,9 @@
 
 Table of Contents  
 [Setting up a the Raspberry Pi](#software)  
+[License](#license)..
+
+---
 
 # Setting up a the Raspberry Pi
 
@@ -29,3 +32,10 @@ Disable avahi:
 ```
 sudo systemctl disable avahi-daemon.service avahi-daemon.socket
 ```
+
+---
+
+# License
+
+![CC BY-NC-SA 4.0](../pictures/by-nc-sa.eu.png)  
+[Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
