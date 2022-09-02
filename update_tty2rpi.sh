@@ -75,7 +75,7 @@ if [ "${?}" -gt "0" ]; then
     . "${TTY2RPI_PATH}/tty2rpi-system.ini"
 fi
 
-! [ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && touch /media/fat/tty2rpi/tty2rpi-user.ini
+! [ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/tty2rpi-user.ini" -O /media/fat/tty2rpi/tty2rpi-user.ini
 
 [ -f "${TTY2RPI_PATH}/tty2rpi.ini" ] && mv "${TTY2RPI_PATH}/tty2rpi.ini" "${TTY2RPI_PATH}/tty2rpi.ini.bak"
 [ -f "/media/fat/Scripts/tty2rpi.ini" ] && mv "/media/fat/Scripts/tty2rpi.ini" "${TTY2RPI_PATH}/tty2rpi-user.ini.bak"

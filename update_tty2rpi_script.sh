@@ -99,21 +99,6 @@ fi
 [[ -f /tmp/${DAEMONNAME} ]] && rm /tmp/${DAEMONNAME}
 
 
-# UDEV rule
-wget ${NODEBUG} "${REPOSITORY_URL}/80-ttyusb.rules.example" -O /tmp/80-ttyusb.rules.example
-if ! cmp -s /tmp/80-ttyusb.rules.example ${TTY2RPI_PATH}/80-ttyusb.rules.example; then
-  mv /tmp/80-ttyusb.rules.example ${TTY2RPI_PATH}/80-ttyusb.rules.example
-fi
-if [ -e ${TTY2RPI_PATH}/80-ttyusb.rules ] && ! [ -e /etc/udev/rules.d/80-ttyusb.rules ]; then
-  cp -a ${TTY2RPI_PATH}/80-ttyusb.rules /etc/udev/rules.d/80-ttyusb.rules
-fi
-
-
-# Download the installer to check esp firmware
-cd /tmp
-[ "${TTY2RPI_UPDATE}" = "yes" ] && bash <(wget -qO- ${REPOSITORY_URL}/installer.sh) UPDATER
-
-
 # Check and remount root non-writable if neccessary
 [ "${MOUNTRO}" = "true" ] && /bin/mount -o remount,ro /
 
