@@ -37,9 +37,17 @@ sudo systemctl disable avahi-daemon.service avahi-daemon.socket
 ---
 
 # Media
-
-[Get all the Marquee pictures](https://www.progettosnaps.net/marquees/) from progetto-SNAPS
+You can create and use your own media files or
+[get all the Marquee pictures](https://www.progettosnaps.net/marquees/) from progetto-SNAPS
 [and the Marquee videos](https://www.arcadepunks.com/marquees-digital-marquees-cab-2/#google_vignette) from Arcade Punks
+and store them on you RPi's SD card, on your NAS or wherever you want, as long as they are accessable by the OS' file system. Don't forget to mount the file system 
+if needed and set their destination variables in **$HOME/tty2rpi-user.ini**  
+The default set in **tty2rpi.ini** is
+```
+PATHPIC="${HOME}/p5-fullset"
+PATHVID="${HOME}/Video_Marquees_V1.1"
+```
+for RPi's SD in your created user's home.
 
 ---
 
