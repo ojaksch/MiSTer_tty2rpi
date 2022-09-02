@@ -1,6 +1,6 @@
 
 Table of Contents  
-[Setting up MiSTer](#software)  
+[Setting up MiSTer](#setting-up-mister)  
 [The INI files](#the-ini-files)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
