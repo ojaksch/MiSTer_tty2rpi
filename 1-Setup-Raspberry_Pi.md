@@ -36,12 +36,17 @@ Disable avahi:
 sudo systemctl disable avahi-daemon.service avahi-daemon.socket
 ```
 
-[Get the scripts and daemons](/tty2rpi-setup.tar.gz):
+Get the scripts and daemons:
 ```
 wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/tty2rpi-setup.tar.gz
 ```
 Don't extract it blindly over your existing installation/Root! Use Midnight Commander (mc) to have a look inside the archive and to see 
-what of **your** files have to be changed and which folders can be extracted.
+what of **your** files have to be changed and which folders can be extracted:  
+- /boot/cmdline.txt (edit)
+- /boot/config.txt (edit)
+- /etc/ (extract)
+- /home/ (extract - the user used here is tty2rpi)
+- /usr/ (extract)
 
 ---
 
