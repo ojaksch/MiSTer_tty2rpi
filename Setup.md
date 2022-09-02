@@ -1,7 +1,8 @@
 
 Table of Contents  
 [Setting up a the Raspberry Pi](#software)  
-[License](#license)..
+[Media](#media)  
+[License](#license)  
 
 ---
 
@@ -32,6 +33,13 @@ Disable avahi:
 ```
 sudo systemctl disable avahi-daemon.service avahi-daemon.socket
 ```
+
+---
+
+# Media
+
+[Get all the Marquee pictures](https://www.progettosnaps.net/marquees/) from progetto-SNAPS
+[and the Marquee videos](https://www.arcadepunks.com/marquees-digital-marquees-cab-2/#google_vignette) from Arcade Punks
 
 ---
 
