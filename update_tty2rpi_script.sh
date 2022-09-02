@@ -102,7 +102,7 @@ fi
 # Check and remount root non-writable if neccessary
 [ "${MOUNTRO}" = "true" ] && /bin/mount -o remount,ro /
 
-echo $TTYDEV
+echo "ttydev: $TTYDEV"
 if ! [ "${TTYDEV}" = "/dev/tcp/IP-ADDRESS-OF-RPI/6666" ]; then
   if [ $(pidof ${DAEMONNAME}) ]; then
     echo -e "${fgreen}Restarting init script\n${freset}"
