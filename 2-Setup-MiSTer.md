@@ -10,7 +10,7 @@ Table of Contents
 # Setting up MiSTer
 
 ```
-wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rpi.sh -O - | bash
+wget -q https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rpi.sh -O - | bash
 ```
 
 ---
