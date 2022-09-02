@@ -39,6 +39,7 @@ sudo systemctl disable avahi-daemon.service avahi-daemon.socket
 ---
 
 # Media
+
 You can create and use your own media files or
 [get all the Marquee pictures](https://www.progettosnaps.net/marquees/) from progetto-SNAPS
 [and the Marquee videos](https://www.arcadepunks.com/marquees-digital-marquees-cab-2/#google_vignette) from Arcade Punks
