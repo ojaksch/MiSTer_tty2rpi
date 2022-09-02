@@ -8,6 +8,14 @@
 . /media/fat/tty2rpi/tty2rpi-user.ini
 cd /tmp
 
+if [ "${TTYDEV}" = "/dev/tcp/IP-ADDRESS-OF-RPI/6666" ]; then
+    echo -e "\n${fred} IP address of your RPi unset!"
+    echo -e "Please edit /media/fat/tty2rpi/tty2rpi-user.ini"
+    echo -e "and set the IP address of your Raspberry Pi device, then"
+    echo -e "re-run update_tty2rpi.sh${freset}"
+    exit 1
+fi
+
 # Start
 start() {
     TTY2RPI=$(echo ${TTYDEV} | awk -F "/" '{print $4}')
