@@ -1,7 +1,7 @@
 
 Table of Contents  
 [Hardware](#hardware)  
-[Setting up the Raspberry Pi](#software)  
+[Setting up the Raspberry Pi](#setting-up-the-raspberry-pi)  
 [The INI files](#the-ini-files)  
 [Media](#media)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
