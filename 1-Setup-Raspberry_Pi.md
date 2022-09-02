@@ -84,7 +84,8 @@ The default set in **tty2rpi.ini** is
 PATHPIC="${HOME}/p5-fullset"
 PATHVID="${HOME}/Video_Marquees_V1.1"
 ```
-for RPi's SD in your created user's home.  
+for RPi's SD in your created user's home.
+
 You'll find some additional media files in the folder *media_files_rpi* of this repository. Copy the pictures to your created PATHPIC and 
 *MISTER-MENU.mp4* to PATHVID, but renamed to MENU.mp4 when you are setting up tty2rpi for MiSTer, otherwise, when setting up tty2rpi for 
 MAME, copy *MAME-MENU.mp4* to PATHVID without renaming it.
