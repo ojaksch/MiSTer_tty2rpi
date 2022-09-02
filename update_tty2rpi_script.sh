@@ -112,7 +112,7 @@ if ! [ "${TTYDEV}" = "/dev/tcp/IP-ADDRESS-OF-RPI/6666" ]; then
   fi
 else
   echo -e "\n${fred}Please edit /media/fat/tty2rpi and set the IP address of your Raspberry Pi device, "
-  echo "then re-run update_tty2rpi.sh${freset}"
+  echo -e "then re-run update_tty2rpi.sh${freset}"
 fi
 
 [ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
