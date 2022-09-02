@@ -1,6 +1,6 @@
 
 Table of Contents  
-[Software](#Setting up a the Raspberry Pi)  
+[Setting up a the Raspberry Pi](#software)  
 
 # Setting up a the Raspberry Pi
 
