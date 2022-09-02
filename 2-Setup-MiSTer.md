@@ -26,7 +26,7 @@ tty2rpi-system.ini contains the system wide variables and definitions. Do not ed
 For your own favorite variables please use tty2rpi-user.ini and take over and edit the needed line from tty2rpi-system.ini. All useful variables are commented - see "# Userdata" in tty2rpi
 -system.ini
 
-**IMPORTANT** 
+**IMPORTANT**  
 When setting up tty2rpi for the first time by running *update_tty2rpi.sh*, you'll see a notice to edit tty2rpi-user.ini and set the IP of your RPi there. 
 Change the value **IP-ADDRESS-OF-RPI** to the IP address or FQDN of your RPi and re-run update_tty2rpi.sh
 
