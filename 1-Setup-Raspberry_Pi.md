@@ -53,7 +53,7 @@ Don't extract it blindly over your existing installation/Root! Use Midnight Comm
 what of **your** files have to be changed and which folders can be extracted:  
 - /boot/cmdline.txt (edit)
 - /boot/config.txt (edit)
-- /etc/ (extract)
+- /etc/ (extract, edit **wpa_supplicant.conf**)
 - /home/ (extract - the user used here is tty2rpi)
 - /usr/ (extract)
 
