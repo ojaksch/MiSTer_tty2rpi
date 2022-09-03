@@ -33,11 +33,10 @@ the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.
 Setup a SD card with the downloaded image. Insert the SD into your RPi, connect all needed cables and devices
 and boot up your RPi. Follow the instruction there and setup your user and password. Enable and setup WiFi if you want to use it.
 
-Update your Raspberry Pi OS and install the following packages (**needs to be reviewed**):
+Update your Raspberry Pi OS and install the following packages:
 
 ```
-sudo apt install mc inotify-tools netcat-openbsd flex bison readline-common ncurses-base libreadline-dev libgif-dev \  
- libtiff-dev libjpeg62-turbo-dev libexif-dev xorg xserver-xorg-video-fbdev openbox libsdl-image1.2-dev imagemagick vlc feh
+sudo apt install mc inotify-tools netcat-openbsd flex bison readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc feh
 ```
 
 Disable avahi:
