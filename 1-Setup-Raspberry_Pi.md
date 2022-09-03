@@ -45,6 +45,11 @@ Disable avahi:
 sudo systemctl disable avahi-daemon.service avahi-daemon.socket
 ```
 
+Enable SSH:
+```
+sudo systemctl enable ssh.service
+```
+
 Get the scripts and daemons:
 ```
 wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/tty2rpi-setup.tar.gz
