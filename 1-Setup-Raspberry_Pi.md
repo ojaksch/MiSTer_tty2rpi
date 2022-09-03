@@ -28,7 +28,7 @@ price/power a RPi 3A+
 
 Download the **Raspberry Pi OS Lite** of your choice from https://www.raspberrypi.com/software/operating-systems/
 The usual version is the 32-bit version of the RPi OS for *all* RPi board releases, but if you would like to go
-the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.
+the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.  
 **REMARK**
 I'm currently having an issue with VLC and the 64-bit RPi OS where the videos isn't played at full speed. Needs some investigating.
 
