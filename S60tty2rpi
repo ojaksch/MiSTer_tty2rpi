@@ -1,0 +1,71 @@
+#!/bin/bash
+
+#
+#
+
+! [ "$(dos2unix -ic /media/fat/tty2rpi/*.ini)" = "" ] && dos2unix -k -q /media/fat/tty2rpi/*.ini
+. /media/fat/tty2rpi/tty2rpi-system.ini
+. /media/fat/tty2rpi/tty2rpi-user.ini
+cd /tmp
+
+if [ "${TTYDEV}" = "/dev/tcp/IP-ADDRESS-OF-RPI/6666" ]; then
+    echo -e "\n${fred} IP address of your RPi unset!"
+    echo -e "Please edit /media/fat/tty2rpi/tty2rpi-user.ini"
+    echo -e "and set the IP address of your Raspberry Pi device, then"
+    echo -e "re-run update_tty2rpi.sh${freset}"
+    exit 1
+fi
+
+# Start
+start() {
+    TTY2RPI=$(echo ${TTYDEV} | awk -F "/" '{print $4}')
+    echo "Waiting for ${TTY2RPI} become avaiable"
+    until ping -c1 ${TTY2RPI} >/dev/null 2>&1; do echo -n "." ; sleep 0.2; done
+    echo -e "\nHost ${TTY2RPI} reachable"
+    until (echo "NIL" > /dev/tcp/tty2rpi.com-in.de/6666) 2>/dev/null; do echo -n "." ; sleep 0.2; done
+    echo -e "\nSocket of ${TTY2RPI} available"
+
+    if [[ -x ${DAEMONSCRIPT} ]]; then
+      if [ -e /run/tty2rpi-daemon.pid ] && [ -d /proc/$(</run/tty2rpi-daemon.pid) ]; then
+	echo "${DAEMONNAME} already running"
+	exit 1
+      else
+	echo "Starting ${DAEMONNAME}..."
+	${DAEMONSCRIPT} & echo $! > /run/tty2rpi-daemon.pid
+      fi
+    else
+      echo "${DAEMONSCRIPT} not found!"
+    fi
+}
+
+# Stop
+stop() {
+    echo "Stopping ${DAEMONNAME}..."
+    if [ -e /run/tty2rpi-daemon.pid ]; then
+      PIDDAEMON=$(</run/tty2rpi-daemon.pid)
+      PIDINOTIFY=$(ps -eo pid,ppid,args | grep $(ps | grep tty2rpi | awk 'NR==1{print $1}') | tail -1 | awk '{print $1}')
+      [ ${PIDDAEMON} ] && kill ${PIDDAEMON}
+      [ ${PIDINOTIFY} ] && kill ${PIDINOTIFY}
+      rm -f /run/tty2rpi-daemon.pid
+    fi
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop) 
+        stop
+        ;;
+  restart)
+        stop
+        start
+        ;;
+#  reload)
+#       reload
+#       ;;
+  *)
+#        echo "Usage: $0 {start|stop|restart|reload}"
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+esac
