@@ -22,7 +22,7 @@ start() {
     echo "Waiting for ${TTY2RPI} become avaiable"
     until ping -c1 ${TTY2RPI} >/dev/null 2>&1; do echo -n "." ; sleep 0.2; done
     echo -e "\nHost ${TTY2RPI} reachable"
-    until (echo "NIL" > /dev/tcp/tty2rpi.com-in.de/6666) 2>/dev/null; do echo -n "." ; sleep 0.2; done
+    until (echo "NIL" > ${TTY2RPI}) 2>/dev/null; do echo -n "." ; sleep 0.2; done
     echo -e "\nSocket of ${TTY2RPI} available"
 
     if [[ -x ${DAEMONSCRIPT} ]]; then
