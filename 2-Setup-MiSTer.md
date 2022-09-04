@@ -40,5 +40,5 @@ Change the value **IP-ADDRESS-OF-RPI** to the IP address or FQDN of your RPi and
 
 # License
 
-![CC BY-NC-SA 4.0](pictures/by-nc-sa.eu.png)  
+![CC BY-NC-SA 4.0](by-nc-sa.eu.png)  
 [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)

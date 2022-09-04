@@ -93,7 +93,7 @@ PATHVID="${HOME}/Video_Marquees_V1.1"
 for RPi's SD in your created user's home.
 
 You'll find some additional media files in the folder *media_files_rpi* of this repository. Copy the pictures to your created PATHPIC and 
-*MISTER-MENU.mp4* to PATHVID, but renamed to MENU.mp4 when you are setting up tty2rpi for MiSTer, otherwise, when setting up tty2rpi for 
+*MISTER-MENU.mp4* to PATHVID, but renamed to MENU.png and MENU.mp4 when you are setting up tty2rpi for MiSTer, otherwise, when setting up tty2rpi for 
 MAME, copy *MAME-MENU.mp4* to PATHVID without renaming it.
 
 ---
@@ -108,5 +108,5 @@ MAME, copy *MAME-MENU.mp4* to PATHVID without renaming it.
 
 # License
 
-![CC BY-NC-SA 4.0](pictures/by-nc-sa.eu.png)  
+![CC BY-NC-SA 4.0](by-nc-sa.eu.png)  
 [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
