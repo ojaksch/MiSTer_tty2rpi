@@ -33,7 +33,8 @@ the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.
 I'm currently having an issue with VLC and the 64-bit RPi OS where the videos aren't played at full speed. Needs some investigating.
 
 Setup a SD card with the downloaded image. Insert the SD into your RPi, connect all needed cables and devices
-and boot up your RPi. Follow the instruction there and setup your user and password. Enable and setup WiFi if you want to use it.
+and boot up your RPi. Follow the instruction there and setup your user and password. For simplicity you can create a user **tty2rpi** (see also at end of this paragraph). 
+Enable and setup WiFi if you want to use it.
 
 Update your Raspberry Pi OS and install the following packages:
 
@@ -57,9 +58,16 @@ wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/tty2rpi-setup
 ```
 Don't extract it blindly over your existing installation/Root! Use Midnight Commander (mc) to have a look inside the archive and to see 
 what of **your** files have to be changed and which folders can be extracted:  
-- /boot/cmdline.txt (edit)
-- /boot/config.txt (edit)
-- /etc/ (extract, edit **wpa_supplicant.conf**)
+- /boot/cmdline.txt (edit - there is a "quiet" at the end of the line to suppress boot messages)
+- /boot/config.txt (edit - disable dtoverlay=vc4-kms-v3d and add
+```
+[all]
+disable_splash=1
+boot_delay=0
+gpu_mem=128
+```
+to the end)
+- /etc/ (extract, edit **wpa_supplicant.conf** if using WiFi; don't copy if not)
 - /home/ (extract - the user used here is tty2rpi)
 - /usr/ (extract)
 
@@ -94,7 +102,7 @@ for RPi's SD in your created user's home.
 
 You'll find some additional media files in the folder *media_files_rpi* of this repository. Copy the pictures to your created PATHPIC and 
 *MISTER-MENU.mp4* to PATHVID, but renamed to MENU.png and MENU.mp4 when you are setting up tty2rpi for MiSTer, otherwise, when setting up tty2rpi for 
-MAME, copy *MAME-MENU.mp4* to PATHVID without renaming it.
+MAME, copy *MAME-MENU.png* and *MAME-MENU.mp4* without renaming it.
 
 ---
 
