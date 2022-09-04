@@ -1,7 +1,8 @@
 
 Table of Contents  
 [Hardware](#hardware)  
-[Setting up the Raspberry Pi](#setting-up-the-raspberry-pi)  
+[Setting up the Raspberry Pi lazy](#setting-up-the-raspberry-pi-lazy)  
+[Setting up the Raspberry Pi manual](#setting-up-the-raspberry-pi-manual)  
 [The INI files](#the-ini-files)  
 [Media](#media)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
@@ -17,9 +18,16 @@ I'm using [this display](https://www.amazon.de/dp/B08R5MFN5P) (not an affiliate 
 
 ---
 
-# Setting up the Raspberry Pi
+# Setting up the Raspberry Pi lazy
 
-In this HowTo I assume that you are already familiar with setting up a Raspberry Pi.
+This short HowTo is for the lazy guys who aren't adventurers. Just [download this image](https://drive.google.com/drive/folders/1jEfDOJIkxnNSgx5FvXF2xUvo7-5Dww_1?usp=sharing), 
+burn it onto your RPI's SD >= 4gb and feed it to your RPi. Done. Boooring! :stuck_out_tongue_winking_eye:
+
+---
+
+# Setting up the Raspberry Pi manual
+
+In this HowTo for the Indiana Jones' of you, I assume that you are already familiar with setting up a Raspberry Pi.
 
 Obviously you need a Raspberry Pi. Any model except the Pico will do, but remember that - even a RPi1 will
 do a fine job - the faster the RPi is, the more responsive your experience will be.
