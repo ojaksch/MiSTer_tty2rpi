@@ -69,7 +69,7 @@ wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/tty2rpi-setup
 Don't extract it blindly over your existing installation/Root! Use Midnight Commander (mc) to have a look inside the archive and to see 
 what of **your** files have to be changed and which folders can be extracted:  
 - /boot/cmdline.txt (edit - there is a "quiet" at the end of the line to suppress boot messages)
-- /boot/config.txt (edit - disable **dtoverlay=vc4-kms-v3d** and add to the end of the line)
+- /boot/config.txt (edit - disable **dtoverlay=vc4-kms-v3d** and add to the end of the file)
 ```
 [all]
 disable_splash=1
