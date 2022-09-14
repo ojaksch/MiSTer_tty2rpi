@@ -64,7 +64,7 @@ Enable SSH:
 sudo systemctl enable ssh.service
 ```
 
-Get and run the install/update scripts:
+Get and run the install/update script:
 ```
 wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rpi.sh -O - | bash
 ```
