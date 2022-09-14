@@ -51,7 +51,7 @@ Enable and setup WiFi if you want to use it.
 Update your Raspberry Pi OS and install the following packages:
 
 ```
-sudo apt install mc rsync inotify-tools netcat-openbsd flex bison readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc feh
+sudo apt install mc rsync git inotify-tools netcat-openbsd flex bison readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc feh
 ```
 
 Disable avahi:
