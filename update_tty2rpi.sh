@@ -28,11 +28,11 @@ check4error() {
 # Update the updater if neccessary
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi.sh" -O /tmp/update_tty2rpi.sh
 check4error "${?}"
+chmod +x /tmp/update_tty2rpi.sh
 cmp -s /tmp/update_tty2rpi.sh ~/update_tty2rpi.sh
 if [ "${?}" -gt "0" ] && [ -s /tmp/update_tty2rpi.sh ]; then
     echo -e "${fyellow}Downloading Updater-Update ${fmagenta}${PICNAME}${freset}"
     mv -f /tmp/update_tty2rpi.sh ~/update_tty2rpi.sh
-    chmod +x ~/update_tty2rpi.sh
     exec ~/update_tty2rpi.sh
     exit 255
 else
