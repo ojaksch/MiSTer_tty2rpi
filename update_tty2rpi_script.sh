@@ -12,7 +12,7 @@ if [ ${?} -gt 0 ]; then
   rm -rf ${LOCALGITDIR}/MiSTer_tty2rpi/
 fi
 sudo rsync -aq ${LOCALGITDIR}/files_rpi/ / > /dev/null 2>&1
-sudo rsync -aq /tmp/home/tty2rp/ ~/
+sudo rsync -aq /tmp/home/tty2rpi/ ~/
 sudo chown -R $(id -un 1000): $(getent passwd "1000" | awk -F ":" '{print $6}')
 sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf
 sudo chown root: /etc/wpa_supplicant/wpa_supplicant.conf.example
