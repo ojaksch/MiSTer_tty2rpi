@@ -1,6 +1,7 @@
 #!/bin/bash
 
 REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main"
+NODEBUG="-q -o /dev/null"
 [ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
 [ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
 
