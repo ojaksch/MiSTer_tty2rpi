@@ -83,6 +83,7 @@ gpu_mem=128
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config to disable DPMS
 - /etc/wpa_supplicant/wpa_supplicant.conf.example -- Example config for WiFi
 - /home/ (extract -- the user used here is tty2rpi)
+- /tmp/home/tty2rpi/ -- User file that will be copied to the user you have created - this is "the engine"
 - /usr/local/bin/ -- Needed and needful programs
 
 Read on the next chapters for the media content and a readup of the INI fles. When done, just reboot your RPi and continue 
