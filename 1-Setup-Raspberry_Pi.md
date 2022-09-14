@@ -66,7 +66,7 @@ sudo systemctl enable ssh.service
 
 Get and run the install/update scripts:
 ```
-wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/files_rpi/update_tty2rpi.sh -O - | bash
+wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rpi.sh -O - | bash
 ```
 Files that will be created;
 - /boot/cmdline.txt.example -- compare with your existing cmdline.txt. The only relevant change here is the parameter *quiet*)
