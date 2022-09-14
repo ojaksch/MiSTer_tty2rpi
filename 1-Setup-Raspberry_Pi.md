@@ -1,5 +1,3 @@
-# Documentation is being updated (2022, Sept. 14th)
-# Use with care but better not at all and come back later.
 
 Table of Contents  
 [Hardware](#hardware)  
