@@ -1,0 +1,12 @@
+[Unit]
+Description="Socket for tty2rpi data"
+After=network.target syslog.target
+
+[Service]
+Type=simple
+#ExecStartPre=/bin/sleep 1
+#ExecStartPre=/bin/echo 0 > /sys/class/graphics/fbcon/cursor_blink
+ExecStart=/bin/bash -c '/bin/nc -k -l 6666 > /dev/shm/tty2rpi.socket'
+
+[Install]
+WantedBy=multi-user.target

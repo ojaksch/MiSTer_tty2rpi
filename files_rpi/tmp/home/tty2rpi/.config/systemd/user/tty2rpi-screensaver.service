@@ -1,0 +1,5 @@
+[Unit]
+Description=tty2rpi screensaver
+
+[Service]
+ExecStart=%h/tty2rpi-scripts/tty2rpi-clock.sh

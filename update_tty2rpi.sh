@@ -1,35 +1,7 @@
 #!/bin/bash
 
-# v1.5 - Copyright (c) 2021 ojaksch, venice
-
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-# You can download the latest version of this script from:
-# https://github.com/ojaksch/MiSTer_tty2rpi
-
-
-
-# Changelog:
-
-freset="\e[0m\033[0m"
-fblue="\e[1;34m"
-
-REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/files_mister"
-#REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/Testing"    # Testing branch
-
-SCRIPTNAME="/tmp/update_tty2rpi_script.sh"
-NODEBUG="-q -o /dev/null"
+[ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
+[ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
 
 echo -e "\n +---------+";
 echo -e " | ${fblue}tty2rpi${freset} |---[]";
@@ -54,35 +26,31 @@ check4error() {
 # Update the updater if neccessary
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi.sh" -O /tmp/update_tty2rpi.sh
 check4error "${?}"
-cmp -s /tmp/update_tty2rpi.sh /media/fat/Scripts/update_tty2rpi.sh
+cmp -s /tmp/update_tty2rpi.sh ~/update_tty2rpi.sh
 if [ "${?}" -gt "0" ] && [ -s /tmp/update_tty2rpi.sh ]; then
     echo -e "${fyellow}Downloading Updater-Update ${fmagenta}${PICNAME}${freset}"
-    mv -f /tmp/update_tty2rpi.sh /media/fat/Scripts/update_tty2rpi.sh
-    exec /media/fat/Scripts/update_tty2rpi.sh
+    mv -f /tmp/update_tty2rpi.sh ~/update_tty2rpi.sh
+    exec ~/update_tty2rpi.sh
     exit 255
 else
     rm /tmp/update_tty2rpi.sh
 fi
 
 # Check and update INI files if neccessary
-wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/tty2rpi-system.ini" -O /tmp/tty2rpi-system.ini
+wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/files_rpi/tmp/home/tty2rpi/tty2rpi.ini" -O /tmp/tty2rpi.ini
 check4error "${?}"
-. /tmp/tty2rpi-system.ini
-[[ -d "${TTY2RPI_PATH}" ]] || mkdir "${TTY2RPI_PATH}"
-cmp -s /tmp/tty2rpi-system.ini "${TTY2RPI_PATH}/tty2rpi-system.ini"
+. /tmp/tty2rpi.ini
+cmp -s /tmp/tty2rpi.ini ~/tty2rpi.ini
 if [ "${?}" -gt "0" ]; then
-    mv /tmp/tty2rpi-system.ini "${TTY2RPI_PATH}/tty2rpi-system.ini"
-    . "${TTY2RPI_PATH}/tty2rpi-system.ini"
+    mv /tmp/tty2rpi.ini ~/tty2rpi.ini
+    . ~/tty2rpi.ini
 fi
 
-! [ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/tty2rpi-user.ini" -O /media/fat/tty2rpi/tty2rpi-user.ini
-
-[ -f "${TTY2RPI_PATH}/tty2rpi.ini" ] && mv "${TTY2RPI_PATH}/tty2rpi.ini" "${TTY2RPI_PATH}/tty2rpi.ini.bak"
-[ -f "/media/fat/Scripts/tty2rpi.ini" ] && mv "/media/fat/Scripts/tty2rpi.ini" "${TTY2RPI_PATH}/tty2rpi-user.ini.bak"
+! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini
 
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi_script.sh" -O "${SCRIPTNAME}"
 check4error "${?}"
-[ -s "${SCRIPTNAME}" ] && bash "${SCRIPTNAME}" "${1}"
+[ -s "${SCRIPTNAME}" ] && bash "${SCRIPTNAME}" "${@}"
 [ -f "${SCRIPTNAME}" ] && rm "${SCRIPTNAME}"
 
 exit 0

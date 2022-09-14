@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+if [ -e /.resize_root ]; then
+  /usr/bin/raspi-config --expand-rootfs > /dev/null 2>&1
+  /usr/bin/rm /.resize_root
+  /usr/bin/sync
+  /usr/bin/systemctl reboot
+fi
+
+ln -sf /bin/bash /bin/sh
+
+exit 0

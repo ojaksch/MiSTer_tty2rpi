@@ -1,0 +1,11 @@
+[Unit]
+Description=Run the tty2rpi screensaver
+
+[Timer]
+OnActiveSec=120
+OnUnitActiveSec=10
+AccuracySec=1ms
+
+[Install]
+WantedBy=timers.target
+

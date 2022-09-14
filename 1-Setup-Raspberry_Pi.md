@@ -1,3 +1,5 @@
+# Documentation is being updated (2022, Sept. 14th)
+# Use with care but better not at all and come back later.
 
 Table of Contents  
 [Hardware](#hardware)  
@@ -49,7 +51,7 @@ Enable and setup WiFi if you want to use it.
 Update your Raspberry Pi OS and install the following packages:
 
 ```
-sudo apt install mc inotify-tools netcat-openbsd flex bison readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc feh
+sudo apt install mc rsync inotify-tools netcat-openbsd flex bison readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc feh
 ```
 
 Disable avahi:
@@ -62,23 +64,26 @@ Enable SSH:
 sudo systemctl enable ssh.service
 ```
 
-Get the scripts and daemons:
+Get and run the install/update scripts:
 ```
-wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/files_rpi/tty2rpi-setup.tar.gz
+wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/files_rpi/update_tty2rpi.sh -O - | bash
 ```
-Don't extract it blindly over your existing installation/Root! Use Midnight Commander (mc) to have a look inside the archive and to see 
-what of **your** files have to be changed and which folders can be extracted:  
-- /boot/cmdline.txt (edit - there is a "quiet" at the end of the line to suppress boot messages)
-- /boot/config.txt (edit - disable **dtoverlay=vc4-kms-v3d** and add to the end of the file)
+Files that will be created;
+- /boot/cmdline.txt.example -- compare with your existing cmdline.txt. The only relevant change here is the parameter *quiet*)
+- /boot/config.txt.example -- compare with and edit your existing config.txt. Changes are:
 ```
+...
+#dtoverlay=vc4-kms-v3d
+...
 [all]
 disable_splash=1
 boot_delay=0
 gpu_mem=128
 ```
-- /etc/ (extract, edit **wpa_supplicant.conf** if using WiFi; don't copy if not)
-- /home/ (extract - the user used here is tty2rpi)
-- /usr/ (extract)
+- /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config to disable DPMS
+- /etc/wpa_supplicant/wpa_supplicant.conf.example -- Example config for WiFi
+- /home/ (extract -- the user used here is tty2rpi)
+- /usr/local/bin/ -- Needed and needful programs
 
 Read on the next chapters for the media content and a readup of the INI fles. When done, just reboot your RPi and continue 
 with [setting up the MiSTer](/2-Setup-MiSTer.md)
