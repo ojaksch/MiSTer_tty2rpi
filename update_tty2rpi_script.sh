@@ -11,7 +11,7 @@ if [ ${?} -gt 0 ]; then
   mv ${LOCALGITDIR}/MiSTer_tty2rpi/{.,}* ${LOCALGITDIR}/ > /dev/null 2>&1
   rm -rf ${LOCALGITDIR}/MiSTer_tty2rpi/
 fi
-sudo rsync -aq ${LOCALGITDIR}/files_rpi/ /tmp/y/   # <------- has to be /
+sudo rsync -aq ${LOCALGITDIR}/files_rpi/ /
 sudo rsync -aq /tmp/home/tty2rp/ ~/
 sudo chown -R $(id -un 1000): $(getent passwd "1000" | awk -F ":" '{print $6}')
 sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf
