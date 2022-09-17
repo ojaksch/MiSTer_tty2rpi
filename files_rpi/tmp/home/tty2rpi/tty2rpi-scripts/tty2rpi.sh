@@ -19,7 +19,8 @@ else
   if [ -f "${PATHPIC}/${MEDIA}" ]; then
     PICSIZE=$(identify -format '%wx%h' "${PATHPIC}/${MEDIA}")
     if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ]; then
-      convert "${PATHPIC}/${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+      #convert "${PATHPIC}/${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+      ffmpeg -y -loglevel quiet -i "${PATHPIC}/${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
     else
       cp "${PATHPIC}/${MEDIA}" /dev/shm/pic.png
     fi
