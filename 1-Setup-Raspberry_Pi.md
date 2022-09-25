@@ -132,7 +132,7 @@ As you can see, (many) parameters are possible and a comma sign is used as separ
 Have a look at the already existing scripts in **~/tty2rpi-scripts/** to get an idea.
 
 Available commands:
-| Commands                        | Description                              |
+| Command                         | Description                              |
 | ------------------------------- |----------------------------------------- |
 | CMDCOR,PARAM                    | Shows a video and/or picture named PARAM |
 | CMDSHOWCPU                      | Shows CPU informations                   |
