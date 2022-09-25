@@ -5,6 +5,7 @@ Table of Contents
 [Setting up the Raspberry Pi manual](#setting-up-the-raspberry-pi-manual)  
 [The INI files](#the-ini-files)  
 [Media](#media)  
+[Commands](#commands)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
 
@@ -115,6 +116,20 @@ for RPi's SD in your created user's home.
 You'll find some additional media files in the folder *media_files_rpi* of this repository. Copy the pictures to your created PATHPIC and 
 *MISTER-MENU.mp4* to PATHVID, but renamed to MENU.png and MENU.mp4 when you are setting up tty2rpi for MiSTer, otherwise, when setting up tty2rpi for 
 MAME, copy *MAME-MENU.png* and *MAME-MENU.mp4* without renaming it.
+
+---
+
+# Commands
+
+The commands available on RPi's side are handled by the Daemon (tty2rpi.sh) itself and are flexible...just create a file with the name of the command plus 
+the extension of ".sh" (e.g. CMDHELLO.sh), set file's attribute to "executable" and copy/write your script into that file. That's easy, isn't it?
+
+Send the command from your client through the defined TCP socket (e.g.
+```
+echo "CMDCOR,19xx" > /dev/tcp/IP-ADDRESS-OF-RPI/6666)
+```
+As you can see, (many) parameters are possible and a comma sign is used as separator.  
+Have a look at the already existing scripts in **~/tty2rpi-scripts/** to get an idea.
 
 ---
 

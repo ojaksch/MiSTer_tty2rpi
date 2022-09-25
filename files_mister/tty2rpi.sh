@@ -23,8 +23,7 @@ dbug() {
 # USB Send-Picture-Data function
 senddata() {
   . /media/fat/tty2rpi/tty2rpi-user.ini						# ReRead INI for changes
-  #echo "CMDCOR,${1}" > ${TTYDEV}						# Instruct the device to load the appropriate picture from SD card
-  echo "${1}" > ${TTYDEV}							# Instruct the device to load the appropriate picture from SD card
+  echo "CMDCOR,${1}" > ${TTYDEV}						# Instruct the device to load the appropriate picture from SD card
 }
 
 sendtime() {
