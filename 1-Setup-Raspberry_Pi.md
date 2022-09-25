@@ -131,6 +131,12 @@ echo "CMDCOR,19xx" > /dev/tcp/IP-ADDRESS-OF-RPI/6666)
 As you can see, (many) parameters are possible and a comma sign is used as separator.  
 Have a look at the already existing scripts in **~/tty2rpi-scripts/** to get an idea.
 
+Available commands:
+- CMDCOR,<SETNAME_OF_CORE>	Shows a video and/or picture
+- CMDSHOWCPU			Shows CPU informations
+- CMDSHOWIPS			Shows RPi's IP adress(es)
+- CMDSHUTDOWN			Shutdown the RPi
+
 ---
 
 # Bugs and things still to do
