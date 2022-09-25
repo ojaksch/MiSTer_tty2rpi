@@ -122,7 +122,7 @@ MAME, copy *MAME-MENU.png* and *MAME-MENU.mp4* without renaming it.
 # Commands
 
 The commands available on RPi's side are handled by the Daemon (tty2rpi.sh) itself and are flexible...just create a file with the name of the command plus 
-the extension of ".sh" (e.g. CMDHELLO.sh), set file's attribute to "executable" and copy/write your script into that file. That's easy, isn't it?
+the extension of ".sh" (e.g. **~/tty2rpi-scripts/CMDHELLO.sh**), set file's attribute to "executable" and copy/write your script into that file. That's easy, isn't it?
 
 Send the command from your client through the defined TCP socket (e.g.
 ```
