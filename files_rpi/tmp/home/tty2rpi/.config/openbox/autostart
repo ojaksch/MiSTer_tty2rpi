@@ -3,11 +3,11 @@ xset -b
 
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service
 
-echo "Your IP adress(es):" > /tmp/ip-adresses
-ip -o addr | awk '!/^[0-9]*: ?lo|link\/ether/ {gsub("/", " "); print $2" "$4}' >> /tmp/ip-adresses
-convert -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/20)) -fill white -gravity center -draw "text 0,0 '$(cat /tmp/ip-adresses)'" /tmp/ip-adresses.png
-feh -q -F /tmp/ip-adresses.png &
+# Show IP addresses
+sleep 1
+echo "CMDSHOWIPS" > "${SOCKET}"
 sleep ${IPTIMEOUT}
-KILLPID feh
 
+# Show Welcome screen
+KILLPID feh
 feh -q -F ~/tty2rpi-pics/tty2rpi.png
