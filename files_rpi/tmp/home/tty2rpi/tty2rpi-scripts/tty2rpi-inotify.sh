@@ -20,8 +20,8 @@ fi
 
 while true; do
   inotifywait -qq -e modify ${SOCKET}
-  MEDIA=$(tail -n1 ${SOCKET} | tr -d '\0')
-  if [ "${MEDIA}" != "NIL" ]; then					# NIL is a "hello?" command
+  COMMAND=$(tail -n1 ${SOCKET} | tr -d '\0')
+  if [ "${COMMAND}" != "NIL" ]; then					# NIL is a "hello?" command
     ! [ "$(<${PID_TTY2RPI})" = "0" ] && KILLPID $(<${PID_TTY2RPI})
     KILLPID "feh"
     KILLPID "vlc"
