@@ -126,9 +126,9 @@ the extension of ".sh" (e.g. **~/tty2rpi-scripts/CMDHELLO.sh**), set file's attr
 
 Send the command from your client through the defined TCP socket (e.g.
 ```
-echo "CMDCOR,19xx" > /dev/tcp/IP-ADDRESS-OF-RPI/6666)
+echo "CMDHELLO.sh,1st_parameter,2nd_parameter" > /dev/tcp/IP-ADDRESS-OF-RPI/6666)
 ```
-As you can see, (many) parameters are possible and a comma sign is used as separator.  
+As you can see, (many) parameters are possible and a comma sign is used as separator. No spaces are allowed as they're also interpreted as separator.  
 Have a look at the already existing scripts in **~/tty2rpi-scripts/** to get an idea.
 
 Available commands:
