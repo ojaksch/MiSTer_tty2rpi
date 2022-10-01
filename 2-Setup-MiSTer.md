@@ -12,7 +12,7 @@ Table of Contents
 - Open a ssh-shell to your MiSTer or open a console at MiSTer and logon.
 - Type in
 ```
-wget -q https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rpi.sh -O - | bash
+wget -q https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/files_mister/update_tty2rpi.sh -O - | bash
 ```
 This will download and setup the needed files for MiSTer. You can use *update_tty2rpi.sh* to keep this up to date. 
 Read The next chapter for a description of the used INI files and the last needed step to set and activate tty2rpi.
