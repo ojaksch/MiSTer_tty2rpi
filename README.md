@@ -3,6 +3,12 @@ The even bigger brother of [tty2oled] and [tty2tft]. A simple but yet powerful M
 
 *A marquee/display add-on for the **[MiSTer FPGA]** and **[MAME] Emulator***
 
+The instructions how to set this up consist of two parts: 
+- [Setup Raspberry](1-Setup-Raspberry_Pi.md)
+- [Setup MiSTer](2-Setup-MiSTer.md)
+
+---
+
 <a href="https://www.youtube.com/watch?feature=player_embedded&v=70Q7mfuPFxw" target="_blank"><img src="http://img.youtube.com/vi/70Q7mfuPFxw/0.jpg" 
 alt="1st run" width="800" height="600" border="10" /></a>
 
