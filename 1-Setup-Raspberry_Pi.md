@@ -102,7 +102,7 @@ from tty2rpi.ini. All useful variables are commented - see "# Userdata" in tty2r
 # Media
 
 You can create and use your own media files or
-[get all the Marquee pictures](https://www.progettosnaps.net/marquees/) from progetto-SNAPS
+[get all the Marquee pictures](https://www.progettosnaps.net/marquees/) from progetto-SNAPS (or search for MAME's *marquees.zip* - there are many similar projects providing HQ Marquee sized images) 
 [and the Marquee videos](https://www.arcadepunks.com/marquees-digital-marquees-cab-2/#google_vignette) from Arcade Punks
 and store them on you RPi's SD card, on your NAS or wherever you want, as long as they are accessable by the OS' file system. Don't forget to mount the file system 
 if needed and set their destination variables in **$HOME/tty2rpi-user.ini**  
