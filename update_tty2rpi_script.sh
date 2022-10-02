@@ -4,6 +4,12 @@
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 
+# Fetch -apt install- line from GitHub and silently install possible new packages
+echo "Checking and installing missing packages..."
+APTUPD=$(wget -q ${REPOSITORY_URL}/1-Setup-Raspberry_Pi.md -O - | grep -m1 "sudo apt install mc")
+APTUPD=$(echo ${APTUPD} | sed 's/apt install/apt -q=3 install/')
+
+echo "Updating tty2rpi..."
 ! [ -d ${LOCALGITDIR} ] && mkdir ${LOCALGITDIR}
 git -C ${LOCALGITDIR} pull --quiet > /dev/null 2>&1
 if [ ${?} -gt 0 ]; then
