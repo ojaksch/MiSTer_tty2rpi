@@ -10,4 +10,4 @@ sleep ${IPTIMEOUT}
 
 # Show Welcome screen
 KILLPID feh
-feh -q -F ~/tty2rpi-pics/tty2rpi.png
+feh -q -F ~/tty2rpi-pics/tty2rpi.png &
