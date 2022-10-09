@@ -80,4 +80,3 @@ arm_boost=1
 [all]
 disable_splash=1
 boot_delay=0
-gpu_mem=128
