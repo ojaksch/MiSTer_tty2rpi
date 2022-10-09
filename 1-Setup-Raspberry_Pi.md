@@ -79,7 +79,6 @@ Files that will be created;
 [all]
 disable_splash=1
 boot_delay=0
-gpu_mem=128
 ```
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config to disable DPMS
 - /etc/wpa_supplicant/wpa_supplicant.conf.example -- Example config for WiFi
