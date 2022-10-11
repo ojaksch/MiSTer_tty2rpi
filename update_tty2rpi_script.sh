@@ -8,6 +8,7 @@ source ~/tty2rpi-user.ini
 echo "Checking for and installing missing packages..."
 APTUPD=$(wget -q ${REPOSITORY_URL}/1-Setup-Raspberry_Pi.md -O - | grep -m1 "sudo apt install mc")
 APTUPD=$(echo ${APTUPD} | sed 's/apt install/apt -q=3 install/')
+${APTUPD}
 
 echo "Updating tty2rpi..."
 ! [ -d ${LOCALGITDIR} ] && mkdir ${LOCALGITDIR}
