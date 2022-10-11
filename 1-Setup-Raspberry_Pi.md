@@ -110,14 +110,16 @@ and store them on you RPi's SD card, on your NAS or wherever you want, as long a
 if needed and set their destination variables in **$HOME/tty2rpi-user.ini**  
 The default set in **tty2rpi.ini** is
 ```
-PATHPIC="${HOME}/p5-fullset"
-PATHVID="${HOME}/Video_Marquees_V1.1"
+PATHPIC="${HOME}/marquee-pictures"
+PATHVID="${HOME}/marquee-videos"
 ```
 for RPi's SD in your created user's home.
 
-You'll find some additional media files in the folder *media_files_rpi* of this repository. Copy the pictures to your created PATHPIC and 
+~~You'll find some additional media files in the folder *media_files_rpi* of this repository. Copy the pictures to your created PATHPIC and 
 *MISTER-MENU.mp4* to PATHVID, but renamed to MENU.png and MENU.mp4 when you are setting up tty2rpi for MiSTer, otherwise, when setting up tty2rpi for 
-MAME, copy *MAME-MENU.png* and *MAME-MENU.mp4* without renaming it.
+MAME, copy *MAME-MENU.png* and *MAME-MENU.mp4* without renaming it.~~
+
+Paths are now predefined and already filled with some files for easier setup. Don't forget to copy these files to another folder or mount point, if changed by you.
 
 ---
 
