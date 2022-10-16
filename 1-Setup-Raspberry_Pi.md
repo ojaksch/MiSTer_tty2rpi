@@ -140,7 +140,7 @@ Available commands:
 | ------------------------------- |----------------------------------------- |
 | CMDCOR,PARAM                    | Shows a video and/or picture named PARAM |
 | CMDSHOWCPU                      | Shows CPU informations                   |
-| CMDSHOWIPS                      | Shows RPi's IP adress(es)                |
+| CMDSHOWIPS                      | Shows RPi's IP address(es)               |
 | CMDSHUTDOWN                     | Shutdown the RPi                         |
 
 ---
