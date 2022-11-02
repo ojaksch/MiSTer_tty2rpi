@@ -1,7 +1,7 @@
 source ~/tty2rpi.ini
 xset -b
 
-systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service
+systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
 sleep 1
 
 # Show IP addresses
