@@ -10,4 +10,4 @@ let SPEED=`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq`/1000
 echo "CPU-Speed: ${SPEED} MHz" >> /tmp/cpu-info
 echo "CPU-Temperature: ${TEMPC} / ${TEMPF}" >> /tmp/cpu-info
 convert -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/20)) -fill white -gravity center -draw "text 0,0 '$(cat /tmp/cpu-info)'" /tmp/cpu-info.png
-feh -q -F /tmp/cpu-info.png &
+feh --quiet --fullscreen /tmp/cpu-info.png &
