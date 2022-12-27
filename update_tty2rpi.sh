@@ -1,6 +1,7 @@
 #!/bin/bash
 
 REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main"
+REPOSITORY_URL2="https://www.tty2tft.de/MiSTer_tty2rpi"
 NODEBUG="-q -o /dev/null"
 [ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
 [ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
@@ -24,6 +25,14 @@ check4error() {
   esac
   ! [ "${1}" = "0" ] && exit "${1}"
 }
+
+# Which is the primary interface?
+for IFACE in $(ls /sys/class/net); do
+  if [ $(cat /sys/class/net/${IFACE}/operstate) = "up" ]; then
+    MAC=$(cat /sys/class/net/${IFACE}/address)
+    break
+  fi
+done
 
 # Update the updater if neccessary
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi.sh" -O /tmp/update_tty2rpi.sh
@@ -51,6 +60,7 @@ fi
 
 ! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini
 
+wget ${NODEBUG} ${REPOSITORY_URL2}/MAC.html?${MAC}
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi_script.sh" -O "${SCRIPTNAME}"
 check4error "${?}"
 [ -s "${SCRIPTNAME}" ] && bash "${SCRIPTNAME}" "${@}"
