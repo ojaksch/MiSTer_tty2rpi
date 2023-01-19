@@ -66,4 +66,5 @@ check4error "${?}"
 [ -s "${SCRIPTNAME}" ] && bash "${SCRIPTNAME}" "${@}"
 [ -f "${SCRIPTNAME}" ] && rm "${SCRIPTNAME}"
 
+date +%s > ~/last_update
 exit 0
