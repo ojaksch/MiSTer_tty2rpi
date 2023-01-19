@@ -20,7 +20,7 @@ fi
 start() {
     TTY2RPI=$(echo ${TTYDEV} | awk -F "/" '{print $4}')
     echo -n "Waiting for ${TTY2RPI} become avaiable"
-    until ping -c1 ${TTY2RPI} >/dev/null 2>&1; do echo -n "." ; sleep 0.2; done
+    until ping -W1 -c1 ${TTY2RPI} >/dev/null 2>&1; do echo -n "." ; sleep 0.2; done
     echo -e "\nHost ${TTY2RPI} reachable"
 
     echo -n "Waiting for socket of ${TTY2RPI} to become avaiable"
