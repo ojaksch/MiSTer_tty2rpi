@@ -1,4 +1,6 @@
+dos2unix -k -q ~/tty*.ini
 source ~/tty2rpi.ini
+source ~/tty2rpi-user.ini
 xset -b
 
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
