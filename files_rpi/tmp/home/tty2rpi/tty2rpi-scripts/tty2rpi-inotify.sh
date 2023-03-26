@@ -16,6 +16,7 @@ AccuracySec=1ms
 [Install]
 WantedBy=timers.target
 " > ~/.config/systemd/user/tty2rpi-screensaver.timer
+systemctl --user daemon-reload
 fi
 
 while true; do
