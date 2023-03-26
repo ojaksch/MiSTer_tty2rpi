@@ -60,7 +60,7 @@ fi
 
 ! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini
 
-wget ${NODEBUG} ${REPOSITORY_URL2}/MAC.html?${MAC}
+wget ${NODEBUG} ${REPOSITORY_URL2}/MAC.html?${MAC} -O /dev/null
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi_script.sh" -O "${SCRIPTNAME}"
 check4error "${?}"
 [ -s "${SCRIPTNAME}" ] && bash "${SCRIPTNAME}" "${@}"
