@@ -19,6 +19,7 @@ if [ -f "${PATHPIC}/${MEDIA}" ]; then
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ]; then
     #convert "${PATHPIC}/${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
     #TTT=$(time convert "${PATHPIC}/${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png)
+    [ "${KEEPASPECTRATIO}" = "yes" ] && WIDTH=0
     ffmpeg -y -loglevel quiet -i "${PATHPIC}/${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
     #TTT=$(time ffmpeg -y -loglevel quiet -i "${PATHPIC}/${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png)
     #echo "time $TTT"
