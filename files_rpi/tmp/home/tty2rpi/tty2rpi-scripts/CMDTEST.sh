@@ -3,7 +3,7 @@
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 
-systemctl --user stop --quiet tty2rpi-screensaver.timer
+[ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 if [ -f "${PATHPIC}/000-TESTBILD.png" ]; then
   PICSIZE=$(identify -format '%wx%h' "${PATHPIC}/${MEDIA}")
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ]; then

@@ -9,7 +9,7 @@ MEDIAVID="${COMMANDLINE[1]}"
 MEDIA="${COMMANDLINE[1]}"
 logger "Socket got »${MEDIA}«"
 echo "${MEDIA}" > /dev/shm/corename
-systemctl --user stop --quiet tty2rpi-screensaver.timer
+[ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 
 GETFNAM "${PATHPIC}" "${MEDIAPIC}"
 if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]); then cp "${PATHPIC}/${MEDIA}" /dev/shm; fi
@@ -43,5 +43,10 @@ if [ -e /dev/shm/convert.pid ]; then
   while [ -d /proc/$(</dev/shm/convert.pid) ] ; do sleep 0.1; done
   rm /dev/shm/convert.pid
 fi
-systemctl --user start --quiet tty2rpi-screensaver.timer
+
+[ "${SCREENSAVER}" = "yes" ] && systemctl --user start --quiet tty2rpi-screensaver.timer
+if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screensaver.timer) = "active" ]; then
+  systemctl --user stop tty2rpi-screensaver.timer
+fi
+
 feh --quiet --fullscreen /dev/shm/pic.png

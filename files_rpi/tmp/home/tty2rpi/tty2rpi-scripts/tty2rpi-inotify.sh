@@ -19,6 +19,10 @@ WantedBy=timers.target
 systemctl --user daemon-reload
 fi
 
+if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screensaver.timer) = "active" ]; then
+  systemctl --user stop tty2rpi-screensaver.timer
+fi
+
 while true; do
   inotifywait -qq -e modify ${SOCKET}
   COMMAND=$(tail -n1 ${SOCKET} | tr -d '\0')
