@@ -29,5 +29,6 @@ sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf
 sudo chown root: /etc/wpa_supplicant/wpa_supplicant.conf.example
 sudo chown root: /etc/rc.local
 sudo ln -sf ~/update_tty2rpi.sh /usr/local/bin/
+sudo chmod 777 /tmp
 
 [ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
