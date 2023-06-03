@@ -13,7 +13,6 @@ echo "${MEDIA}" > /dev/shm/corename
 
 GETFNAM "${PATHPIC}" "${MEDIAPIC}"
 if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]); then cp "${PATHPIC}/${MEDIA}" /dev/shm; fi
-#[ -f "${PATHPIC}/${MEDIA}" ] && ffmpeg -y -loglevel quiet -i "${PATHPIC}/${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
 if [ -f "${PATHPIC}/${MEDIA}" ]; then
   PICSIZE=$(identify -format '%wx%h' "${PATHPIC}/${MEDIA}")
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ]; then
@@ -27,7 +26,8 @@ if [ -f "${PATHPIC}/${MEDIA}" ]; then
     cp "${PATHPIC}/${MEDIA}" /dev/shm/pic.png
   fi
 else
-  cp ~/tty2rpi-pics/000-notavail.png /dev/shm/pic.png
+  [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png
+  [ -s /dev/shm/pic.png ] || cp ~/tty2rpi-pics/000-notavail.png /dev/shm/pic.png
 fi
 
 GETFNAM "${PATHVID}" "${MEDIAVID}"
