@@ -147,7 +147,24 @@ Available commands:
 
 # Bugs and things still to do
 
-- No bugs for now (Yikes!)
+- If you are having problems connecting RPi's WiFi to your AP, there may two possible solutions. I had to use the first one with a RPi 3A+ and the 2nd one after upgrading to Debian Bookworm.  
+Your **/etc/wpa_supplicant/wpa_supplicant.conf** could look like my one:
+```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+country=YOUR-WIFI-COUNTRY-CODE
+ap_scan=1
+
+network={
+        ssid="YOUR-SSID"
+        psk="YOUR-SECRET-WIFI-PASSWORD"
+        key_mgmt=WPA-PSK-SHA256
+        ieee80211w=2
+}
+```
+The important lines are **country**, **ssid** and **PSK** (of course), **key_mgmt** and **ieee80211w**. The last two lines may help with a mixed 2.4 GHz and 5 GHz WiFi networks.  
+
+For the other issue you can edit **/etc/profile.d/wifi-country.sh**, remove the leading hash and again set your country code here (same as in **wpa_supplicant.conf**). And if you 
+are *still* having connection problems, have a look into the directory **/lib/crda**. If the file **regulatory.bin** is missing there, just copy that file from your HOME and reboot.
 
 - Revise and publish the documentation for MAME
 
