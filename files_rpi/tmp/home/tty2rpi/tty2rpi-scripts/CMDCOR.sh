@@ -35,7 +35,7 @@ if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then VLCAUDIO="--no-audio"; fi
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
 if [ "${PLAYVIDEO}" = "yes" ]; then
-  [ -f "${PATHVID}/${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout mmal_vout --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${PATHVID}/${MEDIA}"
+  [ -f "${PATHVID}/${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout ${VLCVIDEO} --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${PATHVID}/${MEDIA}"
 fi
 
 # Wait for the completion of the convert process
