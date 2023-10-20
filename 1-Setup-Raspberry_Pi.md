@@ -147,6 +147,7 @@ Available commands:
 
 # Bugs and things still to do
 
+## 1st paragraph is deprecated - Debian Bookworm is the new standard release and has moved from wpa_supplicant to NetworkManager  
 - If you are having problems connecting RPi's WiFi to your AP, there may two possible solutions. I had to use the first one with a RPi 3A+ and the 2nd one after upgrading to Debian Bookworm.  
 Your **/etc/wpa_supplicant/wpa_supplicant.conf** could look like my one:
 ```
@@ -165,6 +166,38 @@ The important lines are **country**, **ssid** and **PSK** (of course), **key_mgm
 
 For the other issue you can edit **/etc/profile.d/wifi-country.sh**, remove the leading hash and again set your country code here (same as in **wpa_supplicant.conf**). And if you 
 are *still* having connection problems, have a look into the directory **/lib/crda**. If the file **regulatory.bin** is missing there, just copy that file from your HOME and reboot.
+
+- Debian Bookworm - NetworkManager
+
+Debian Bookworm is now the actual version for our Raspberry's. If you are going to upgrade to Bookworm, you may stumble about a change how networking is done now as they are using NetworkManager for managing networks.
+
+For WiFi setups: After upgrading but before rebooting, create a file named /etc/NetworkManager/system-connections/wlan.nmconnection and copy and edit this code snipped
+
+```
+[connection]
+id=YourOwnSSID-Or-Name
+uuid=26cbd98d-c857-4b9e-a313-0a07bea76d55
+type=wifi
+interface-name=wlan0
+autoconnect=true
+
+[wifi]
+mode=infrastructure
+ssid=YourOwnSSID
+
+[wifi-security]
+# for WPA2 or mixed WPA2/WPA3
+key-mgmt=WPA-PSK
+# for WPA3
+# key-mgmt=sae
+psk=YourVeryStrongAndSecretPassword
+```
+
+Edit id, ssid and psk for your needs and disable wpa_supplicant
+
+```systemctl disable wpa_supplicant```
+
+Reboot and all should work.
 
 - Revise and publish the documentation for MAME
 
