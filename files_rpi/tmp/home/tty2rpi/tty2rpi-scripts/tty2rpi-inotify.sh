@@ -28,7 +28,11 @@ while true; do
   COMMAND=$(tail -n1 ${SOCKET} | tr -d '\0')
   if [ "${COMMAND}" != "NIL" ]; then					# NIL is a "hello?" command
     ! [ "$(<${PID_TTY2RPI})" = "0" ] && KILLPID $(<${PID_TTY2RPI})
-    KILLPID "feh"
+    if [ "${GC9A01}" = "yes" ]; then
+      KILLPID "fim"
+    else
+      KILLPID "feh"
+    fi
     KILLPID "vlc"
     sync ${SOCKET}
     ~/tty2rpi-scripts/tty2rpi.sh & echo $! > ${PID_TTY2RPI}

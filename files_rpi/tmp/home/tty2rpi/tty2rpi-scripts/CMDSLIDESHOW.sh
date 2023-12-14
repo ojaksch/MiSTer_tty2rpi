@@ -6,4 +6,8 @@ source ~/tty2rpi-user.ini
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 SHOWTOUT="${COMMANDLINE[1]}"
 [ -z "${SHOWTOUT}" ] && SHOWTOUT=9
-feh --quiet --fullscreen --randomize --auto-zoom -D ${SHOWTOUT} ${PATHPIC}
+if [ "${GC9A01}" = "yes" ]; then
+  FRAMEBUFFER="/dev/fb1" fim --autozoom --quiet --output-device fb --slideshow ${SHOWTOUT} ${PATHPIC} > /dev/null 2>&1
+else
+  feh --quiet --fullscreen --randomize --auto-zoom --slideshow-delay ${SHOWTOUT} ${PATHPIC}
+fi

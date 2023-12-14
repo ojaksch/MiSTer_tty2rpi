@@ -46,6 +46,7 @@
 # Uncomment this to enable infrared communication.
 #dtoverlay=gpio-ir,gpio_pin=17
 #dtoverlay=gpio-ir-tx,gpio_pin=18
+#dtoverlay=gc9a01,rotate=90
 
 # Additional overlays and parameters are documented /boot/overlays/README
 

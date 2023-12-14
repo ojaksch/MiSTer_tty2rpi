@@ -35,7 +35,11 @@ if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then VLCAUDIO="--no-audio"; fi
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
 if [ "${PLAYVIDEO}" = "yes" ]; then
-  [ -f "${PATHVID}/${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout ${VLCVIDEO} --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${PATHVID}/${MEDIA}"
+  if [ "${GC9A01}" = "yes" ]; then
+    [ -f "${PATHVID}/${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:/dev/fb1 -vf scale=240:-3 -nosound -nolirc "${PATHVID}/${MEDIA}"
+  else
+    [ -f "${PATHVID}/${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout ${VLCVIDEO} --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${PATHVID}/${MEDIA}"
+  fi
 fi
 
 # Wait for the completion of the convert process
@@ -49,4 +53,8 @@ if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screens
   systemctl --user stop tty2rpi-screensaver.timer
 fi
 
-feh --quiet --fullscreen /dev/shm/pic.png
+if [ "${GC9A01}" = "yes" ]; then
+  FRAMEBUFFER="/dev/fb1" fim --autozoom --quiet --output-device fb /dev/shm/pic.png > /dev/null 2>&1
+else
+  feh --quiet --fullscreen /dev/shm/pic.png
+fi
