@@ -48,6 +48,55 @@
 #dtoverlay=gpio-ir-tx,gpio_pin=18
 #dtoverlay=gc9a01,rotate=90
 
+# ----------- displays
+# GC9A01 240x240 Round Display
+# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb1"
+#dtoverlay=gc9a01,rotate=90
+
+# NoName MHS 3.5" 480x240 (SKU: MHS3528) (waveshare dto)
+# - Using https://github.com/juj/fbcp-ili9341
+#   Compile fbcp-ili9341 with 'cmake -DSPI_BUS_CLOCK_DIVISOR=6 -DWAVESHARE35B_ILI9486=ON -DDISPLAY_ROTATE_180_DEGREES=ON -DSTATISTICS=0 ..'
+# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb0" in tty2rpi-user.ini
+# - Enable fbcp-ili9341 in /home/tty2rpi/.bash_profile
+#dtoverlay=waveshare35a,rotate=270
+#hdmi_group=2
+#hdmi_mode=87
+#hdmi_cvt=480 320 60 1 0 0 0
+#hdmi_force_hotplug=1
+
+# Adafruit 2.8" 320x240 CAP (SKU: 1947)
+# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb1" in tty2rpi-user.ini
+#dtoverlay=fbtft,spi0-0,adafruit28,dc_pin=24,reset_pin=25,rotate=270
+
+# Adafruit PiTFT+ 2.8" 320x240 CAP (SKU: 2423)
+# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb1" in tty2rpi-user.ini
+#dtoverlay=pitft28-capacitive
+#hdmi_group=2
+#hdmi_mode=87
+#hdmi_cvt=320 240 60 1 0 0 0
+#hdmi_force_hotplug=1
+
+# waveshare 3.5" 640x480 CAP (SKU: 19173) (waveshare dto)
+# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb0" in tty2rpi-user.ini
+#dtoverlay=vc4-kms-v3d
+#dtoverlay=vc4-kms-DPI-35inch
+#dtoverlay=waveshare-35dpi-3b-4b
+#dtoverlay=waveshare-35dpi-3b
+#dtoverlay=waveshare-35dpi-4b
+
+# waveshare 3.5" 640x480 CAP (SKU: 19173)
+# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb0" in tty2rpi-user.ini
+#dtoverlay=vc4-kms-v3d
+#dtoverlay=vc4-kms-dpi-generic
+#dtparam=hactive=640,vactive=480,rgb666-padhi,hsync-invert=1
+
+# Adafruit/Pimoroni HyperPixel 4" 800x600 CAP (SKU: 3578)
+# Set FBUFDEV="no"
+#dtoverlay=vc4-kms-v3d
+#dtoverlay=vc4-kms-dpi-hyperpixel4
+
+# -----------
+
 # Additional overlays and parameters are documented /boot/overlays/README
 
 # Enable audio (loads snd_bcm2835)
@@ -81,3 +130,4 @@ arm_boost=1
 [all]
 disable_splash=1
 boot_delay=0
+gpu_mem=128

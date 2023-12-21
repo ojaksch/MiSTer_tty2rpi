@@ -2,6 +2,7 @@
 
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
+source ~/tty2rpi-screens.ini
 
 if [ "${SCREENSAVER}" = "yes" ]; then
   SCREENSAVER_START=$((SCREENSAVER_START*60))
@@ -28,12 +29,13 @@ while true; do
   COMMAND=$(tail -n1 ${SOCKET} | tr -d '\0')
   if [ "${COMMAND}" != "NIL" ]; then					# NIL is a "hello?" command
     ! [ "$(<${PID_TTY2RPI})" = "0" ] && KILLPID $(<${PID_TTY2RPI})
-    if [ "${GC9A01}" = "yes" ]; then
+    if [ "${FBUFDEV}" = "yes" ]; then
       KILLPID "fim"
+      KILLPID "mplayer"
     else
       KILLPID "feh"
+      KILLPID "vlc"
     fi
-    KILLPID "vlc"
     sync ${SOCKET}
     ~/tty2rpi-scripts/tty2rpi.sh & echo $! > ${PID_TTY2RPI}
   fi

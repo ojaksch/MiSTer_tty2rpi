@@ -3,7 +3,6 @@ Description="Watch for changes in /dev/shm/tty2rpi.socket (systemd service)"
 After=network.target syslog.target tty2rpi-socket.service change.login.tty.service
 
 [Service]
-# ExecStartPre=/bin/sleep 1
 Type=simple
 ExecStart=%h/tty2rpi-scripts/tty2rpi-inotify.sh
 

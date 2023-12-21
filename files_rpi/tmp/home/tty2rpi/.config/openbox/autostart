@@ -1,15 +1,21 @@
 dos2unix -k -q ~/tty*.ini
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
-xset -b
+source ~/tty2rpi-screens.ini
+#xset -b
 
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
-sleep 1
+sleep 1.5
 
 # Show IP addresses
 echo "CMDSHOWIPS" > "${SOCKET}"
 sleep ${IPTIMEOUT}
 
 # Show Welcome screen
-KILLPID feh
-feh -q -F ~/tty2rpi-pics/tty2rpi.png &
+if [ "${FBUFDEV}" = "yes" ]; then
+  KILLPID fim
+  FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb ~/tty2rpi-pics/tty2rpi.png > /dev/null 2>&1 &
+else
+  KILLPID feh
+  feh --quiet --fullscreen ~/tty2rpi-pics/tty2rpi.png &
+fi

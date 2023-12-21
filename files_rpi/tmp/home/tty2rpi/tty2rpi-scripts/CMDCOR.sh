@@ -2,6 +2,7 @@
 
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
+source ~/tty2rpi-screens.ini
 
 MEDIAPIC="${COMMANDLINE[1]}"
 MEDIAVID="${COMMANDLINE[1]}"
@@ -35,8 +36,9 @@ if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then VLCAUDIO="--no-audio"; fi
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
 if [ "${PLAYVIDEO}" = "yes" ]; then
-  if [ "${GC9A01}" = "yes" ]; then
-    [ -f "${PATHVID}/${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:/dev/fb1 -vf scale=240:-3 -nosound -nolirc "${PATHVID}/${MEDIA}"
+  if [ "${FBUFDEV}" = "yes" ]; then
+    source ~/tty2rpi-screens.ini
+    [ -f "${PATHVID}/${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${PATHVID}/${MEDIA}"
   else
     [ -f "${PATHVID}/${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout ${VLCVIDEO} --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${PATHVID}/${MEDIA}"
   fi
@@ -53,8 +55,8 @@ if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screens
   systemctl --user stop tty2rpi-screensaver.timer
 fi
 
-if [ "${GC9A01}" = "yes" ]; then
-  FRAMEBUFFER="/dev/fb1" fim --autozoom --quiet --output-device fb /dev/shm/pic.png > /dev/null 2>&1
+if [ "${FBUFDEV}" = "yes" ]; then
+  FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /dev/shm/pic.png > /dev/null 2>&1
 else
   feh --quiet --fullscreen /dev/shm/pic.png
 fi
