@@ -1,0 +1,3 @@
+[submodule "files_rpi/tmp/home/tty2rpi/fbcp-ili9341"]
+	path = files_rpi/tmp/home/tty2rpi/fbcp-ili9341
+	url = https://github.com/juj/fbcp-ili9341
