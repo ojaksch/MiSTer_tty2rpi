@@ -26,13 +26,13 @@ burn it onto your RPI's SD >= 4gb and feed it to your RPi. Done. Boooring! :stuc
 After it's first boot a script is run which expand it's filesystem to the full size of your SD and reboots another time. After the second boot you should 
 see the "tty2tft" logo some seconds later. SSH is enabled, the username is "tty2rpi" with passwort "1" (all without quotes).~~
 
-Link and image are still working, but maintaining two paths isn't reliable. You'd better take a manageable learning curve with manual installing.
+Link and image are still working, but maintaining two paths isn't reliable. You'd better take a manageable learning curve with manual installing. **This image is still Debian Bullseye and will be updated soon.**
 
 ---
 
 # Setting up the Raspberry Pi manual
 
-In this HowTo for the Indiana Jones' of you, I assume that you are already familiar with setting up a Raspberry Pi.
+In this HowTo for the Indiana Jones' of you, I assume that you are already familiar with setting up a Raspberry Pi. We are going to using Debian Bookworm, the current version of Debian
 
 Obviously you need a Raspberry Pi. Any model except the Pico will do, but remember that - even a RPi1 will
 do a fine job - the faster the RPi is, the more responsive your experience will be.
@@ -71,7 +71,7 @@ Get and run the install/update script:
 wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rpi.sh -O - | bash -
 ```
 Files that will be created;
-- /boot/cmdline.txt.example -- compare with your existing cmdline.txt. The only relevant change here is the parameter *quiet*)
+- /boot/cmdline.txt.example -- compare with your existing cmdline.txt. The only relevant changes here are the parameters *quiet* and *cfg80211.ieee80211_regdom=COUNTRYCODE*. [See here](https://www.arubanetworks.com/techdocs/InstantWenger_Mobile/Advanced/Content/Instant%20User%20Guide%20-%20volumes/Country_Codes_List.htm) for a list of WiFi regulatory domains.
 - /boot/config.txt.example -- compare with and edit your existing config.txt. Changes are:
 ```
 ...
@@ -82,7 +82,8 @@ disable_splash=1
 boot_delay=0
 ```
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config to disable DPMS
-- /etc/wpa_supplicant/wpa_supplicant.conf.example -- Example config for WiFi
+- ~~/etc/wpa_supplicant/wpa_supplicant.conf.example -- Example config for WiFi~~ DEPRECATED!
+- /etc/NetworkManager/system-connections/wifi.nmconnection -- Example config for WiFi
 - /tmp/home/tty2rpi/ -- User files that will be copied to the user you have created - this is "the engine"
 - /usr/local/bin/ -- Needed and needful programs
 
