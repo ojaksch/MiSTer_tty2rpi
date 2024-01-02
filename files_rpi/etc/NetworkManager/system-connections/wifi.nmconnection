@@ -1,0 +1,26 @@
+[connection]
+id=YourOwnSSID-Or-Name
+uuid=26cbd98d-c857-4b9e-a313-0a07bea76d55
+type=wifi
+interface-name=wlan0
+
+[wifi]
+mode=infrastructure
+ssid=YourOwnSSID
+
+[wifi-security]
+auth-alg=open
+# for WPA2 or mixed WPA2/WPA3
+key-mgmt=wpa-psk
+# for WPA3
+# key-mgmt=sae
+psk=YourVeryStrongAndSecretPassword
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]
