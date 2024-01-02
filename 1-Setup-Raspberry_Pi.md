@@ -148,7 +148,7 @@ Available commands:
 
 # Bugs and things still to do
 
-## 1st paragraph is deprecated - Debian Bookworm is the new standard release and has moved from wpa_supplicant to NetworkManager  
+## This paragraph is deprecated - Debian Bookworm is the new standard release and has moved from wpa_supplicant to NetworkManager  
 - If you are having problems connecting RPi's WiFi to your AP, there may two possible solutions. I had to use the first one with a RPi 3A+ and the 2nd one after upgrading to Debian Bookworm.  
 Your **/etc/wpa_supplicant/wpa_supplicant.conf** could look like my one:
 ```
@@ -180,18 +180,27 @@ id=YourOwnSSID-Or-Name
 uuid=26cbd98d-c857-4b9e-a313-0a07bea76d55
 type=wifi
 interface-name=wlan0
-autoconnect=true
 
 [wifi]
 mode=infrastructure
 ssid=YourOwnSSID
 
 [wifi-security]
+auth-alg=open
 # for WPA2 or mixed WPA2/WPA3
-key-mgmt=WPA-PSK
+key-mgmt=wpa-psk
 # for WPA3
 # key-mgmt=sae
 psk=YourVeryStrongAndSecretPassword
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]
 ```
 
 Edit id, ssid and psk for your needs and disable wpa_supplicant
