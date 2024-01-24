@@ -22,6 +22,7 @@ else
   git -C ${LOCALGITDIR} reset --hard origin/main --quiet > /dev/null 2>&1
   git -C ${LOCALGITDIR} clean -xdf --quiet 2>&1
 fi
+! [ -f ~/.xinitrc-extra ] && touch ~/.xinitrc-extra
 sudo rsync -aq ${LOCALGITDIR}/files_rpi/ / > /dev/null 2>&1
 sudo rsync -aq /tmp/home/tty2rpi/ ~/
 sudo chown -R $(id -un 1000): $(getent passwd "1000" | awk -F ":" '{print $6}')
