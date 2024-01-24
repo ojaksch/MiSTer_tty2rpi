@@ -90,7 +90,7 @@
 #dtoverlay=vc4-kms-dpi-generic
 #dtparam=hactive=640,vactive=480,rgb666-padhi,hsync-invert=1
 
-# Adafruit/Pimoroni HyperPixel 4" 800x600 CAP (SKU: 3578)
+# Adafruit/Pimoroni HyperPixel 4" 800x480 CAP (SKU: 3578)
 # Set FBUFDEV="no"
 #dtoverlay=vc4-kms-v3d
 #dtoverlay=vc4-kms-dpi-hyperpixel4
