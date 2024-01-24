@@ -84,8 +84,14 @@
 #dtoverlay=waveshare-35dpi-3b
 #dtoverlay=waveshare-35dpi-4b
 
-# waveshare 3.5" 640x480 CAP (SKU: 19173)
+# waveshare 3.5" 640x480 CAP (SKU: 19173) - Framebuffer mode
 # - Set FBUFDEV="yes" and FBDEVICE="/dev/fb0" in tty2rpi-user.ini
+#dtoverlay=vc4-kms-v3d
+#dtoverlay=vc4-kms-dpi-generic
+#dtparam=hactive=640,vactive=480,rgb666-padhi,hsync-invert=1
+
+# waveshare 3.5" 640x480 CAP (SKU: 19173) - Xorg mode
+# - Set FBUFDEV="no"
 #dtoverlay=vc4-kms-v3d
 #dtoverlay=vc4-kms-dpi-generic
 #dtparam=hactive=640,vactive=480,rgb666-padhi,hsync-invert=1
