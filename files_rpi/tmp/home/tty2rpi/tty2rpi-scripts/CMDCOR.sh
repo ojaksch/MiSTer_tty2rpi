@@ -4,10 +4,10 @@ source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 source ~/tty2rpi-screens.ini
 
-MEDIAPIC="${COMMANDLINE[1]}"
-MEDIAVID="${COMMANDLINE[1]}"
+MEDIAPIC="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2-)"
+MEDIAVID="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2-)"
 
-MEDIA="${COMMANDLINE[1]}"
+MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2-)"
 logger "Socket got »${MEDIA}«"
 echo "${MEDIA}" > /dev/shm/corename
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
