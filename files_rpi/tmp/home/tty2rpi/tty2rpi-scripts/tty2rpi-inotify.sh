@@ -17,7 +17,8 @@ AccuracySec=1ms
 [Install]
 WantedBy=timers.target
 " > ~/.config/systemd/user/tty2rpi-screensaver.timer
-systemctl --user daemon-reload
+  cp --update ~/tty2rpi-pics/tty2rpi.png /dev/shm
+  systemctl --user daemon-reload
 fi
 
 if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screensaver.timer) = "active" ]; then

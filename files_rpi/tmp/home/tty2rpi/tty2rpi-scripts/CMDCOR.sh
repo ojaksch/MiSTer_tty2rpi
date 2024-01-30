@@ -13,18 +13,19 @@ echo "${MEDIA}" > /dev/shm/corename
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 
 GETFNAM "${PATHPIC}" "${MEDIAPIC}"
-if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]); then cp "${PATHPIC}/${MEDIA}" /dev/shm; fi
-if [ -f "${PATHPIC}/${MEDIA}" ]; then
-  PICSIZE=$(identify -format '%wx%h' "${PATHPIC}/${MEDIA}")
+if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FNAMSEARCH}" = "MISTER-MENU" ]); then cp "${MEDIA}" /dev/shm/pic.png; fi
+
+if [ -f "${MEDIA}" ]; then
+  PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ]; then
-    #convert "${PATHPIC}/${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
-    #TTT=$(time convert "${PATHPIC}/${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png)
+    #convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+    #TTT=$(time convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png)
     [ "${KEEPASPECTRATIO}" = "yes" ] && WIDTH=0
-    ffmpeg -y -loglevel quiet -i "${PATHPIC}/${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
-    #TTT=$(time ffmpeg -y -loglevel quiet -i "${PATHPIC}/${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png)
+    ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+    #TTT=$(time ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png)
     #echo "time $TTT"
   else
-    cp "${PATHPIC}/${MEDIA}" /dev/shm/pic.png
+    cp "${MEDIA}" /dev/shm/pic.png
   fi
 else
   [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png
@@ -38,9 +39,9 @@ if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${
 if [ "${PLAYVIDEO}" = "yes" ]; then
   if [ "${FBUFDEV}" = "yes" ]; then
     source ~/tty2rpi-screens.ini
-    [ -f "${PATHVID}/${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${PATHVID}/${MEDIA}"
+    [ -f "${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${MEDIA}"
   else
-    [ -f "${PATHVID}/${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout ${VLCVIDEO} --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${PATHVID}/${MEDIA}"
+    [ -f "${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout ${VLCVIDEO} --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${MEDIA}"
   fi
 fi
 

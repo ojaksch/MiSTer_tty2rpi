@@ -15,7 +15,7 @@ dbug() {
     echo "${1}"
     if [ ! -e ${debugfile} ]; then						# log file not (!) exists (-e) create it
       echo "---------- tty2rpi Debuglog ----------" > ${debugfile}
-    fi 
+    fi
     echo "${1}" >> ${debugfile}							# output debug text
   fi
 }
@@ -40,18 +40,43 @@ fi										# end if command line Parameter
   sleep ${WAITSECS}
   while true; do								# main loop
     if [ -r ${corenamefile} ]; then						# proceed if file exists and is readable (-r)
-      newcore=$(cat ${corenamefile})						# get CORENAME
+      if [ -z "${GAMESELECT}" ]; then
+	newcore=$(<${corenamefile})						# get CORENAME if GAMESELECT is empty
+      else
+	newcore="${GAMESELECT}"
+	[ "${debug}" = "true" ] && logger "new core: ${GAMESELECT}"
+      fi
+      #
       dbug "Read CORENAME: -${newcore}-"
       if [ "${newcore}" != "${oldcore}" ]; then					# proceed only if Core has changed
 	dbug "Send -${newcore}- to ${TTYDEV}."
-	senddata "CMDCOR,${newcore}"						# The "Magic"
+	senddata "CMDCOR§${newcore}"						# The "Magic"
 	oldcore="${newcore}"							# update oldcore variable
       fi									# end if core check
-      if [ "${debug}" = "false" ]; then
+      #
+      if [ $(grep -c "log_file_entry=1" /media/fat/mister.ini) = 1 ] && [ -e /tmp/CURRENTPATH ] && [ -e /tmp/FILESELECT ]; then 
+	inotifywait -qq -e modify "${corenamefile}" /tmp/CURRENTPATH /tmp/FILESELECT
+	CN="$(</tmp/CORENAME)"
+	CP="$(</tmp/CURRENTPATH)"
+	FP="$(</tmp/FULLPATH)"
+	FS="$(</tmp/FILESELECT)"
+	if ! [ "${FP%%/*}" = "_Arcade" ] && [ "${FS}" = "selected" ] && [ $(echo ${FP} | awk -F "/" '{print NF-1}') -ge 1 ]; then	# only when NOT on "Arcade", a game is selected and path has a depth greater than 1
+	  GAMESELECT="${CP%.*}"
+	  if [ "${debug}" = "true" ]; then
+	    logger "============================="
+	    logger "CORENAME: $CN"
+	    logger "CURRENTPATH: $CP"
+	    logger "FULLPATH: $FP"
+	    logger "FILESELECT: $FS"
+	    logger "============================="
+	  fi
+	else
+	  [ /tmp/CORENAME -nt /tmp/CURRENTPATH ] && GAMESELECT=""
+	fi
+      elif [ "${debug}" = "false" ]; then
 	# wait here for next change of corename, -qq for quietness
 	inotifywait -qq -e modify "${corenamefile}"
-      fi
-      if [ "${debug}" = "true" ]; then
+      elif [ "${debug}" = "true" ]; then
 	# but not -qq when debugging
 	inotifywait -e modify "${corenamefile}"
       fi
