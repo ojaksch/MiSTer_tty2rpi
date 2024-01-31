@@ -22,7 +22,7 @@ I'm using [this display](https://www.amazon.de/dp/B08R5MFN5P) (not an affiliate 
 # Setting up the Raspberry Pi lazy
 
 ~~This short HowTo is for the lazy guys who aren't adventurers. Just [download this image](https://drive.google.com/drive/folders/1jEfDOJIkxnNSgx5FvXF2xUvo7-5Dww_1?usp=sharing), 
-burn it onto your RPI's SD >= 4gb and feed it to your RPi. Done. Boooring! :stuck_out_tongue_winking_eye:  
+burn it onto your RPI's SD >= 8gb and feed it to your RPi. Done. Boooring! :stuck_out_tongue_winking_eye:  
 After it's first boot a script is run which expand it's filesystem to the full size of your SD and reboots another time. After the second boot you should 
 see the "tty2tft" logo some seconds later. SSH is enabled, the username is "tty2rpi" with passwort "1" (all without quotes).~~
 
@@ -203,9 +203,12 @@ method=auto
 [proxy]
 ```
 
-Edit id, ssid and psk for your needs and disable wpa_supplicant
+Edit id, ssid and psk for your needs, quit editor, set the correct file mode bits and disable wpa_supplicant
 
-```systemctl disable wpa_supplicant```
+```
+chmod 600 /etc/NetworkManager/system-connections/wlan.nmconnection
+systemctl disable wpa_supplicant
+```
 
 Reboot and all should work.
 
