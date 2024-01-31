@@ -15,7 +15,8 @@ Table of Contents
 
 You obviously need a Rasoberry Pi. This is descibed in it's own chapter.  
 I'm using [this display](https://www.amazon.de/dp/B08R5MFN5P) (not an affiliate link) as it's BIG in size, using HMDI and sound and fits my idea of a Marquee display. 
-*Any* HDMI display will do in principle, but you'll need to have and use appropriate media files then.
+*Any* HDMI display will do in principle, but you'll need to have and use appropriate media files then.  
+A new feature was added at the end of 2023: You can now use almost any SPI, DSI and DPI display. See /boot/config.txt.example for some examples.
 
 ---
 
