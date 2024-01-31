@@ -27,7 +27,7 @@ burn it onto your RPI's SD >= 8gb and feed it to your RPi. Done. Boooring! :stuc
 After it's first boot a script is run which expand it's filesystem to the full size of your SD and reboots another time. After the second boot you should 
 see the "tty2tft" logo some seconds later. SSH is enabled, the username is "tty2rpi" with passwort "1" (all without quotes).~~
 
-Link and image are still working, but maintaining two paths isn't reliable. You'd better take a manageable learning curve with manual installing. **This image is still Debian Bullseye and will be updated soon.**
+Link and image are still working, but maintaining two paths isn't reliable. You'd better take a manageable learning curve with manual installing. **This image is now Debian Bookworm!**
 
 ---
 
