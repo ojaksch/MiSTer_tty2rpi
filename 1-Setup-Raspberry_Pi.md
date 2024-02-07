@@ -1,8 +1,7 @@
 
 Table of Contents  
 [Hardware](#hardware)  
-[Setting up the Raspberry Pi lazy](#setting-up-the-raspberry-pi-lazy)  
-[Setting up the Raspberry Pi manual](#setting-up-the-raspberry-pi-manual)  
+[Setting up the Raspberry Pi](#setting-up-the-raspberry-pi)  
 [The INI files](#the-ini-files)  
 [Media](#media)  
 [Commands](#commands)  
@@ -21,36 +20,26 @@ A new feature was added at the end of 2023: You can now use almost any SPI, DSI 
 
 ---
 
-# Setting up the Raspberry Pi lazy
+# Setting up the Raspberry Pi
 
-~~This short HowTo is for the lazy guys who aren't adventurers. Just [download this image](https://drive.google.com/drive/folders/1jEfDOJIkxnNSgx5FvXF2xUvo7-5Dww_1?usp=sharing), 
-burn it onto your RPI's SD >= 8gb and feed it to your RPi. Done. Boooring! :stuck_out_tongue_winking_eye:  
-After it's first boot a script is run which expand it's filesystem to the full size of your SD and reboots another time. After the second boot you should 
-see the "tty2tft" logo some seconds later. SSH is enabled, the username is "tty2rpi" with passwort "1" (all without quotes).~~
-
-Link and image are still working, but maintaining two paths isn't reliable. You'd better take a manageable learning curve with manual installing. **This image is now Debian Bookworm!**
-
----
-
-# Setting up the Raspberry Pi manually
-
-In this HowTo for the Indiana Jones' of you, I assume that you are already familiar with setting up a Raspberry Pi. We are going to using Debian Bookworm, the current version of Debian
+I assume that you are already familiar with setting up a Raspberry Pi. We are going to using Debian Bookworm, the current version of Debian
 
 Obviously you need a Raspberry Pi. Any model except the Pico will do, but remember that - even a RPi1 will
 do a fine job - the faster the RPi is, the more responsive your experience will be.
 From my personal experience a good minimum is the RPi2, better would be a RPi3. A good choice regarding
 price/power a RPi 3A+
 
-Download the **Raspberry Pi OS Lite** of your choice from https://www.raspberrypi.com/software/operating-systems/
+[Download the **Raspberry Pi OS Lite** of your choice.](https://www.raspberrypi.com/software/operating-systems/)
 The usual version is the 32-bit version of the RPi OS for *all* RPi board releases, but if you would like to go
 the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.  
+
+[Download the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) setup WiFi credentials and/or other needed settings and write the OS image to your SD card, which should be >=8 GB in size.  
 
 **REMARK**  
 I'm currently having an issue with VLC and the 64-bit RPi OS where the videos aren't played at full speed. Needs some investigating.
 
-Setup a SD card with the downloaded image. Insert the SD into your RPi, connect all needed cables and devices
-and boot up your RPi. Follow the instruction there and setup your user and password. For simplicity you can create a user **tty2rpi** (see also at end of this paragraph). 
-Enable and setup WiFi if you want to use it.
+Insert the SD into your RPi, connect all needed cables and devices and boot up your RPi.  
+<ins>If not already done with the Raspberry Pi Imager:</ins> Follow the instruction shown on the screen and setup your user and password. For simplicity you can create a user **tty2rpi** (see also at end of this paragraph). Enable and setup WiFi if you want to use it.
 
 Update your Raspberry Pi OS and install the following packages:
 
