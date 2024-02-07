@@ -26,10 +26,9 @@ fi
 sudo rsync -aq ${LOCALGITDIR}/files_rpi/ / > /dev/null 2>&1
 sudo rsync -aq /tmp/home/tty2rpi/ ~/
 sudo chown -R $(id -un 1000): $(getent passwd "1000" | awk -F ":" '{print $6}')
-sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf
-sudo chown root: /etc/wpa_supplicant/wpa_supplicant.conf.example
-sudo chown root: /etc/rc.local
+sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf  /etc/wpa_supplicant/wpa_supplicant.conf.example  /etc/rc.local  /etc/NetworkManager/system-connections/*
 sudo ln -sf ~/update_tty2rpi.sh /usr/local/bin/
+sudo chmod 600 /etc/NetworkManager/system-connections/*
 sudo chmod 777 /tmp
 
 [ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
