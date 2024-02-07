@@ -30,7 +30,7 @@ From my personal experience a good minimum is the RPi2, better would be a RPi3. 
 price/power a RPi 3A+
 
 [Download the **Raspberry Pi OS Lite** of your choice.](https://www.raspberrypi.com/software/operating-systems/)
-The usual version is the 32-bit version of the RPi OS for *all* RPi board releases, but if you would like to go
+The usual version is the 32-bit legacy version of the RPi OS for *all* RPi board releases, but if you would like to go
 the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.  
 
 [Download the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) setup WiFi credentials and/or other needed settings and write the OS image to your SD card, which should be >=8 GB in size.  
@@ -73,7 +73,6 @@ disable_splash=1
 boot_delay=0
 ```
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config to disable DPMS
-- ~~/etc/wpa_supplicant/wpa_supplicant.conf.example -- Example config for WiFi~~ DEPRECATED!
 - /tmp/home/tty2rpi/ -- User files that will be copied to the user you have created - this is "the engine"
 - /usr/local/bin/ -- Needed and needful programs
 
@@ -175,7 +174,6 @@ Edit id, ssid and psk for your needs, quit editor, set the correct file mode bit
 
 ```
 chmod 600 /etc/NetworkManager/system-connections/wlan.nmconnection
-systemctl disable wpa_supplicant
 ```
 
 Reboot and all should work.
