@@ -6,7 +6,7 @@ Table of Contents
 [The INI files](#the-ini-files)  
 [Media](#media)  
 [Commands](#commands)  
-[NetworkManager](networkmanager)  
+[NetworkManager](#networkmanager)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
 
