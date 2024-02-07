@@ -1,2 +1,2 @@
-source ~/.xinitrc-extra
+[ -f ~/.xinitrc-extra ] && source ~/.xinitrc-extra
 exec openbox-session

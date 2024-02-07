@@ -1,2 +1,0 @@
-# Example command to rotate a DPI display
-# xrandr --output DPI-1 --rotation right
