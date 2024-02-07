@@ -84,7 +84,6 @@ boot_delay=0
 ```
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config to disable DPMS
 - ~~/etc/wpa_supplicant/wpa_supplicant.conf.example -- Example config for WiFi~~ DEPRECATED!
-- /etc/NetworkManager/system-connections/wifi.nmconnection -- Example config for WiFi
 - /tmp/home/tty2rpi/ -- User files that will be copied to the user you have created - this is "the engine"
 - /usr/local/bin/ -- Needed and needful programs
 
