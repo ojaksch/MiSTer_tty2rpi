@@ -17,7 +17,7 @@ if [ -f "${PATHPIC}/000-TESTBILD.png" ]; then
     fi
   fi
 else
-  cp ~/tty2rpi-pics/000-notavail.png /dev/shm/pic.png
+  cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
 fi
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /tmp/testpic.png > /dev/null 2>&1

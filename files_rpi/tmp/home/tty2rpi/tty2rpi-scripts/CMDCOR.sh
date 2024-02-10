@@ -20,8 +20,15 @@ if [ -f "${MEDIA}" ]; then
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ]; then
     #convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
     #TTT=$(time convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png)
-    [ "${KEEPASPECTRATIO}" = "yes" ] && WIDTH=0
-    ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+    if [ "${KEEPASPECTRATIO}" = "yes" ]; then
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+    elif [ "${KEEPASPECTRATIO}" = "no" ]; then
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+    elif [ "${KEEPASPECTRATIO}" = "x" ]; then
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=-1:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+    elif [ "${KEEPASPECTRATIO}" = "y" ]; then
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+    fi
     #TTT=$(time ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png)
     #echo "time $TTT"
   else
@@ -29,7 +36,7 @@ if [ -f "${MEDIA}" ]; then
   fi
 else
   [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png
-  [ -s /dev/shm/pic.png ] || cp ~/tty2rpi-pics/000-notavail.png /dev/shm/pic.png
+  [ -s /dev/shm/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
 fi
 
 GETFNAM "${PATHVID}" "${MEDIAVID}"

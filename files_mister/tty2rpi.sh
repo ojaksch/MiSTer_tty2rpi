@@ -61,7 +61,7 @@ fi										# end if command line Parameter
 	FP="$(</tmp/FULLPATH)"
 	FS="$(</tmp/FILESELECT)"
 	if ! [ "${FP%%/*}" = "_Arcade" ] && [ "${FS}" = "selected" ] && [ $(echo ${FP} | awk -F "/" '{print NF-1}') -ge 1 ]; then	# only when NOT on "Arcade", a game is selected and path has a depth greater than 1
-	  GAMESELECT="${CP%.*}"
+	  GAMESELECT="${CN}/${CP%.*}"
 	  if [ "${debug}" = "true" ]; then
 	    logger "============================="
 	    logger "CORENAME: $CN"

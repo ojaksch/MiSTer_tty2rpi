@@ -35,9 +35,6 @@ the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.
 
 [Download the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) setup WiFi credentials and/or other needed settings and write the OS image to your SD card, which should be >=8 GB in size.  
 
-**REMARK**  
-I'm currently having an issue with VLC and the 64-bit RPi OS where the videos aren't played at full speed. Needs some investigating.
-
 Insert the SD into your RPi, connect all needed cables and devices and boot up your RPi.  
 <ins>If not already done with the Raspberry Pi Imager:</ins> Follow the instruction shown on the screen and setup your user and password. For simplicity you can create a user **tty2rpi** (see also at end of this paragraph). Enable and setup WiFi if you want to use it.
 
