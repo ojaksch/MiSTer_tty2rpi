@@ -40,15 +40,16 @@ else
 fi
 
 GETFNAM "${PATHVID}" "${MEDIAVID}"
-if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDMENU}" = "no" ]; then VLCAUDIO="--no-audio"; fi
-if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then VLCAUDIO="--no-audio"; fi
+if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDMENU}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
+if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
 if [ "${PLAYVIDEO}" = "yes" ]; then
   if [ "${FBUFDEV}" = "yes" ]; then
     source ~/tty2rpi-screens.ini
     [ -f "${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${MEDIA}"
   else
-    [ -f "${MEDIA}" ] && cvlc -f --no-video-title-show --play-and-exit --verbose 0 --vout ${VLCVIDEO} --aout alsa ${VLCAUDIO} ${VLCPREFEETCH} "${MEDIA}"
+    [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "vlc" ] && cvlc --verbose 0 -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}"
+    [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "mpv" ] && mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}"
   fi
 fi
 
