@@ -50,7 +50,7 @@ if [ "${PLAYVIDEO}" = "yes" ]; then
   else
     [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "vlc" ] && cvlc --verbose 0 -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}"
     [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "mpv" ] && mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}"
-    [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "mplayer" ] && AUDIOYESNO="-nosound" mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}"
+    [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "mplayer" ] && AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}"
   fi
 fi
 
