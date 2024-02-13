@@ -48,9 +48,13 @@ if [ "${PLAYVIDEO}" = "yes" ]; then
     source ~/tty2rpi-screens.ini
     [ -f "${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${MEDIA}"
   else
-    [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "vlc" ] && cvlc --verbose 0 -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}"
-    [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "mpv" ] && mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}"
-    [ -f "${MEDIA}" ] && [ "${VIDEOPLAYER}" = "mplayer" ] && AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}"
+    if [ -f "${MEDIA}" ]; then
+      case "${VIDEOPLAYER}" in
+	"vlc")		cvlc --verbose 0 -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}" ;;
+	"mpv")		mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}" ;;
+	"mplayer")	AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}" ;;
+      esac
+    fi
   fi
 fi
 
