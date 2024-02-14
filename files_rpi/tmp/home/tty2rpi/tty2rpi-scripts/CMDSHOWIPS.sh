@@ -10,7 +10,9 @@ if [ "${FBUFDEV}" = "yes" ]; then
 else
   feh --quiet --fullscreen /tmp/wait4inet.png &
 fi
-until ping -c1 www.google.de >/dev/null 2>&1; do sleep 1; done
+
+DEFGW="$(ip route | grep "default via" | awk '{print $3}')"
+until ping -c1 "${DEFGW}" >/dev/null 2>&1; do sleep 1; done
 if [ "${FBUFDEV}" = "yes" ]; then
   KILLPID fim
 else
