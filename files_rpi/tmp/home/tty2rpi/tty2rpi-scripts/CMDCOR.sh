@@ -46,7 +46,8 @@ if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${
 if [ "${PLAYVIDEO}" = "yes" ]; then
   if [ "${FBUFDEV}" = "yes" ]; then
     source ~/tty2rpi-screens.ini
-    [ -f "${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${MEDIA}"
+    #[ -f "${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${MEDIA}"
+    [ -f "${MEDIA}" ] && ffmpeg -loglevel quiet -re -i "${MEDIA}" -c:v rawvideo -pix_fmt rgb565le -f fbdev -vf "scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=decrease,pad=${WIDTH}:${HEIGHT}:(ow-iw)/2:(oh-ih)/2" ${FBDEVICE}
   else
     if [ -f "${MEDIA}" ]; then
       case "${VIDEOPLAYER}" in
