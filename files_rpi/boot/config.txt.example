@@ -53,7 +53,7 @@
 # - Set FBUFDEV="yes" and FBDEVICE="/dev/fb1"
 #dtoverlay=gc9a01,rotate=90
 
-# NoName MHS 3.5" 480x240 (SKU: MHS3528) (waveshare dto)
+# NoName MHS 3.5" 480x320 (SKU: MHS3528) (waveshare dto)
 # - Using https://github.com/juj/fbcp-ili9341
 #   Compile fbcp-ili9341 with 'cmake -DSPI_BUS_CLOCK_DIVISOR=6 -DWAVESHARE35B_ILI9486=ON -DDISPLAY_ROTATE_180_DEGREES=ON -DSTATISTICS=0 ..'
 # - Set FBUFDEV="yes" and FBDEVICE="/dev/fb0" in tty2rpi-user.ini
