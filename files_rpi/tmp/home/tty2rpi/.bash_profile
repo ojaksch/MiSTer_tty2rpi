@@ -8,7 +8,9 @@ if [ -z "${SSH_TTY}" ]; then
       clear
       PS1=""
       tput civis
-#      sudo /home/tty2rpi/fbcp-ili9341/build/fbcp-ili9341 > /dev/null 2>&1 &
+      if [ "${FBUFDEV}" = "yes" ] && [ "${USEFBCP}" = "yes" ] && [ -e /home/tty2rpi/fbcp-ili9341/build/fbcp-ili9341 ]; then
+	sudo /home/tty2rpi/fbcp-ili9341/build/fbcp-ili9341 > /dev/null 2>&1 &
+      fi
       /home/tty2rpi/.config/openbox/autostart &
     else
       #[[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx -- -nocursor vt1 &> /dev/null
