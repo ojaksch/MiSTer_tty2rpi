@@ -29,11 +29,11 @@ do a fine job - the faster the RPi is, the more responsive your experience will 
 From my personal experience a good minimum is the RPi2, better would be a RPi3. A good choice regarding
 price/power a RPi 3A+
 
-[Download the **Raspberry Pi OS Lite** of your choice.](https://www.raspberrypi.com/software/operating-systems/)
-The usual version is the 32-bit legacy version of the RPi OS for *all* RPi board releases, but if you would like to go
-the 64-bit way and you are using a RPi 3A+ or greater, grab the 64-bit RPi OS.  
-
-[Download the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) setup WiFi credentials and/or other needed settings and write the OS image to your SD card, which should be >=8 GB in size.  
+[Download and start the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) insert a SD card, choose your Raspberry Pi Model, the OS version (Legacy 32-bit recommended) and the SD card you want to write to. Click on the button **Next**.  
+Click on the first button to edit settings as shown below, but be sure to set **your own** WiFi credentials & country and time zone 😉  
+General Settings           |  Services Settings
+:-------------------------:|:-------------------------:
+![](/images/rpi-imager-settings1.png)   |  ![](/images/rpi-imager-settings2.png)
 
 Insert the SD into your RPi, connect all needed cables and devices and boot up your RPi.  
 <ins>If not already done with the Raspberry Pi Imager:</ins> Follow the instruction shown on the screen and setup your user and password. For simplicity you can create a user **tty2rpi** (see also at end of this paragraph). Enable and setup WiFi if you want to use it.
@@ -70,7 +70,7 @@ disable_splash=1
 boot_delay=0
 gpu_mem=128
 ```
-- /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config to disable DPMS
+- /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config file that disables DPMS
 - /tmp/home/tty2rpi/ -- User files that will be copied to the user you have created - this is "the engine"
 - /usr/local/bin/ -- Needed and needful programs
 
@@ -186,5 +186,5 @@ Reboot and all should work.
 
 # License
 
-![CC BY-NC-SA 4.0](by-nc-sa.eu.png)  
+![CC BY-NC-SA 4.0](/images/by-nc-sa.eu.png)  
 [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
