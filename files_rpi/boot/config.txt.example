@@ -58,7 +58,6 @@
 #   Install needed packages: 'sudo apt-get install libraspberrypi-dev raspberrypi-kernel-headers cmake'
 #   Compile fbcp-ili9341 with 'cmake -DSPI_BUS_CLOCK_DIVISOR=6 -DWAVESHARE35B_ILI9486=ON -DDISPLAY_ROTATE_180_DEGREES=ON -DSTATISTICS=0 ..'
 # - Set FBUFDEV="yes", FBDEVICE="/dev/fb0" and USEFBCP="yes" in tty2rpi-user.ini
-# - Enable fbcp-ili9341 in /home/tty2rpi/.bash_profile
 #dtoverlay=waveshare35a,rotate=270
 #hdmi_group=2
 #hdmi_mode=87
