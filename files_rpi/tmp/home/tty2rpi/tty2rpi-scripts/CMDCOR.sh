@@ -17,7 +17,7 @@ if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FN
 
 if [ -f "${MEDIA}" ]; then
   PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
-  if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ]; then
+  if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ -n "${KEEPASPECTRATIO}" ]; then
     #convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
     #TTT=$(time convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png)
     if [ "${KEEPASPECTRATIO}" = "yes" ]; then
@@ -73,5 +73,5 @@ fi
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /dev/shm/pic.png > /dev/null 2>&1
 else
-  feh --quiet --fullscreen /dev/shm/pic.png
+  feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png
 fi
