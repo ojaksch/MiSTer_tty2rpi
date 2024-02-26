@@ -179,7 +179,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 - Added rc.local to set bash instead of dash
 
 20220911:
-- RPi: include stoNe font
+- RPi: include [stoNe font](https://www.dafont.com/font-comment.php?file=stone2) (100% Freeware)
 - RPi: show IP adresses when starting
 
 20220909:
