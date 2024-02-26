@@ -13,7 +13,7 @@ if [ -f "${PATHPIC}/000-TESTBILD.png" ]; then
     if [ "${FBUFDEV}" = "yes" ]; then
       FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb "${PATHPIC}/000-TESTBILD.png" > /dev/null 2>&1
     else
-      feh --quiet --fullscreen "${PATHPIC}/000-TESTBILD.png"
+      feh --quiet --fullscreen --auto-zoom "${PATHPIC}/000-TESTBILD.png"
     fi
   fi
 else
@@ -22,5 +22,5 @@ fi
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /tmp/testpic.png > /dev/null 2>&1
 else
-  feh --quiet --fullscreen /tmp/testpic.png
+  feh --quiet --fullscreen --auto-zoom /tmp/testpic.png
 fi

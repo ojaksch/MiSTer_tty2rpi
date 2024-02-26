@@ -8,7 +8,7 @@ convert -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/20)) -fill white -gr
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /tmp/wait4inet.png > /dev/null 2>&1 &
 else
-  feh --quiet --fullscreen /tmp/wait4inet.png &
+  feh --quiet --fullscreen --auto-zoom /tmp/wait4inet.png &
 fi
 
 DEFGW="$(ip route | grep "default via" | awk '{print $3}')"
@@ -25,5 +25,5 @@ convert -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/25)) -fill white -gr
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /tmp/ip-adresses.png > /dev/null 2>&1
 else
-  feh --quiet --fullscreen /tmp/ip-adresses.png
+  feh --quiet --fullscreen --auto-zoom /tmp/ip-adresses.png
 fi

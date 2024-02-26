@@ -10,6 +10,6 @@ if [ "${SCREENSAVER}" = "yes" ]; then
     FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb --random /dev/shm/ > /dev/null 2>&1 &
   else
     KILLPID feh
-    feh --quiet --fullscreen --randomize /dev/shm/ &
+    feh --quiet --fullscreen --auto-zoom --randomize /dev/shm/ &
   fi
 fi

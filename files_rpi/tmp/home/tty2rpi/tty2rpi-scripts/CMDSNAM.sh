@@ -9,5 +9,5 @@ convert -undercolor Black -fill white -pointsize $((${WIDTH}/20)) -gravity South
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /dev/shm/pic.png > /dev/null 2>&1
 else
-  feh --quiet --fullscreen /dev/shm/pic.png
+  feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png
 fi

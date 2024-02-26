@@ -10,5 +10,5 @@ SHOWTOUT="${COMMANDLINE[1]}"
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb --slideshow ${SHOWTOUT} ${PATHPIC} > /dev/null 2>&1
 else
-  feh --quiet --fullscreen --randomize --auto-zoom --slideshow-delay ${SHOWTOUT} ${PATHPIC}
+  feh --quiet --fullscreen --auto-zoom --randomize --auto-zoom --slideshow-delay ${SHOWTOUT} ${PATHPIC}
 fi

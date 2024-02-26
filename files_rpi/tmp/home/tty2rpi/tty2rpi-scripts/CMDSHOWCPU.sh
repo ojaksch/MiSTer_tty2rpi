@@ -14,5 +14,5 @@ convert -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/20)) -fill white -gr
 if [ "${FBUFDEV}" = "yes" ]; then
   FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /tmp/cpu-info.png > /dev/null 2>&1 &
 else
-  feh --quiet --fullscreen /tmp/cpu-info.png &
+  feh --quiet --fullscreen --auto-zoom /tmp/cpu-info.png &
 fi
