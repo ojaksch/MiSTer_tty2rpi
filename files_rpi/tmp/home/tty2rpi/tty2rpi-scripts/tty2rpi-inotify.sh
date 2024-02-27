@@ -17,7 +17,7 @@ AccuracySec=1ms
 [Install]
 WantedBy=timers.target
 " > ~/.config/systemd/user/tty2rpi-screensaver.timer
-  cp --update ~/tty2rpi-pics/tty2rpi.png /dev/shm
+  cp --update ${TTY2RPIPICS}/tty2rpi.png /dev/shm
   systemctl --user daemon-reload
 fi
 
@@ -32,10 +32,10 @@ while true; do
     ! [ "$(<${PID_TTY2RPI})" = "0" ] && KILLPID $(<${PID_TTY2RPI})
     if [ "${FBUFDEV}" = "yes" ]; then
       KILLPID "fim"
-      KILLPID "mplayer"
+      KILLPID "${VIDEOPLAYER}"
     else
       KILLPID "feh"
-      KILLPID "vlc"
+      KILLPID "${VIDEOPLAYER}"
     fi
     sync ${SOCKET}
     ~/tty2rpi-scripts/tty2rpi.sh & echo $! > ${PID_TTY2RPI}

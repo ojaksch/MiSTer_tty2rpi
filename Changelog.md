@@ -1,3 +1,7 @@
+20240227:
+- Splash screen - see /etc/systemd/system/splashscreen.service for details
+- tty2rpi logo now customizable
+
 20240225:
 - Search for filenames with at least three caracters, not two. This speeds up searching and lowers the risk of misinterpretation
 - The INI variable KEEPASPECTRATIO is now undefined per default. The picture viewers feh/fim are now auto scaling a picture to screen's size. This speeds up displaying a picture a lot!  
