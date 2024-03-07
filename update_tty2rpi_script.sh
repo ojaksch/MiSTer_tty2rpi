@@ -30,8 +30,17 @@ sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf  /etc/rc.local  /etc/Netwo
 sudo ln -sf ~/update_tty2rpi.sh /usr/local/bin/
 sudo chmod 600 /etc/NetworkManager/system-connections/*
 sudo chmod 777 /tmp
-if ! [ -s /etc/systemd/system/splashscreen.service ]; then
-  sudo cp /etc/systemd/system/splashscreen.service.template /etc/systemd/system/splashscreen.service
-  sudo systemctl enable splashscreen.service
+if ! [ -s /etc/systemd/system/splashscreen-startup.service ]; then
+  sudo cp /etc/systemd/system/splashscreen-startup.service.template /etc/systemd/system/splashscreen-startup.service
+  sudo systemctl enable splashscreen-startup.service
+fi
+if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
+  sudo cp /etc/systemd/system/splashscreen-shutdown.service.template /etc/systemd/system/splashscreen-shutdown.service
+  sudo systemctl enable splashscreen-shutdown.service
+fi
+# The next block can be remove in some months
+if [ -f /etc/systemd/system/splashscreen.service ]; then
+  sudo systemctl disable splashscreen.service
+  rm /etc/systemd/system/splashscreen.service
 fi
 [ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"

@@ -1,0 +1,14 @@
+[Unit]
+Description=Splash Screen
+DefaultDependencies=no
+Before=halt.target poweroff.target reboot.target shutdown.target
+
+[Service]
+#ExecStartPre is to workaround a race condition with bullseye. It can be removed in most cases. If an error appears on the screen that says it "cannot open /dev/fb0" then make sure ExecStartPre is used.
+#ExecStartPre=/usr/bin/sleep 2
+ExecStart=/usr/bin/fim --autozoom --quiet --output-device fb --execute-commands rotate90 /home/tty2rpi/tty2rpi-pics/tty2rpi-shutdown.png
+StandardInput=tty
+StandardOutput=tty
+
+[Install]
+WantedBy=halt.target poweroff.target reboot.target shutdown.target
