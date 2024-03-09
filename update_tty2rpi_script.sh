@@ -41,6 +41,6 @@ fi
 # The next block can be remove in some months
 if [ -f /etc/systemd/system/splashscreen.service ]; then
   sudo systemctl disable splashscreen.service
-  rm /etc/systemd/system/splashscreen.service
+  sudo rm /etc/systemd/system/splashscreen.service
 fi
 [ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
