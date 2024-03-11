@@ -29,7 +29,7 @@ do a fine job - the faster the RPi is, the more responsive your experience will 
 From my personal experience a good minimum is the RPi2, better would be a RPi3. A good choice regarding
 price/power a RPi 3A+
 
-[Download and start the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) insert a SD card, choose your Raspberry Pi Model, the OS version (Legacy 32-bit recommended) and the SD card you want to write to. Click on the button **Next**.  
+[Download and start the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) insert a SD card, choose your Raspberry Pi Model, the OS version (standard 32-bit w/o desktop recommended) and the SD card you want to write to. Click on the button **Next**.  
 Click on the first button to edit settings as shown below, but be sure to set **your own** WiFi credentials & country and time zone 😉  
 General Settings           |  Services Settings
 :-------------------------:|:-------------------------:
