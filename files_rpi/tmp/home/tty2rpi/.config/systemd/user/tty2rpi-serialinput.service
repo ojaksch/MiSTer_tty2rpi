@@ -1,0 +1,11 @@
+[Unit]
+Description="Serial socket for tty2rpi data"
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+ExecStart=%h/tty2rpi-scripts/tty2rpi-serialinput.sh
+
+[Install]
+WantedBy=multi-user.target

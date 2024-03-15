@@ -5,6 +5,7 @@ source ~/tty2rpi-screens.ini
 #xset -b
 
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
+[ "${SERIALSOCKET}" = "yes" ] && systemctl --user start tty2rpi-serialinput.service
 sleep 1.5
 
 # Show IP addresses
