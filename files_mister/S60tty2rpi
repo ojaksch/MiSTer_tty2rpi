@@ -19,9 +19,8 @@ fi
 # Start
 start() {
     TTY2RPI=$(echo ${TTYDEV} | awk -F "/" '{print $4}')
-    echo -n "Waiting for ${TTY2RPI} become avaiable"
     if [ -z "${TTYPARAM}" ]; then
-      echo tcp #################
+      echo -n "Waiting that ${TTY2RPI} become avaiable"
       until ping -W1 -c1 ${TTY2RPI} >/dev/null 2>&1; do echo -n "." ; sleep 0.2; done
       echo -e "\nHost ${TTY2RPI} reachable"
 
@@ -29,7 +28,7 @@ start() {
       until (echo "NIL" > ${TTYDEV}) 2>/dev/null; do echo -n "." ; sleep 1; done
       echo -e "\nSocket of ${TTY2RPI} available"
     else
-      echo serial ${TTYDEV} #################
+      echo "Setting up serial device on ${TTYDEV}"
       stty -F ${TTYDEV} ${TTYPARAM}
     fi
 
