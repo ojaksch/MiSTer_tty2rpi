@@ -26,17 +26,20 @@ fi
 sudo rsync -aq ${LOCALGITDIR}/files_rpi/ / > /dev/null 2>&1
 sudo rsync -aq /tmp/home/tty2rpi/ ~/
 sudo chown -R $(id -un 1000): $(getent passwd "1000" | awk -F ":" '{print $6}')
-sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf  /etc/rc.local  /etc/NetworkManager/system-connections/*
+sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf  /etc/rc.local
+if [ "$(ls -A /etc/NetworkManager/system-connections/ )" ]; then
+  sudo chown root: /etc/NetworkManager/system-connections/*
+  sudo chmod 600 /etc/NetworkManager/system-connections/*
+fi
 sudo ln -sf ~/update_tty2rpi.sh /usr/local/bin/
-sudo chmod 600 /etc/NetworkManager/system-connections/*
 sudo chmod 777 /tmp
 if ! [ -s /etc/systemd/system/splashscreen-startup.service ]; then
   sudo cp /etc/systemd/system/splashscreen-startup.service.template /etc/systemd/system/splashscreen-startup.service
-  sudo systemctl enable splashscreen-startup.service
+  sudo systemctl --quiet enable splashscreen-startup.service
 fi
 if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
   sudo cp /etc/systemd/system/splashscreen-shutdown.service.template /etc/systemd/system/splashscreen-shutdown.service
-  sudo systemctl enable splashscreen-shutdown.service
+  sudo systemctl --quiet enable splashscreen-shutdown.service
 fi
 # The next block can be remove in some months
 if [ -f /etc/systemd/system/splashscreen.service ]; then
