@@ -9,8 +9,10 @@ systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-up
 sleep 1.5
 
 # Show IP addresses
-echo "CMDSHOWIPS" > "${SOCKET}"
-sleep ${IPTIMEOUT}
+if [ $(ip link | grep -c "state UP") -gt 0 ] && [ "${SHOWIPS}" = "yes" ]; then
+  echo "CMDSHOWIPS" > "${SOCKET}"
+  sleep ${IPTIMEOUT}
+fi
 
 # Show Welcome screen
 if [ "${FBUFDEV}" = "yes" ]; then
