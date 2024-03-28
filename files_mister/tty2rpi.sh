@@ -50,7 +50,11 @@ fi										# end if command line Parameter
       dbug "Read CORENAME: -${newcore}-"
       if [ "${newcore}" != "${oldcore}" ]; then					# proceed only if Core has changed
 	dbug "Send -${newcore}- to ${TTYDEV}."
-	senddata "CMDCOR§${newcore}"						# The "Magic"
+	if [ -n "${CN}" ]; then
+	  senddata "CMDCOR§${CN}§${newcore}"
+	else
+	  senddata "CMDCOR§-§${newcore}"						# The "Magic"
+	fi
 	oldcore="${newcore}"							# update oldcore variable
       fi									# end if core check
       #

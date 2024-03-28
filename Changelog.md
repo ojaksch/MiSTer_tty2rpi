@@ -1,3 +1,41 @@
+20240328:
+- Clock optional with new parameter SCREENSAVER_CLOCK
+- Better and faster search routine
+- Screensaver with optional "also show Core and/or Game picture"
+
+20240321:
+- New parameter SHOWIPS to disable the IP addresses message at all
+
+20240320:
+- Silence some updater tasks
+
+20240319:
+- Beautify S60 script
+
+20240318:
+- Added gegenric ssh key for shutting down RPi from MiSTer
+
+20240316:
+- Option to receive core changes by serial - MiSTer part
+
+20240315:
+- Option to receive core changes by serial
+
+20240314:
+- Quiet removing obsolete splashscreen.service
+
+20240311:
+- doc: remove hint to -legacy- RPi OS
+
+20240309:
+- Fixed splash screen in bash_profile
+
+20240307:
+- Splash screen when shutdown or reboot
+
+20240227:
+- Add parameters to cmdline.txt.example for splash screen
+
 20240227:
 - Splash screen - see /etc/systemd/system/splashscreen.service for details
 - tty2rpi logo now customizable
@@ -10,7 +48,7 @@ Setting KEEPASPECTRATIO to yes/no/x/y re-enables pre-scaling.
 20240222:
 - Instructions for simple framebuffer devices in config.txt.example how to compile fbcp-ili9341
 - New INI parameter: USEFBCP (whether to use fbcp-ili9341 or not, defaults to "no")
-- New INI parameter: FBPIXFMT (Configurable Pixel Format for ffmpeg in tty2rpi-user.ini. Depends on framebuffer display - see https://ffmpeg.org/ffmpeg.html#Advanced-Video-options)
+- New INI parameter: FBPIXFMT (Configurable Pixel Format for ffmpeg in tty2rpi-user.ini (RPi). Depends on framebuffer display - see https://ffmpeg.org/ffmpeg.html#Advanced-Video-options)
 
 20240221: 
 - Fixed wrong display dimension of SKU-MHS3528 in config.txt.example
@@ -32,7 +70,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 - Updated documentation
 - Removed prebuilt Raspberry Pi image
 - Subfolder of a specific core is now correctly scanned
-- You can now setup your own clock and "picture not available" by setting TTY2RPIPICS in tty2rpi-user.ini (see tty2rpi.ini for details)
+- You can now setup your own clock and "picture not available" by setting TTY2RPIPICS in tty2rpi-user.ini (RPi, see tty2rpi.ini for details)
 
 20240207:
 - Mention gpu_mem in config.txt.example
@@ -87,7 +125,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 - Don't save MAC as file
 
 20230325:
-- openbox/autostart: ensure unix linebreaks and also load tty2rpi-user.ini
+- openbox/autostart: ensure unix linebreaks and also load tty2rpi-user.ini (RPi)
 - Changes to the update service, Support for Batocera added
 
 20230125:
@@ -109,7 +147,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 
 20221011:
 - Fixed screensaver's exit
-- Removed tty2rpi-user.ini as it overwrites user's one, added MENUMODE
+- Removed tty2rpi-user.ini (RPi) as it overwrites user's one, added MENUMODE
 - Predefined and filled media folder marquee-pictures and marquee-videos
 - systemd: auto update every friday 2pm + 2h per random
 - Fixed execution of APTUPD
@@ -139,7 +177,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 - Inform about the setup docs
 
 20221001:
-- pre-define user variables commented out in tty2rpi-user.ini
+- pre-define user variables commented out in tty2rpi-user.ini (RPi)
 - Setup-MiSTer: fixed wrong download path
 
 20220925:
@@ -179,7 +217,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 20220912:
 - mister: Optimations to S60
 - autostart: run function KILLPID
-- tty2rpi.ini: IPTIMEOUT
+- tty2rpi.ini (MiSTer): IPTIMEOUT
 - Added rc.local to set bash instead of dash
 
 20220911:

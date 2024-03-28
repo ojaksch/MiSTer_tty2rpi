@@ -4,11 +4,21 @@ source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 source ~/tty2rpi-screens.ini
 
-MEDIAPIC="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2-)"
-MEDIAVID="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2-)"
+MEDIAPIC="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
+MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
+if [ "${MEDIA}" != "-" ]; then
+  logger "Socket got CORE »${MEDIA}«"
+  GETFNAM "${PATHPIC}" "${MEDIAPIC}"
+  [ "${SCREENSAVER}" = "yes" ] && convert "${PATHPIC}/${MEDIAPIC}".* /dev/shm/CORE.png
+else
+  [ -f /dev/shm/CORE.png ] && rm /dev/shm/CORE.png
+fi
 
-MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2-)"
-logger "Socket got »${MEDIA}«"
+MEDIAPIC="$(echo ${COMMANDLINE[@]} | cut -d " " -f 3-)"
+MEDIAVID="$(echo ${COMMANDLINE[@]} | cut -d " " -f 3-)"
+
+MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 3-)"
+logger "Socket got GAME »${MEDIA}«"
 echo "${MEDIA}" > /dev/shm/corename
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 

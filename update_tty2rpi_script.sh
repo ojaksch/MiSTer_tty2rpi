@@ -12,7 +12,6 @@ ${APTUPD}
 
 echo "Updating tty2rpi..."
 ! [ -d ${LOCALGITDIR} ] && mkdir ${LOCALGITDIR}
-#git -C ${LOCALGITDIR} pull --quiet > /dev/null 2>&1
 git -C ${LOCALGITDIR} fetch origin --quiet > /dev/null 2>&1
 if [ ${?} -gt 0 ]; then
   git -C ${LOCALGITDIR} clone --quiet https://github.com/ojaksch/MiSTer_tty2rpi
