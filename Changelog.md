@@ -1,10 +1,10 @@
 20240329:
-- Screensaver creates clock images only if enabled
+- Screensaver creates clock images only if enabled by SCREENSAVER_CLOCK (default "yes")
 - Clock images are created in another temp directory and moved after creation
-- Clock script starts screensaver mode regardless of whether enabled or disabled
-- Don't randomly cycle through images in screensaver, can be enabled with SCREENSAVER_RNDM,
+- Clock script starts screensaver mode regardless of whether clock is enabled or disabled
+- Don't randomly cycle through images in screensaver, can be enabled with SCREENSAVER_RNDM (default "no"),
   with interval defined in SCREENSAVER_IVAL (default 10s)
-- Silence the restart of screensaver service
+- Silence the restart of screensaver service in journal
 
 20240328:
 - Clock optional with new parameter SCREENSAVER_CLOCK
