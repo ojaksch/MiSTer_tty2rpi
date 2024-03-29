@@ -11,7 +11,7 @@ Description=Run the tty2rpi screensaver
 
 [Timer]
 OnActiveSec=${SCREENSAVER_START}
-OnUnitActiveSec=${SCREENSAVER_IVAL}
+OnUnitActiveSec=$((SCREENSAVER_IVAL-2))
 AccuracySec=1ms
 
 [Install]

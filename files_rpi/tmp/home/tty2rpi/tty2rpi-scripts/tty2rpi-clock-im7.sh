@@ -17,14 +17,16 @@ if [ "${SCREENSAVER}" = "yes" ] && [ ${SCREENSAVER_CLOCK} = "yes" ]; then
   DATEM2=${DATEFULL:3:1}
 
   CLOCKPNG="/dev/shm/tty2rpi-clock.png"
+  CLOCKPNGTMP="/dev/shm/tmp/tty2rpi-clock.png"
 
-  magick -size 500x320 xc:black ${CLOCKPNG}
-  magick composite ${TTY2RPIPICS}/000-clock.png ${CLOCKPNG} ${CLOCKPNG}
+  magick -size 500x320 xc:black ${CLOCKPNGTMP}
+  magick composite ${TTY2RPIPICS}/000-clock.png ${CLOCKPNGTMP} ${CLOCKPNGTMP}
 
-  magick composite -geometry  +45+155 ${TTY2RPIPICS}/000-clock-${DATEH1}.jpg ${CLOCKPNG} ${CLOCKPNG}
-  magick composite -geometry  +140+155 ${TTY2RPIPICS}/000-clock-${DATEH2}.jpg ${CLOCKPNG} ${CLOCKPNG}
-  magick composite -geometry  +265+155 ${TTY2RPIPICS}/000-clock-${DATEM1}.jpg ${CLOCKPNG} ${CLOCKPNG}
-  magick composite -geometry  +360+155 ${TTY2RPIPICS}/000-clock-${DATEM2}.jpg ${CLOCKPNG} ${CLOCKPNG}
+  magick composite -geometry  +45+155 ${TTY2RPIPICS}/000-clock-${DATEH1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
+  magick composite -geometry  +140+155 ${TTY2RPIPICS}/000-clock-${DATEH2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
+  magick composite -geometry  +265+155 ${TTY2RPIPICS}/000-clock-${DATEM1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
+  magick composite -geometry  +360+155 ${TTY2RPIPICS}/000-clock-${DATEM2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
 fi
 
-echo "tty2rpi-screensaver" > "${SOCKET}"
+[ "${COMMANDLINE}" != "tty2rpi-screensaver" ] && echo "tty2rpi-screensaver" > "${SOCKET}"
+exit 0
