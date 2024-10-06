@@ -59,16 +59,14 @@ Get and run the install/update script:
 wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rpi.sh -O - | bash -
 ```
 Files that will be created;
-- /boot/cmdline.txt.example -- compare with your existing cmdline.txt. The only relevant changes here are the parameters *quiet* and *cfg80211.ieee80211_regdom=COUNTRYCODE*. [See here](https://www.arubanetworks.com/techdocs/InstantWenger_Mobile/Advanced/Content/Instant%20User%20Guide%20-%20volumes/Country_Codes_List.htm) for a list of WiFi regulatory domains.
-- /boot/config.txt.example -- compare with and edit your existing config.txt. Changes are:
+- /boot/firmware/cmdline.txt.example -- compare with your existing cmdline.txt. The only relevant changes here are the parameters *quiet* and *cfg80211.ieee80211_regdom=COUNTRYCODE*. [See here](https://www.arubanetworks.com/techdocs/InstantWenger_Mobile/Advanced/Content/Instant%20User%20Guide%20-%20volumes/Country_Codes_List.htm) for a list of WiFi regulatory domains.
+- /boot/firmware/config.txt.example -- compare with and edit your existing config.txt. Changes are:
 ```
 ...
 #dtoverlay=vc4-kms-v3d
 ...
 [all]
 disable_splash=1
-boot_delay=0
-gpu_mem=128
 ```
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config file that disables DPMS
 - /tmp/home/tty2rpi/ -- User files that will be copied to the user you have created - this is "the engine"
@@ -181,6 +179,9 @@ Reboot and all should work.
 ---
 
 # Bugs and things still to do
+
+- If your are getting a blank screen only after booting, you could try to set one or all HDMI related settings in *config.txt*: __hdmi_safe__, __hdmi_force_hotplug__ and __hdmi_drive__
+Another hint, especially when using a RPi5, could be to set __vc4.force_hotplug=3__ in *cmdline.txt* - see [that issue](https://github.com/ojaksch/MiSTer_tty2rpi/issues/5) we had in the past.
 
 ---
 

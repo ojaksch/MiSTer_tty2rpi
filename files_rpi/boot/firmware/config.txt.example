@@ -135,8 +135,6 @@ arm_boost=1
 
 [all]
 disable_splash=1
-boot_delay=0
-gpu_mem=128
 
 # Enable PL011 UART to receive core changes via serial
 # "console=serial0,115200" needs to be removed in /boot/cmdline.txt (resp. /boot/firmware/cmdline.txt)
