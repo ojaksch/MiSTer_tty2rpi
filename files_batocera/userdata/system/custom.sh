@@ -12,4 +12,4 @@ case ${1} in
 esac
 
 # tty2rpi part
-echo "CMDCOR,${CORE}" > ${TTYDEV}
+echo "CMDCOR§${CORE}" > ${TTYDEV}

@@ -68,6 +68,9 @@ Files that will be created;
 [all]
 disable_splash=1
 ```
+
+Use ```dtoverlay=vc4-kms-v3d``` for a standard HDMI setup or ```#dtoverlay=vc4-kms-v3d``` for other display types and have a look above the ```# -----------``` line for examples.
+
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config file that disables DPMS
 - /tmp/home/tty2rpi/ -- User files that will be copied to the user you have created - this is "the engine"
 - /usr/local/bin/ -- Needed and needful programs
