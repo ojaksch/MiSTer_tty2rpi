@@ -3,7 +3,7 @@ Table of Contents
 [Hardware](#hardware)  
 [Setting up the Raspberry Pi](#setting-up-the-raspberry-pi)  
 [The INI files](#the-ini-files)  
-[Alternative serial setup](alternative-serial-setup)
+[Alternative serial setup](alternative-serial-setup)  
 [Media](#media)  
 [Commands](#commands)  
 [NetworkManager](#networkmanager)  
