@@ -3,6 +3,7 @@ Table of Contents
 [Hardware](#hardware)  
 [Setting up the Raspberry Pi](#setting-up-the-raspberry-pi)  
 [The INI files](#the-ini-files)  
+[Alternative serial setup](alternative-serial-setup)
 [Media](#media)  
 [Commands](#commands)  
 [NetworkManager](#networkmanager)  
@@ -77,6 +78,30 @@ Use ```dtoverlay=vc4-kms-v3d``` for a standard HDMI setup or ```#dtoverlay=vc4-k
 
 Read on the next chapters for the media content and a readup of the INI fles. When done, just reboot your RPi and continue 
 with [setting up the MiSTer](/2-Setup-MiSTer.md)
+
+---
+
+# Alternative serial setup
+
+If your going **not** to use WiFi (or whatever your intention is), you can use a serial connection. Buy and use a simple USB2Serial adapter, connect the USB part to your MiSTer and the loose cables to the RPi as shown below, but **do not use the red wire** which is carrying a voltatge of 3V or 5V and **might destroy your RPi**!
+
+![Connection scheme](/images/serial-connection.jpg)
+
+- Edit RPi's */boot/firmware/cmdline.txt* and change the part ```console=serial0,115200``` to ```console=tty1```
+- Edit */boot/firmware/config.txt* and enable the last two line so they're reading  
+```
+[all]
+enable_uart=1
+dtoverlay=disable-bt
+```
+- In *~/tty2rpi-user.ini* set SERIALSOCKET="yes"
+- Disable Bluetooth modems which are connected via UART  
+```sudo systemctl disable hciuart```
+- Don't forget to set two parameters in MiSTer's ```/media/fat/tty2rpi/tty2rpi-user.ini```:  
+```
+TTYDEV="/dev/ttyUSB0"
+TTYPARAM="115200 cs8 raw -parenb -cstopb -hupcl -echo"
+```
 
 ---
 

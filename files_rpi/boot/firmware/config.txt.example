@@ -136,6 +136,11 @@ arm_boost=1
 [all]
 disable_splash=1
 
+# Overclock the SD Card to x MHz, for example 100
+# This can only be done with at least a UHS Class 1 card
+# Use with care!
+#dtparam=sd_overclock=100
+
 # Enable PL011 UART to receive core changes via serial
 # "console=serial0,115200" needs to be removed in /boot/cmdline.txt (resp. /boot/firmware/cmdline.txt)
 # and "sudo systemctl disable hciuart" to be executed once. Reboot required.
