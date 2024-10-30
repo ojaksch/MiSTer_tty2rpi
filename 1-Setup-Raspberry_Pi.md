@@ -152,7 +152,7 @@ Have a look at the already existing scripts in **~/tty2rpi-scripts/** to get an 
 Available commands:
 | Command                         | Description                              |
 | ------------------------------- |----------------------------------------- |
-| CMDCOR,PARAM                    | Shows a video and/or picture named PARAM |
+| CMDCOR§PARAM§PARAM              | Shows a video and/or picture named PARAM |
 | CMDSHOWCPU                      | Shows CPU informations                   |
 | CMDSHOWIPS                      | Shows RPi's IP address(es)               |
 | CMDSHUTDOWN                     | Shutdown the RPi                         |
