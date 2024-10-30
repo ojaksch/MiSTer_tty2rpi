@@ -14,7 +14,6 @@ if [ -z "${SSH_TTY}" ]; then
       fi
       /home/tty2rpi/.config/openbox/autostart &
     else
-      #[[ $(fgconsole 2>/dev/null) == 1 ]] && exec startx -- -nocursor vt1 &> /dev/null
       exec startx -- -nocursor vt1 &> /dev/null
     fi
   fi
