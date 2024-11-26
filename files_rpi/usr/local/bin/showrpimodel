@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. /etc/profile
+
+RPIMODEL=$(cat /proc/cpuinfo | grep Model | cut -d ":" -f 2)
+echo -e "You are using a\e[1;32m${RPIMODEL}\e[0m"
