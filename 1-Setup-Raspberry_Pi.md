@@ -42,6 +42,9 @@ Insert the SD into your RPi, connect all needed cables and devices and boot up y
 Update your Raspberry Pi OS and install the following packages:
 
 ```
+sudo apt update
+```
+```
 sudo apt install mc dos2unix rsync git bc inotify-tools netcat-openbsd flex bison p7zip-full readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc ffmpeg feh fim mplayer mpv
 ```
 

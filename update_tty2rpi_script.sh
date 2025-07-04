@@ -22,10 +22,12 @@ else
   git -C ${LOCALGITDIR} clean -xdf --quiet 2>&1
 fi
 ! [ -f ~/.xinitrc-extra ] && touch ~/.xinitrc-extra
-sudo rsync -aq ${LOCALGITDIR}/files_rpi/ / > /dev/null 2>&1
-sudo rsync -aq /tmp/home/tty2rpi/ ~/
-sudo chown -R $(id -un 1000): $(getent passwd "1000" | awk -F ":" '{print $6}')
-sudo chown root: /etc/X11/xorg.conf.d/10-monitor.conf  /etc/rc.local
+TTY2RPIUSER="$(id -un 1000)"
+TTY2RPIUSERDIR="$(getent passwd "1000" | awk -F ":" '{print $6}')"
+sudo rsync -aq --usermap=root --groupmap=root ${LOCALGITDIR}/files_rpi/ / > /dev/null 2>&1
+sudo rsync -aq --usermap="${TTY2RPIUSER}" --groupmap="${TTY2RPIUSER}" /tmp/home/tty2rpi/ ~/
+sudo chown -R "${TTY2RPIUSER}:" "${TTY2RPIUSERDIR}"
+
 if [ "$(ls -A /etc/NetworkManager/system-connections/ )" ]; then
   sudo chown root: /etc/NetworkManager/system-connections/*
   sudo chmod 600 /etc/NetworkManager/system-connections/*
