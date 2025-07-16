@@ -1,3 +1,6 @@
+20250716:
+- Deprecation warning for SPI displays
+
 20240329:
 - Screensaver creates clock images only if enabled by SCREENSAVER_CLOCK (default "yes")
 - Clock images are created in another temp directory and moved after creation

@@ -12,6 +12,11 @@ Table of Contents
 
 ---
 
+## Deprecation warning(s)
+- fbcp-ili9341 for SPI displays. Will be removed 2026/01, also any support for these displays types. A more modern display driver [is available](https://github.com/notro/panel-mipi-dbi/wiki) but due its complexity you are on your own activating and using it (but I still accept "issues" about it)
+
+---
+
 # Hardware
 
 You obviously need a Rasoberry Pi. This is descibed in it's own chapter.  
