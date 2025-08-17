@@ -9,7 +9,7 @@ MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
 if [ "${MEDIA}" != "-" ]; then
   logger "Socket got CORE »${MEDIA}«"
   GETFNAM "${PATHPIC}" "${MEDIAPIC}"
-  [ "${SCREENSAVER}" = "yes" ] && convert "${PATHPIC}/${MEDIAPIC}".* /dev/shm/CORE.png
+  [ "${SCREENSAVER}" = "yes" ] && ${IMconvert} "${PATHPIC}/${MEDIAPIC}".* /dev/shm/CORE.png
 else
   [ -f /dev/shm/CORE.png ] && rm /dev/shm/CORE.png
 fi
@@ -28,8 +28,6 @@ if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FN
 if [ -f "${MEDIA}" ]; then
   PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ -n "${KEEPASPECTRATIO}" ]; then
-    #convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
-    #TTT=$(time convert "${MEDIA}" -resize ${WIDTH}x${HEIGHT}\! /dev/shm/pic.png)
     if [ "${KEEPASPECTRATIO}" = "yes" ]; then
       ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
     elif [ "${KEEPASPECTRATIO}" = "no" ]; then
@@ -57,7 +55,6 @@ if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${
 if [ "${PLAYVIDEO}" = "yes" ]; then
   if [ "${FBUFDEV}" = "yes" ]; then
     source ~/tty2rpi-screens.ini
-    #[ -f "${MEDIA}" ] && TERM=xterm-256color mplayer -really-quiet -vo fbdev2:${FBDEVICE} -vf scale=${WIDTH}:-2 -aspect 16:9 -nosound -nolirc "${MEDIA}"
     [ -f "${MEDIA}" ] && ffmpeg -loglevel quiet -re -i "${MEDIA}" -an -c:v rawvideo -pix_fmt "${FBPIXFMT}" -f fbdev -vf "scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=decrease,pad=${WIDTH}:${HEIGHT}:(ow-iw)/2:(oh-ih)/2" ${FBDEVICE}
   else
     if [ -f "${MEDIA}" ]; then

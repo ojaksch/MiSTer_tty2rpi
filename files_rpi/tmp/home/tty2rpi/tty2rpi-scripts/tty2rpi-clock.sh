@@ -19,21 +19,11 @@ if [ "${SCREENSAVER}" = "yes" ] && [ ${SCREENSAVER_CLOCK} = "yes" ]; then
   CLOCKPNG="/dev/shm/tty2rpi-clock.png"
   CLOCKPNGTMP="/dev/shm/tmp/tty2rpi-clock.png"
 
-  if ! [ -x /usr/bin/magick ]; then
-    convert -size 500x320 xc:black ${CLOCKPNGTMP}
-    composite ${TTY2RPIPICS}/000-clock.png ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    composite -geometry  +45+155 ${TTY2RPIPICS}/000-clock-${DATEH1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    composite -geometry  +140+155 ${TTY2RPIPICS}/000-clock-${DATEH2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    composite -geometry  +265+155 ${TTY2RPIPICS}/000-clock-${DATEM1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    composite -geometry  +360+155 ${TTY2RPIPICS}/000-clock-${DATEM2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-  else
-    magick -size 500x320 xc:black ${CLOCKPNGTMP}
-    magick composite ${TTY2RPIPICS}/000-clock.png ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    magick composite -geometry  +45+155 ${TTY2RPIPICS}/000-clock-${DATEH1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    magick composite -geometry  +140+155 ${TTY2RPIPICS}/000-clock-${DATEH2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    magick composite -geometry  +265+155 ${TTY2RPIPICS}/000-clock-${DATEM1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-    magick composite -geometry  +360+155 ${TTY2RPIPICS}/000-clock-${DATEM2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
-  fi
+  ${IMconvert} -size 500x320 xc:black ${CLOCKPNGTMP}
+  ${IMcomposite} -geometry  +45+155 ${TTY2RPIPICS}/000-clock-${DATEH1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
+  ${IMcomposite} -geometry  +140+155 ${TTY2RPIPICS}/000-clock-${DATEH2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
+  ${IMcomposite} -geometry  +265+155 ${TTY2RPIPICS}/000-clock-${DATEM1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
+  ${IMcomposite} -geometry  +360+155 ${TTY2RPIPICS}/000-clock-${DATEM2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
 
   mv ${CLOCKPNGTMP} ${CLOCKPNG}
 fi
