@@ -1,3 +1,6 @@
+20250820:
+- Documentation added for GPIO serial on RPi5
+
 20250716:
 - Deprecation warning for SPI displays
 

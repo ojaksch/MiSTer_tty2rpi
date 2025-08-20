@@ -101,6 +101,10 @@ If your going **not** to use WiFi (or whatever your intention is), you can use a
 [all]
 enable_uart=1
 dtoverlay=disable-bt
+# Enable the next lines (by removing the leading #) when using a RPi5
+#dtparam=uart0           # Enable UART0/ttyAMA0 on GPIO 14 & 15
+#dtparam=uart0_console   # Enable UART0/ttyAMA0 on GPIO 14 & 15 and make it the console UART
+
 ```
 - In *~/tty2rpi-user.ini* set SERIALSOCKET="yes"
 - Disable Bluetooth modems which are connected via UART  
