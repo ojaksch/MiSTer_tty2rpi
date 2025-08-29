@@ -107,7 +107,7 @@ dtoverlay=disable-bt
 #dtparam=uart0_console   # Enable UART0/ttyAMA0 on GPIO 14 & 15 and make it the console UART
 
 ```
-- In *~/tty2rpi-user.ini* set SERIALSOCKET="yes" or "gpio" (RPi up to 4), "uart" (RPi 5)
+- In *~/tty2rpi-user.ini* set SERIALSOCKET="yes" or "gpio" (RPi up to 4 or RPi 5 with GPIO based connection), "uart" (RPi 5 UART connection)
 - Disable Bluetooth modems which are connected via UART  
 ```sudo systemctl disable hciuart```
 - Don't forget to set two parameters in MiSTer's ```/media/fat/tty2rpi/tty2rpi-user.ini```:  
