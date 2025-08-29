@@ -1,3 +1,7 @@
+20250829:
+- Support for RPi5's dedicated UART connector
+- Documentation added for UART serial on RPi5
+
 20250820:
 - Documentation added for GPIO serial on RPi5
 

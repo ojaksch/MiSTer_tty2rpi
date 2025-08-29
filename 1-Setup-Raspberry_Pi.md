@@ -101,12 +101,13 @@ If your going **not** to use WiFi (or whatever your intention is), you can use a
 [all]
 enable_uart=1
 dtoverlay=disable-bt
-# Enable the next lines (by removing the leading #) when using a RPi5
+# Enable the next lines (by removing the leading #) when using a RPi5 and the GPIO based serial connection.
+# Do not enable when using the RPi5 specific 3-Pin UART cable.
 #dtparam=uart0           # Enable UART0/ttyAMA0 on GPIO 14 & 15
 #dtparam=uart0_console   # Enable UART0/ttyAMA0 on GPIO 14 & 15 and make it the console UART
 
 ```
-- In *~/tty2rpi-user.ini* set SERIALSOCKET="yes"
+- In *~/tty2rpi-user.ini* set SERIALSOCKET="yes" or "gpio" (RPi up to 4), "uart" (RPi 5)
 - Disable Bluetooth modems which are connected via UART  
 ```sudo systemctl disable hciuart```
 - Don't forget to set two parameters in MiSTer's ```/media/fat/tty2rpi/tty2rpi-user.ini```:  
