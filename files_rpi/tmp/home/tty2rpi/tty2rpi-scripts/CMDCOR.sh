@@ -43,9 +43,13 @@ if [ -f "${MEDIA}" ]; then
     cp "${MEDIA}" /dev/shm/pic.png
   fi
 else
-  rm /dev/shm/pic.png
+  mv /dev/shm/pic.png /dev/shm/pic.png.tmp
   [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png
-  [ -s /dev/shm/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
+  if [ ${SHOWMISSPIC} = "yes" ]; then
+    [ -s /dev/shm/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
+  else
+    mv /dev/shm/pic.png.tmp /dev/shm/pic.png
+  fi
 fi
 
 GETFNAM "${PATHVID}" "${MEDIAVID}"
