@@ -12,13 +12,13 @@ ${APTUPD}
 
 echo "Updating tty2rpi..."
 ! [ -d ${LOCALGITDIR} ] && mkdir ${LOCALGITDIR}
-git -C ${LOCALGITDIR} fetch origin --quiet > /dev/null 2>&1
+git -C ${LOCALGITDIR} fetch origin/testing --quiet > /dev/null 2>&1
 if [ ${?} -gt 0 ]; then
-  git -C ${LOCALGITDIR} clone --quiet https://github.com/ojaksch/MiSTer_tty2rpi
+  git -C ${LOCALGITDIR} clone --quiet https://github.com/ojaksch/MiSTer_tty2rpi-testing
   mv ${LOCALGITDIR}/MiSTer_tty2rpi/{.,}* ${LOCALGITDIR}/ > /dev/null 2>&1
   rm -rf ${LOCALGITDIR}/MiSTer_tty2rpi/
 else
-  git -C ${LOCALGITDIR} reset --hard origin/main --quiet > /dev/null 2>&1
+  git -C ${LOCALGITDIR} reset --hard origin/testing --quiet > /dev/null 2>&1
   git -C ${LOCALGITDIR} clean -xdf --quiet 2>&1
 fi
 ! [ -f ~/.xinitrc-extra ] && touch ~/.xinitrc-extra
