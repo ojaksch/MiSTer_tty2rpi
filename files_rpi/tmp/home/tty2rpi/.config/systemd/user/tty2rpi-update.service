@@ -2,5 +2,5 @@
 Description=tty2rpi update
 
 [Service]
-ExecStartPre=/bin/wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/refs/heads/testing"/update_tty2rpi.sh -O /tmp/update_tty2rpi.sh
+ExecStartPre=/bin/wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/refs/heads/testing/update_tty2rpi.sh -O /tmp/update_tty2rpi.sh
 ExecStart=/bin/bash /tmp/update_tty2rpi.sh
