@@ -43,12 +43,11 @@ if [ -f "${MEDIA}" ]; then
     cp "${MEDIA}" /dev/shm/pic.png
   fi
 else
-  mv /dev/shm/pic.png /dev/shm/pic.png.tmp
-  [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png
+  [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png.tmp
   if [ ${SHOWMISSPIC} = "yes" ]; then
     [ -s /dev/shm/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
   else
-    mv /dev/shm/pic.png.tmp /dev/shm/pic.png
+    [ -s /dev/shm/pic.png.tmp ] && mv /dev/shm/pic.png.tmp /dev/shm/pic.png
   fi
 fi
 
@@ -57,17 +56,12 @@ if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
 if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
 if [ "${PLAYVIDEO}" = "yes" ]; then
-  if [ "${FBUFDEV}" = "yes" ]; then
-    source ~/tty2rpi-screens.ini
-    [ -f "${MEDIA}" ] && ffmpeg -loglevel quiet -re -i "${MEDIA}" -an -c:v rawvideo -pix_fmt "${FBPIXFMT}" -f fbdev -vf "scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=decrease,pad=${WIDTH}:${HEIGHT}:(ow-iw)/2:(oh-ih)/2" ${FBDEVICE}
-  else
-    if [ -f "${MEDIA}" ]; then
-      case "${VIDEOPLAYER}" in
-	"vlc")		cvlc --verbose 0 --no-lua -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}" ;;
-	"mpv")		mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}" ;;
-	"mplayer")	AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}" ;;
-      esac
-    fi
+  if [ -f "${MEDIA}" ]; then
+    case "${VIDEOPLAYER}" in
+      "vlc")		cvlc --verbose 0 --no-lua -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}" ;;
+      "mpv")		mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}" ;;
+      "mplayer")	AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}" ;;
+    esac
   fi
 fi
 
@@ -82,8 +76,4 @@ if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screens
   systemctl --user stop tty2rpi-screensaver.timer
 fi
 
-if [ "${FBUFDEV}" = "yes" ]; then
-  FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /dev/shm/pic.png > /dev/null 2>&1
-else
-  feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png
-fi
+[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png
