@@ -17,9 +17,11 @@ if [ ${?} -gt 0 ]; then
   git -C ${LOCALGITDIR} clone --quiet https://github.com/ojaksch/MiSTer_tty2rpi
   mv ${LOCALGITDIR}/MiSTer_tty2rpi/{.,}* ${LOCALGITDIR}/ > /dev/null 2>&1
   rm -rf ${LOCALGITDIR}/MiSTer_tty2rpi/
+  [ "${REPOSITORY_URL##*/}" = "testing" ] && git -C ${LOCALGITDIR} checkout origin/testing
 else
   git -C ${LOCALGITDIR} reset --hard origin/main --quiet > /dev/null 2>&1
   git -C ${LOCALGITDIR} clean -xdf --quiet 2>&1
+  [ "${REPOSITORY_URL##*/}" = "testing" ] && git -C ${LOCALGITDIR} checkout origin/testing
 fi
 ! [ -f ~/.xinitrc-extra ] && touch ~/.xinitrc-extra
 TTY2RPIUSER="$(id -un 1000)"
