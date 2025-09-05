@@ -19,12 +19,9 @@ if [ ${?} -gt 0 ]; then
   rm -rf ${LOCALGITDIR}/MiSTer_tty2rpi/
   [ "${REPOSITORY_URL##*/}" = "testing" ] && git -C ${LOCALGITDIR} checkout origin/testing
 else
-  if [ "${REPOSITORY_URL##*/}" = "testing" ]; then
-    git -C ${LOCALGITDIR} reset --hard origin/testing --quiet > /dev/null 2>&1
-  else
-    git -C ${LOCALGITDIR} reset --hard origin/main --quiet > /dev/null 2>&1
-  fi
+  git -C ${LOCALGITDIR} reset --hard origin/main --quiet > /dev/null 2>&1
   git -C ${LOCALGITDIR} clean -xdf --quiet 2>&1
+  [ "${REPOSITORY_URL##*/}" = "testing" ] && git -C ${LOCALGITDIR} checkout origin/testing
 fi
 ! [ -f ~/.xinitrc-extra ] && touch ~/.xinitrc-extra
 TTY2RPIUSER="$(id -un 1000)"
