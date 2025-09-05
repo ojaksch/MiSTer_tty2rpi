@@ -1,4 +1,5 @@
 #!/bin/sh -e
 
+chmod +x /home/tty2rpi/.config/openbox/autostart /home/tty2rpi/tty2rpi-scripts/*
 ln -sf /bin/bash /bin/sh
 exit 0
