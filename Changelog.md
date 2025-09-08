@@ -129,7 +129,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 - p7zip added to RPi's installed packaged
 
 20230527:
-- Smaller font for IPs because of the length of public IPv6 adresses
+- Smaller font for IPs because of the length of public IPv6 addresses
 
 20230428:
 - Better handling of screensaver
@@ -240,7 +240,7 @@ VLC is great but looks like that it needs between 3 and 8 seconds before starts 
 
 20220911:
 - RPi: include [stoNe font](https://www.dafont.com/font-comment.php?file=stone2) (100% Freeware)
-- RPi: show IP adresses when starting
+- RPi: show IP addresses when starting
 
 20220909:
 - Organise into foolders

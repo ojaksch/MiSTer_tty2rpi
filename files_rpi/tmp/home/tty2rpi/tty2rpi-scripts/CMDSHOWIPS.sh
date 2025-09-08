@@ -19,11 +19,11 @@ else
   KILLPID feh
 fi
 
-echo -e "Your IP adress(es) for\nhostname $(hostname -f):\n" > /tmp/ip-adresses
-ip -o addr | awk '!/^[0-9]*: ?lo|link\/ether/ {gsub("/", " "); print $2" "$4}' >> /tmp/ip-adresses
-${IMconvert} -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/25)) -fill white -gravity center -draw "text 0,0 '$(</tmp/ip-adresses)'" /tmp/ip-adresses.png
+echo -e "Your IP addresss(es) for\nhostname $(hostname -f):\n" > /tmp/ip-addressses
+ip -o addr | awk '!/^[0-9]*: ?lo|link\/ether/ {gsub("/", " "); print $2" "$4}' >> /tmp/ip-addressses
+${IMconvert} -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/25)) -fill white -gravity center -draw "text 0,0 '$(</tmp/ip-addressses)'" /tmp/ip-addressses.png
 if [ "${FBUFDEV}" = "yes" ]; then
-  FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /tmp/ip-adresses.png > /dev/null 2>&1
+  FRAMEBUFFER="${FBDEVICE}" fim --autozoom --quiet --output-device fb /tmp/ip-addressses.png > /dev/null 2>&1
 else
-  feh --quiet --fullscreen --auto-zoom /tmp/ip-adresses.png
+  feh --quiet --fullscreen --auto-zoom /tmp/ip-addressses.png
 fi
