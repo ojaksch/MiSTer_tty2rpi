@@ -1,3 +1,13 @@
+20250905:
+- On startup ensure that all scripts are executable
+
+20250903:
+- Support for framebuffer devices removed
+- feh (the picture viewer) got more attention and reacts faster w/o blacking out the previous picture
+
+20250901:
+- New variable SHOWMISSPIC to turn on/off whether to display a notice if no media found
+
 20250829:
 - Support for RPi5's dedicated UART connector
 - Documentation added for UART serial on RPi5
