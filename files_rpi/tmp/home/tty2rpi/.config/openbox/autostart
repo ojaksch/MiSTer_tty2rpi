@@ -8,16 +8,16 @@ KILLPID fim
 
 cp ~/tty2rpi-pics/black.png /dev/shm/pic.png
 feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png &
+sleep 0.2
 
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
 [ "${SERIALSOCKET}" = "yes" ] && systemctl --user start tty2rpi-serialinput.service
-# sleep 1.5
+until [ $(systemctl is-active --user tty2rpi-inotify.service) = "active" ]; do sleep 0.2; done
+sleep 0.2
 
 # Show IP addresses
-if [ $(ip link | grep -c "state UP") -gt 0 ] && [ "${SHOWIPS}" = "yes" ]; then
-  echo "CMDSHOWIPS" > "${SOCKET}"
-  sleep ${IPTIMEOUT}
-fi
+[ "${SHOWIPS}" = "yes" ] && echo "CMDSHOWIPS" > "${SOCKET}"
+sleep ${IPTIMEOUT}
 
 # Show Welcome screen
 tee /dev/shm/pic.png /dev/shm/tty2rpi.png < ~/tty2rpi-pics/tty2rpi.png
