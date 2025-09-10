@@ -42,13 +42,13 @@ if [ -f "${MEDIA}" ]; then
   PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ -n "${KEEPASPECTRATIO}" ]; then
     if [ "${KEEPASPECTRATIO}" = "yes" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
     elif [ "${KEEPASPECTRATIO}" = "no" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
     elif [ "${KEEPASPECTRATIO}" = "x" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=-1:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=-1:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
     elif [ "${KEEPASPECTRATIO}" = "y" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
     fi
   else
     cp "${MEDIA}" /dev/shm/pic.png
@@ -67,9 +67,9 @@ else
 fi
 
 # Wait for the completion of the convert process
-if [ -e /dev/shm/convert.pid ]; then
-  while [ -d /proc/$(</dev/shm/convert.pid) ] ; do sleep 0.1; done
-  rm /dev/shm/convert.pid
+if [ -e /dev/shm/tmp/convert.pid ]; then
+  while [ -d /proc/$(</dev/shm/tmp/convert.pid) ] ; do sleep 0.1; done
+  rm /dev/shm/tmp/convert.pid
 fi
 
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user start --quiet tty2rpi-screensaver.timer
@@ -77,4 +77,11 @@ if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screens
   systemctl --user stop tty2rpi-screensaver.timer
 fi
 
-[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png
+if [ -f /dev/shm/tmp/screesaver.pid ]; then
+  if [ "$(</dev/shm/tmp/screesaver.pid)" -gt "0" ]; then
+    rm /dev/shm/tmp/screesaver.pid
+    KILLPID feh
+    feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png &
+  fi
+fi
+[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png &
