@@ -45,9 +45,13 @@ if [ -f "${MEDIA}" ]; then
 else
   [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png.tmp
   if [ ${SHOWMISSPIC} = "yes" ]; then
+    # Show "not found"
     [ -s /dev/shm/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
+    logger "but no matching medium found"
   else
+    # No Media found but doesn't show it
     [ -s /dev/shm/pic.png.tmp ] && mv /dev/shm/pic.png.tmp /dev/shm/pic.png
+    logger "but no matching medium found"
   fi
 fi
 
