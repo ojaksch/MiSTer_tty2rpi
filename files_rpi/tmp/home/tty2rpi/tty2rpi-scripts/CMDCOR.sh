@@ -22,9 +22,22 @@ logger "Socket got GAME »${MEDIA}«"
 echo "${MEDIA}" > /dev/shm/corename
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 
+GETFNAM "${PATHVID}" "${MEDIAVID}"
+if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDMENU}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
+if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
+if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
+if [ "${PLAYVIDEO}" = "yes" ]; then
+  if [ -f "${MEDIA}" ]; then
+    case "${VIDEOPLAYER}" in
+      "vlc")		cvlc --verbose 0 --no-lua -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}" ;;
+      "mpv")		mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}" ;;
+      "mplayer")	AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}" ;;
+    esac
+  fi
+fi
+
 GETFNAM "${PATHPIC}" "${MEDIAPIC}"
 if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FNAMSEARCH}" = "MISTER-MENU" ]); then cp "${MEDIA}" /dev/shm/pic.png; fi
-
 if [ -f "${MEDIA}" ]; then
   PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
   if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ -n "${KEEPASPECTRATIO}" ]; then
@@ -37,8 +50,6 @@ if [ -f "${MEDIA}" ]; then
     elif [ "${KEEPASPECTRATIO}" = "y" ]; then
       ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 /dev/shm/pic.png & echo $! > /dev/shm/convert.pid
     fi
-    #TTT=$(time ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png)
-    #echo "time $TTT"
   else
     cp "${MEDIA}" /dev/shm/pic.png
   fi
@@ -50,22 +61,8 @@ else
     logger "but no matching medium found"
   else
     # No Media found but doesn't show it
+    ! [ -s /dev/shm/pic.png.tmp ] && logger "but no matching medium found"
     [ -s /dev/shm/pic.png.tmp ] && mv /dev/shm/pic.png.tmp /dev/shm/pic.png
-    logger "but no matching medium found"
-  fi
-fi
-
-GETFNAM "${PATHVID}" "${MEDIAVID}"
-if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDMENU}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
-if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
-if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
-if [ "${PLAYVIDEO}" = "yes" ]; then
-  if [ -f "${MEDIA}" ]; then
-    case "${VIDEOPLAYER}" in
-      "vlc")		cvlc --verbose 0 --no-lua -f --no-video-title-show --play-and-exit --vout ${VLCVIDEO} --aout alsa ${AUDIOYESNO} ${VLCPREFEETCH} "${MEDIA}" ;;
-      "mpv")		mpv --no-config --really-quiet --fullscreen ${AUDIOYESNO} "${MEDIA}" ;;
-      "mplayer")	AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw ${AUDIOYESNO} "${MEDIA}" ;;
-    esac
   fi
 fi
 
