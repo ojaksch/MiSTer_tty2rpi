@@ -1,15 +1,17 @@
 #!/bin/bash
 
-source ~/configs/emulationstation/scripts/tty2rpi.ini
+# This is getting loaded when starting or stopping Batocera
+
+source /userdata/system/scripts/tty2rpi.ini
 
 case ${1} in
   start|restart|reload)
-    CORE="BATOCERA-MENU"
+    CORENAME="BATOCERA-MENU"
     ;;
   stop)
-    CORE="shutdown-mister"
+    CORENAME="shutdown-mister"
     ;;
 esac
 
 # tty2rpi part
-echo "CMDCOR§${CORE}" > ${TTYDEV}
+echo "CMDCOR§-§${CORENAME}" > ${TTYDEV}
