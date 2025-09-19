@@ -8,8 +8,8 @@ case ${1} in
   gameStart)
     CORENAME="${2}"
     GAMENAME="$(basename ${5})"
-#    [ "${CORENAME}" = "mame" ] && CORENAME="$(basename ${5%.*})"
-    [ "${CORENAME}" = "mame" ] && CORENAME="-"
+    if [ "${CORENAME}" = "mame" ] && [ "${TTYPICNAME}" = "core" ]; then CORENAME="$(basename ${5%.*})"; fi
+    if [ "${CORENAME}" = "mame" ] && [ "${TTYPICNAME}" = "game" ]; then CORENAME="-"; fi
     ;;
   gameStop)
     CORENAME="BATOCERA-MENU"
