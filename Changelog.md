@@ -1,3 +1,6 @@
+20250921:
+- Including the plocate package
+
 20250905:
 - On startup ensure that all scripts are executable
 
