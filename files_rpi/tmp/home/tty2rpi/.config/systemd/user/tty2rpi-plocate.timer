@@ -1,0 +1,11 @@
+[Unit]
+Description=Update media library every minute
+
+[Timer]
+OnBootSec=10s
+OnCalendar=*-*-* *:*:00
+Persistent=true
+AccuracySec=1ms
+
+[Install]
+WantedBy=timers.target
