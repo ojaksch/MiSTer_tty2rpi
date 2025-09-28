@@ -1,3 +1,6 @@
+20250928:
+- Documentaion updated regarding OS updates
+
 20250901:
 - New variable SHOWMISSPIC to turn on/off whether to display a notice if no media found
 
