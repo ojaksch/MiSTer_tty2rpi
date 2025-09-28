@@ -33,6 +33,12 @@ from SD card or network.
 </div>
 
 ---
+
+# License
+
+![CC BY-NC-SA 4.0](/images/by-nc-sa.eu.png)  
+[Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
 <!----------------------------------------------------------------------------->
 
 [MiSTer FPGA]: https://github.com/MiSTer-devel

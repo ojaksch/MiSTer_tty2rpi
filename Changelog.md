@@ -1,3 +1,6 @@
+20250928:
+- Documentaion updated regarding OS updates
+
 20250921:
 - Including the plocate package
 

@@ -7,6 +7,7 @@ Table of Contents
 [Media](#media)  
 [Commands](#commands)  
 [NetworkManager](#networkmanager)  
+[OS updates](#osupdates)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
 
@@ -216,6 +217,28 @@ chmod 600 /etc/NetworkManager/system-connections/wlan.nmconnection
 Reboot and all should work.
 
 - Revise and publish the documentation for MAME
+
+---
+
+# OS updates
+
+It is always a good idea to keep you OS updated. This could be automated as known with Windows, but then you are missing any detail what has been updated and could be reported if anything breaks (unlikely, but possible). Updates should be done regularly, but not necessarily every day or week. This is an advice, not a must.  
+Don't panic! We're on Linux here, not Windows or MacOS and your tty2rpi system isn't driving a nuclear plant.
+
+Regular updates are helping in updating software in general, fixing bugs, broken programs or libraries and the underlying OS itself, which could bring new or better device drivers to you. I don't want to delve too deeply into the subject here. You're running an operating system, so you should take care of it and familiarize yourself with it. But in short, and this is usual way, open a console on your device and enter
+
+```
+apt update && apt dist-upgrade 
+```
+
+"&&" is a separator and means that if "apt update" (freshen up software libraries) ran successfully, continue with "apt dist-upgrade" and start the actual update. Carefully read messages and prompts, press Enter and let it roll. When it's done and no errors were reported, you should (optionally) reboot the device. That's all.
+
+The RPi400, RPi4B and RPi5 devices are in a special position, because they are having an EEPROM (think of a BIOS). Nothing you can enter and edit like on a regular PC, but is very similar. Updates to the EEPROM aren't done automagically and must be performed manually. These updates are rarer but even more important. They are bringing updates and fixes to the EEPROM/BIOS/Firmware, like a new/better support for the internal gfx device, GPIO things, NVME devices or serial I/O (Aah! Remember the last reports about "damn, the serial connection won't work and I've done all correct!" ?)
+
+Again, no deep dive into the subject here, read the following articles to get an idea about the what and why's. This only looks complicated at first glance. No Russian rocket science here.
+
+[Geekworm: How to update eeprom firmware](https://wiki.geekworm.com/How_to_update_eeprom_firmware)  
+[Raspberry Foundation: Raspberry Pi boot EEPROM](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#raspberry-pi-boot-eeprom)
 
 ---
 
