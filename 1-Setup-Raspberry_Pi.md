@@ -7,7 +7,7 @@ Table of Contents
 [Media](#media)  
 [Commands](#commands)  
 [NetworkManager](#networkmanager)  
-[OS updates](#osupdates)  
+[OS updates](#os-updates)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
 
