@@ -1,3 +1,7 @@
+20251004:
+- Scripts updated for the new DB based search routine (plocate)
+- Updated Batocera script */userdata/system/scripts/tty2rpi.sh*
+
 20250928:
 - Documentaion updated regarding OS updates
 
