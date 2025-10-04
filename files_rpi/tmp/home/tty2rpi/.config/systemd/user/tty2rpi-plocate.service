@@ -1,5 +1,0 @@
-[Unit]
-Description=Update media library
-
-[Service]
-ExecStart=%h/tty2rpi-scripts/tty2rpi-plocate.sh

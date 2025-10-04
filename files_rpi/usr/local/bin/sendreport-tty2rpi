@@ -1,0 +1,19 @@
+#!/bin/bash
+
+. /etc/profile
+
+/boot/firmware/cmdline.txt
+/boot/firmware/config.txt
+/etc/os-release
+
+rpiinfo
+MACs
+
+/home/tty2rpi/
+/home/tty2rpi/.xinitrc-extra
+/home/tty2rpi/tty2rpi-user.ini
+/home/tty2rpi/
+/home/tty2rpi/
+/home/tty2rpi/
+/home/tty2rpi/
+/home/tty2rpi/

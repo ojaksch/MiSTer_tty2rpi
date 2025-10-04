@@ -2,6 +2,14 @@ dos2unix -k -q ~/tty*.ini
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 source ~/tty2rpi-screens.ini
+
+awk '/DO NOT CHANGE ANYTHING ABOVE/,0' ${HOME}/tty2rpi.ini > /dev/shm/tmp/inis
+echo "# -------------------------------------" >> /dev/shm/tmp/inis
+cat ~/tty2rpi-user.ini >> /dev/shm/tmp/inis
+echo "# -------------------------------------" >> /dev/shm/tmp/inis
+cat ~/tty2rpi-screens.ini >> /dev/shm/tmp/inis
+
+updatedb -l 0 -U ${HOME} -o /dev/shm/tmp/mediadb &
 #xset -b
 
 KILLPID fim

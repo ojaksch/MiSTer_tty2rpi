@@ -19,7 +19,7 @@ esac
 
 # tty2rpi part
 [ "${TTYPICNAME}" = "core" ] && echo "CMDCOR§-§${CORENAME}" > ${TTYDEV}
-[ "${TTYPICNAME}" = "game" ] && echo "CMDCOR§${CORENAME^^}§${GAMENAME}" > ${TTYDEV}
+[ "${TTYPICNAME}" = "game" ] && echo "CMDCOR§${CORENAME^^}§${CORENAME^^}/${GAMENAME}" > ${TTYDEV}
 
 # gameStart gba libretro mgba /userdata/roms/gba/SpaceTwins.gba
 # gameStop gba libretro mgba /userdata/roms/gba/SpaceTwins.gba
