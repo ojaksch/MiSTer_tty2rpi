@@ -7,6 +7,7 @@ Table of Contents
 [Media](#media)  
 [Commands](#commands)  
 [NetworkManager](#networkmanager)  
+[Network Access](#network-access)  
 [OS updates](#os-updates)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
@@ -217,6 +218,14 @@ chmod 600 /etc/NetworkManager/system-connections/wlan.nmconnection
 Reboot and all should work.
 
 - Revise and publish the documentation for MAME
+
+---
+
+# Network Access
+
+To access you tty2rpi device you can use *ssh, scp* or just any SMB based network tool.  
+
+Keep in mind that if you have used another user than *tty2rpi* while creating your SD card or setting up your OS otherwise, that you have to adjust the file */etc/ksmbd/ksmbd.conf* accordingly.
 
 ---
 
