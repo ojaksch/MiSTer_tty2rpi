@@ -29,7 +29,8 @@ while true; do
 #  inotifywait -qq -e modify ${SOCKET}
   INOCHANGE=$(inotifywait --quiet --event modify,close_write,delete,moved_to --recursive --csv ${SOCKET} "${PATHPIC}" "${PATHVID}")
   INOFILE="$(echo ${INOCHANGE} | cut -d "," -f 1)"
-  [ "${DEBUG}" = "yes" ] && logger "inotify: something changed: $INOCHANGE -- (${INOFILE%/})"
+  sync
+  [ "${DEBUG}" = "yes" ] && logger "inotify: something has changed: $INOCHANGE -- (${INOFILE%/})"
   [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U ${HOME} -o /dev/shm/tmp/mediadb &
   [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U ${HOME} -o /dev/shm/tmp/mediadb &
   if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "/dev/shm/tty2rpi.socket" ]; then
