@@ -1,3 +1,7 @@
+20251005:
+- New variable DEBUG and only use logger when DEBUG=yes
+- Network access / SMB
+
 20251004:
 - Scripts updated for the new DB based search routine (plocate)
 - Updated Batocera script */userdata/system/scripts/tty2rpi.sh*
