@@ -40,7 +40,7 @@ GETFNAM "${PATHPIC}" "${MEDIAPIC}"
 if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FNAMSEARCH}" = "MISTER-MENU" ]); then cp "${MEDIA}" /dev/shm/pic.png; fi
 if [ -f "${MEDIA}" ]; then
   PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
-  if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ -n "${KEEPASPECTRATIO}" ]; then
+  if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ "${KEEPASPECTRATIO}" != "no" ]; then
     if [ "${KEEPASPECTRATIO}" = "yes" ]; then
       ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
     elif [ "${KEEPASPECTRATIO}" = "no" ]; then
