@@ -4,8 +4,8 @@ source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 source ~/tty2rpi-screens.ini
 
-if [ ${SCREENSAVER_CLOCK} = "no" ] && [ -f /dev/shm/tty2rpi-clock.png ]; then
-  rm /dev/shm/tty2rpi-clock.png
+if [ ${SCREENSAVER_CLOCK} = "no" ] && [ -f ${TMPDIR}/tty2rpi-clock.png ]; then
+  rm ${TMPDIR}/tty2rpi-clock.png
 fi
 
 if [ "${SCREENSAVER}" = "yes" ] && [ ${SCREENSAVER_CLOCK} = "yes" ]; then
@@ -16,8 +16,8 @@ if [ "${SCREENSAVER}" = "yes" ] && [ ${SCREENSAVER_CLOCK} = "yes" ]; then
   DATEM1=${DATEFULL:2:1}
   DATEM2=${DATEFULL:3:1}
 
-  CLOCKPNG="/dev/shm/tty2rpi-clock.png"
-  CLOCKPNGTMP="/dev/shm/tmp/tty2rpi-clock.png"
+  CLOCKPNG="${TMPDIR}/tty2rpi-clock.png"
+  CLOCKPNGTMP="${TMPDIR}/tmp/tty2rpi-clock.png"
 
   ${IMconvert} -size 500x320 xc:black ${CLOCKPNGTMP}
   ${IMcomposite} ${TTY2RPIPICS}/000-clock.png ${CLOCKPNGTMP} ${CLOCKPNGTMP}

@@ -17,7 +17,7 @@ AccuracySec=1ms
 [Install]
 WantedBy=timers.target
 " > ~/.config/systemd/user/tty2rpi-screensaver.timer
-  cp --update ${TTY2RPIPICS}/tty2rpi.png /dev/shm
+  cp --update ${TTY2RPIPICS}/tty2rpi.png ${TMPDIR}
   systemctl --user daemon-reload
 fi
 
@@ -31,9 +31,9 @@ while true; do
   INOFILE="$(echo ${INOCHANGE} | cut -d "," -f 1)"
   sync
   [ "${DEBUG}" = "yes" ] && logger "inotify: something has changed: $INOCHANGE -- (${INOFILE%/})"
-  [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U ${HOME} -o /dev/shm/tmp/mediadb &
-  [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U ${HOME} -o /dev/shm/tmp/mediadb &
-  if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "/dev/shm/tty2rpi.socket" ]; then
+  [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
+  [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
+  if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "${TMPDIR}/tty2rpi.socket" ]; then
     COMMAND=$(tail -n1 ${SOCKET} | tr -d '\0')
     if [ "${COMMAND}" != "NIL" ]; then					# NIL is a "hello?" command
       KILLPID "${VIDEOPLAYER}"

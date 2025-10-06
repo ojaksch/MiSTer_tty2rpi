@@ -3,19 +3,19 @@ source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 source ~/tty2rpi-screens.ini
 
-awk '/DO NOT CHANGE ANYTHING ABOVE/,0' ${HOME}/tty2rpi.ini > /dev/shm/tmp/inis
-echo "# -------------------------------------" >> /dev/shm/tmp/inis
-cat ~/tty2rpi-user.ini >> /dev/shm/tmp/inis
-echo "# -------------------------------------" >> /dev/shm/tmp/inis
-cat ~/tty2rpi-screens.ini >> /dev/shm/tmp/inis
+awk '/DO NOT CHANGE ANYTHING ABOVE/,0' ${HOME}/tty2rpi.ini > ${TMPDIR}/tmp/inis
+echo "# -------------------------------------" >> ${TMPDIR}/tmp/inis
+cat ~/tty2rpi-user.ini >> ${TMPDIR}/tmp/inis
+echo "# -------------------------------------" >> ${TMPDIR}/tmp/inis
+cat ~/tty2rpi-screens.ini >> ${TMPDIR}/tmp/inis
 
-updatedb -l 0 -U ${HOME} -o /dev/shm/tmp/mediadb &
+updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
 #xset -b
 
 KILLPID fim
 
-cp ~/tty2rpi-pics/black.png /dev/shm/pic.png
-feh --quiet --fullscreen --auto-zoom /dev/shm/pic.png &
+cp ~/tty2rpi-pics/black.png ${TMPDIR}/pic.png
+feh --quiet --fullscreen --auto-zoom ${TMPDIR}/pic.png &
 sleep 0.2
 
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
@@ -28,4 +28,4 @@ sleep 0.2
 sleep ${IPTIMEOUT}
 
 # Show Welcome screen
-tee /dev/shm/pic.png /dev/shm/tty2rpi.png < ~/tty2rpi-pics/tty2rpi.png
+tee ${TMPDIR}/pic.png ${TMPDIR}/tty2rpi.png < ~/tty2rpi-pics/tty2rpi.png
