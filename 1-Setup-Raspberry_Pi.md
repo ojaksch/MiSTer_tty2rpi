@@ -30,7 +30,7 @@ A new feature was added at the end of 2023: You can now use almost any SPI, DSI 
 
 # Setting up the Raspberry Pi
 
-I assume that you are already familiar with setting up a Raspberry Pi. We are going to using Debian Bookworm, the current version of Debian
+I assume that you are already familiar with setting up a Raspberry Pi. We are going to using Debian Trixie, the current version of Debian.
 
 Obviously you need a Raspberry Pi. Any model except the Pico will do, but remember that - even a RPi1 will
 do a fine job - the faster the RPi is, the more responsive your experience will be.
@@ -176,7 +176,7 @@ Available commands:
 
 # NetworkManager
 
-Debian Bookworm is now the actual version for our Raspberry's. If you are going to upgrade to Bookworm, you may stumble about a change how networking is done now as they are using NetworkManager for managing networks.
+Debian Trixie is now the actual version for our Raspberry's. If you are going to upgrade to Trixie, you may stumble about a change how networking is done now as they are using NetworkManager for managing networks.
 
 For WiFi setups: After upgrading but before rebooting, create a file named /etc/NetworkManager/system-connections/wlan.nmconnection and copy and edit this code snipped
 
