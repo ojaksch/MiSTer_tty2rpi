@@ -36,34 +36,39 @@ if [ "${PLAYVIDEO}" = "yes" ]; then
   fi
 fi
 
-GETFNAM "${PATHPIC}" "${MEDIAPIC}"
-if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FNAMSEARCH}" = "MISTER-MENU" ]); then cp "${MEDIA}" /dev/shm/pic.png; fi
-if [ -f "${MEDIA}" ]; then
-  PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
-  if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ "${KEEPASPECTRATIO}" != "no" ]; then
-    if [ "${KEEPASPECTRATIO}" = "yes" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
-    elif [ "${KEEPASPECTRATIO}" = "no" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
-    elif [ "${KEEPASPECTRATIO}" = "x" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=-1:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
-    elif [ "${KEEPASPECTRATIO}" = "y" ]; then
-      ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
+if [ -s "${MAMEMARQUEES}" ]; then
+  7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.*" > /dev/shm/pic.png.tmp
+  [ -s /dev/shm/pic.png.tmp ] && logger "Found a picture »${MEDIAPIC}« in MAME Marquees"
+fi
+if ! [ -s /dev/shm/pic.png.tmp ]; then
+  GETFNAM "${PATHPIC}" "${MEDIAPIC}"
+  if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FNAMSEARCH}" = "MISTER-MENU" ]); then cp "${MEDIA}" /dev/shm/pic.png; fi
+  if [ -f "${MEDIA}" ]; then
+    PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
+    if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ "${KEEPASPECTRATIO}" != "no" ]; then
+      if [ "${KEEPASPECTRATIO}" = "yes" ]; then
+	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
+      elif [ "${KEEPASPECTRATIO}" = "no" ]; then
+	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
+      elif [ "${KEEPASPECTRATIO}" = "x" ]; then
+	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=-1:${HEIGHT} /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
+      elif [ "${KEEPASPECTRATIO}" = "y" ]; then
+	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 /dev/shm/pic.png & echo $! > /dev/shm/tmp/convert.pid
+      fi
+    else
+      cp "${MEDIA}" /dev/shm/pic.png
     fi
-  else
-    cp "${MEDIA}" /dev/shm/pic.png
   fi
+fi
+
+if [ "${SHOWMISSPIC}" = "yes" ]; then
+  # Show "not found"
+  [ -s /dev/shm/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
+  logger "but no matching medium found"
 else
-  [ -s "${MAMEMARQUEES}" ] && 7za e -y -bsp0 -bso0 -so "${MAMEMARQUEES}" "${MEDIAPIC}.png" > /dev/shm/pic.png.tmp
-  if [ "${SHOWMISSPIC}" = "yes" ]; then
-    # Show "not found"
-    [ -s /dev/shm/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png /dev/shm/pic.png
-    logger "but no matching medium found"
-  else
-    # No Media found but doesn't show it
-    ! [ -s /dev/shm/pic.png.tmp ] && logger "but no matching medium found"
-    [ -s /dev/shm/pic.png.tmp ] && mv /dev/shm/pic.png.tmp /dev/shm/pic.png
-  fi
+  # No Media found but doesn't show it
+  ! [ -s /dev/shm/pic.png.tmp ] && logger "but no matching medium found"
+  [ -s /dev/shm/pic.png.tmp ] && mv /dev/shm/pic.png.tmp /dev/shm/pic.png
 fi
 
 # Wait for the completion of the convert process
