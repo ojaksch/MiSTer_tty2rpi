@@ -23,3 +23,7 @@ esac
 
 # gameStart gba libretro mgba /userdata/roms/gba/SpaceTwins.gba
 # gameStop gba libretro mgba /userdata/roms/gba/SpaceTwins.gba
+
+echo "${DATENOW}: this is tty2rpi with core ${CORENAME} and gamename ${GAMENAME}" >> /tmp/tty2rpi-debug
+echo "Batocera command: $@" >> /tmp/tty2rpi-debug
+echo "------------------------------------------------------------------------------------------------" >> /tmp/tty2rpi-debug
