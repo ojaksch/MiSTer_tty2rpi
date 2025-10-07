@@ -9,7 +9,6 @@ cat ~/tty2rpi-user.ini >> ${TMPDIR}/tmp/inis
 echo "# -------------------------------------" >> ${TMPDIR}/tmp/inis
 cat ~/tty2rpi-screens.ini >> ${TMPDIR}/tmp/inis
 
-updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
 #xset -b
 
 KILLPID fim
@@ -29,3 +28,6 @@ sleep ${IPTIMEOUT}
 
 # Show Welcome screen
 tee ${TMPDIR}/pic.png ${TMPDIR}/tty2rpi.png < ~/tty2rpi-pics/tty2rpi.png
+
+# Initial user database for plocate
+updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &

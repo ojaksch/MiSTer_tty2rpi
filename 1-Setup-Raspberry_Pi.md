@@ -55,9 +55,14 @@ sudo apt update
 sudo apt install mc dos2unix rsync git bc inotify-tools netcat-openbsd flex bison p7zip-full readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc ffmpeg feh fim mplayer mpv plocate ksmbd-tools
 ```
 
-Disable avahi (optional):
+Optional: Disable some services to save some memory and to speed up boot time:
 ```
-sudo systemctl disable avahi-daemon.service avahi-daemon.socket
+sudo systemctl disable avahi-daemon.service avahi-daemon.socket bluetooth.service ModemManager.service
+```
+
+Optional: Disable cloud things
+```
+sudo touch /etc/cloud/cloud-init.disabled
 ```
 
 Enable SSH (it not already done in the RPi imager):
