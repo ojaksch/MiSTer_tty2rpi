@@ -4,6 +4,8 @@
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 
+systemctl --user stop tty2rpi-inotify.service
+
 # Fetch -apt install- line from GitHub and silently install possible new packages
 echo "Checking for and installing missing packages..."
 APTUPD=$(wget -q ${REPOSITORY_URL}/1-Setup-Raspberry_Pi.md -O - | grep -m1 "sudo apt install mc")
@@ -44,10 +46,10 @@ if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
   sudo cp /etc/systemd/system/splashscreen-shutdown.service.template /etc/systemd/system/splashscreen-shutdown.service
   sudo systemctl --quiet enable splashscreen-shutdown.service
 fi
-# The next block can be remove in some months
-if [ -f /etc/systemd/system/splashscreen.service ]; then
-  sudo systemctl --quiet disable splashscreen.service
-  [ -f /etc/systemd/system/splashscreen.service ] && sudo rm /etc/systemd/system/splashscreen.service
-  [ -f /etc/systemd/system/splashscreen.service.template ] && sudo rm /etc/systemd/system/splashscreen.service.template
-fi
+systemctl --user daemon-reload
+systemctl --user start tty2rpi-inotify.service
 [ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
+
+# cp ${TMPDIR}/pic.png ${TMPDIR}/tmp/actpic.png
+# ${IMconvert} ${TMPDIR}/pic.png -undercolor Black -fill white -pointsize $((${WIDTH}/20)) -gravity South -draw "text 0,$((${HEIGHT}/10)) ' ...Update in progress... '" ${TMPDIR}/tmp/pictmp.png
+# mv ${TMPDIR}/tmp/actpic.png ${TMPDIR}/pic.png
