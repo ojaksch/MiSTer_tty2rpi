@@ -9,7 +9,7 @@ MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
 if [ "${MEDIA}" != "-" ]; then
   logger "Socket got CORE »${MEDIA}«"
   GETFNAM "${PATHPIC}" "${MEDIAPIC}"
-  [ "${SCREENSAVER}" = "yes" ] && ${IMconvert} "${PATHPIC}/${MEDIAPIC}".* ${TMPDIR}/CORE.png
+  [ "${SCREENSAVER}" = "yes" ] && cp "${MEDIA}" ${TMPDIR}/CORE.png
 else
   [ -f ${TMPDIR}/CORE.png ] && rm ${TMPDIR}/CORE.png
 fi
