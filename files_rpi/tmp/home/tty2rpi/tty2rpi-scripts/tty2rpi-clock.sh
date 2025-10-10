@@ -19,7 +19,7 @@ if [ "${SCREENSAVER}" = "yes" ] && [ ${SCREENSAVER_CLOCK} = "yes" ]; then
   CLOCKPNG="${TMPDIR}/tty2rpi-clock.png"
   CLOCKPNGTMP="${TMPDIR}/tmp/tty2rpi-clock.png"
 
-  ${IMconvert} -size 500x320 xc:black ${CLOCKPNGTMP}
+  ${IMconvert} -size 500x320 canvas:gold ${CLOCKPNGTMP}
   ${IMcomposite} ${TTY2RPIPICS}/000-clock.png ${CLOCKPNGTMP} ${CLOCKPNGTMP}
   ${IMcomposite} -geometry  +45+155 ${TTY2RPIPICS}/000-clock-${DATEH1}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
   ${IMcomposite} -geometry  +140+155 ${TTY2RPIPICS}/000-clock-${DATEH2}.jpg ${CLOCKPNGTMP} ${CLOCKPNGTMP}
