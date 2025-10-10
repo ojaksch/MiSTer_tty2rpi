@@ -58,17 +58,17 @@ if ! [ -s ${TMPDIR}/pic.png.tmp ]; then
     else
       cp "${MEDIA}" ${TMPDIR}/pic.png
     fi
+  else
+    if [ "${SHOWMISSPIC}" = "yes" ]; then
+      # Show "not found"
+      cp ${TTY2RPIPICS}/000-notavail.png ${TMPDIR}/pic.png
+      logger "but no matching medium found"
+    else
+      # No Media found but doesn't show it
+      ! [ -s ${TMPDIR}/pic.png.tmp ] && logger "but no matching medium found"
+      [ -s ${TMPDIR}/pic.png.tmp ] && mv ${TMPDIR}/pic.png.tmp ${TMPDIR}/pic.png
+    fi
   fi
-fi
-
-if [ "${SHOWMISSPIC}" = "yes" ]; then
-  # Show "not found"
-  [ -s ${TMPDIR}/pic.png ] || cp ${TTY2RPIPICS}/000-notavail.png ${TMPDIR}/pic.png
-  logger "but no matching medium found"
-else
-  # No Media found but doesn't show it
-  ! [ -s ${TMPDIR}/pic.png.tmp ] && logger "but no matching medium found"
-  [ -s ${TMPDIR}/pic.png.tmp ] && mv ${TMPDIR}/pic.png.tmp ${TMPDIR}/pic.png
 fi
 
 # Wait for the completion of the convert process
