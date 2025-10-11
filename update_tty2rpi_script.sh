@@ -51,7 +51,6 @@ if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
 fi
 
 systemctl --user daemon-reload
-systemctl --user start tty2rpi-inotify.service
 kill -SIGCONT $(pidof inotifywait)
 mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
 sleep 2
