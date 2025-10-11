@@ -27,7 +27,7 @@ sleep 0.2
 sleep ${IPTIMEOUT}
 
 # Show Welcome screen
-tee ${TMPDIR}/pic.png ${TMPDIR}/tty2rpi.png < "${TTY2RPIPICS}/tty2rpi-pics/tty2rpi.png"
+tee ${TMPDIR}/pic.png ${TMPDIR}/tty2rpi.png < "${TTY2RPIPICS}/tty2rpi.png"
 
 # Initial user database for plocate
 updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
