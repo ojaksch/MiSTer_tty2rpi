@@ -7,10 +7,10 @@ source ~/tty2rpi-user.ini
 #LASTENTRY=$(grep "CMDCOR" "${SOCKET}" | tail -n1)
 systemctl --user stop tty2rpi-inotify.service
 [ $(systemctl is-active --user tty2rpi-screensaver.timer) = "active" ] && systemctl --user stop tty2rpi-screensaver.timer
-#KILLPID feh
-#feh --quiet --fullscreen --auto-zoom "${TTY2RPIPICS}/update.png" &
+KILLPID feh
 cp "${TMPDIR}/pic.png" "${TMPDIR}/tmp/pictmp.png"
 cp "${TTY2RPIPICS}/update.png" "${TMPDIR}/pic.png"
+feh --quiet --fullscreen --auto-zoom "${TTY2RPIPICS}/update.png" &
 
 # Fetch -apt install- line from GitHub and silently install possible new packages
 echo "Checking for and installing missing packages..."
@@ -55,6 +55,7 @@ fi
 
 systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
+sleep 1
 mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
 #KILLPID feh
 #[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom "${TMPDIR}/pic.png" &
