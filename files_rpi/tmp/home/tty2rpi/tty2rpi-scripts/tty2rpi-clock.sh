@@ -29,5 +29,5 @@ if [ "${SCREENSAVER}" = "yes" ] && [ "${SCREENSAVER_CLOCK}" = "yes" ]; then
   mv "${CLOCKPNGTMP}" "${CLOCKPNG}"
 fi
 
-[ "${COMMANDLINE}" != "tty2rpi-screensaver" ] && echo "tty2rpi-screensaver" > "${SOCKET}"
+[ "${COMMANDLINE}" != "tty2rpi-screensaver" ] && echo "tty2rpi-screensaver" >> "${SOCKET}"
 exit 0
