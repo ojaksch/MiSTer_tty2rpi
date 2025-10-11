@@ -4,7 +4,7 @@
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 
-LASTENTRY=$(tail -n1 <${SOCKET})
+LASTENTRY=$(grep "CMDCOR" "${SOCKET}" | tail -n1)
 systemctl --user stop tty2rpi-inotify.service
 KILLPID feh
 feh --quiet --fullscreen --auto-zoom "${TTY2RPIPICS}/update.png" &
