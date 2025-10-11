@@ -17,7 +17,7 @@ AccuracySec=1ms
 [Install]
 WantedBy=timers.target
 " > ~/.config/systemd/user/tty2rpi-screensaver.timer
-  cp --update ${TTY2RPIPICS}/tty2rpi.png ${TMPDIR}
+  cp --update "${TTY2RPIPICS}/tty2rpi.png" "${TMPDIR}"
   systemctl --user daemon-reload
 fi
 
@@ -27,18 +27,18 @@ fi
 
 while true; do
 #  inotifywait -qq -e modify ${SOCKET}
-  INOCHANGE=$(inotifywait --quiet --event modify,close_write,delete,moved_to --recursive --csv ${SOCKET} "${PATHPIC}" "${PATHVID}")
+  INOCHANGE=$(inotifywait --quiet --event modify,close_write,delete,moved_to --recursive --csv "${SOCKET}" "${PATHPIC}" "${PATHVID}")
   INOFILE="$(echo ${INOCHANGE} | cut -d "," -f 1)"
   sync
   [ "${DEBUG}" = "yes" ] && logger "inotify: something has changed: $INOCHANGE -- (${INOFILE%/})"
-  [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
-  [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
+  [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
+  [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
   if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "${TMPDIR}/tty2rpi.socket" ]; then
-    COMMAND=$(tail -n1 ${SOCKET} | tr -d '\0')
+    COMMAND=$(tail -n1 "${SOCKET}" | tr -d '\0')
     if [ "${COMMAND}" != "NIL" ]; then					# NIL is a "hello?" command
       KILLPID "${VIDEOPLAYER}"
-      sync ${SOCKET}
-      ~/tty2rpi-scripts/tty2rpi.sh & echo $! > ${PID_TTY2RPI}
+      sync "${SOCKET}"
+      ~/tty2rpi-scripts/tty2rpi.sh & echo $! > "${PID_TTY2RPI}"
     fi
   fi
 done

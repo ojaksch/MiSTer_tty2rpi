@@ -53,7 +53,7 @@ fi
 systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
 KILLPID feh
-[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom ${TMPDIR}/pic.png &
+[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom "${TMPDIR}/pic.png" &
 #echo "${LASTENTRY}" > "${SOCKET}"
 #[ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
 

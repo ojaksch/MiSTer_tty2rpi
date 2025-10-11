@@ -7,4 +7,4 @@ source ~/tty2rpi-screens.ini
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 SHOWTOUT="${COMMANDLINE[1]}"
 [ -z "${SHOWTOUT}" ] && SHOWTOUT=9
-feh --quiet --fullscreen --auto-zoom --randomize --auto-zoom --slideshow-delay ${SHOWTOUT} ${PATHPIC}
+feh --quiet --fullscreen --auto-zoom --randomize --auto-zoom --slideshow-delay "${SHOWTOUT}" "${PATHPIC}"

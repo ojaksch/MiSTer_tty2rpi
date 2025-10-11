@@ -7,5 +7,5 @@ source ~/tty2rpi-screens.ini
 if [ "${SCREENSAVER}" = "yes" ]; then
   KILLPID feh
   [ "${SCREENSAVER_RNDM}" = "yes" ] && RNDMZE="--randomize" || RNDMZE=""
-  feh --quiet --fullscreen --auto-zoom ${RNDMZE} --slideshow-delay ${SCREENSAVER_IVAL} ${TMPDIR}/ & echo $! > ${TMPDIR}/tmp/screesaver.pid
+  feh --quiet --fullscreen --auto-zoom "${RNDMZE}" --slideshow-delay "${SCREENSAVER_IVAL}" "${TMPDIR}"/ & echo $! > "${TMPDIR}/tmp/screesaver.pid"
 fi
