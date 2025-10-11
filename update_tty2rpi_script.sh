@@ -52,10 +52,10 @@ fi
 
 systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
-sleep 0.2
 kill -SIGCONT $(pidof inotifywait)
 mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
-echo "${LASTENTRY}" > "${SOCKET}"
+sleep 2
+echo "${LASTENTRY}" >> "${SOCKET}"
 
 # cp ${TMPDIR}/pic.png ${TMPDIR}/tmp/actpic.png
 # ${IMconvert} ${TMPDIR}/pic.png -undercolor Black -fill white -pointsize $((${WIDTH}/20)) -gravity South -draw "text 0,$((${HEIGHT}/10)) ' ...Update in progress... '" ${TMPDIR}/tmp/pictmp.png
