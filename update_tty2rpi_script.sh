@@ -6,7 +6,7 @@ source ~/tty2rpi-user.ini
 
 #LASTENTRY=$(grep "CMDCOR" "${SOCKET}" | tail -n1)
 #systemctl --user stop tty2rpi-inotify.service
-[ $(systemctl is-active --user tty2rpi-screensaver.timer) = "active" ] && systemctl --user stop tty2rpi-screensaver.timer
+#[ $(systemctl is-active --user tty2rpi-screensaver.timer) = "active" ] && systemctl --user stop tty2rpi-screensaver.timer
 kill -SIGSTOP $(pidof inotifywait)
 #KILLPID feh
 cp "${TMPDIR}/pic.png" "${TMPDIR}/tmp/pictmp.png"
@@ -58,8 +58,8 @@ systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
 sleep 10.2
 kill -SIGCONT $(pidof inotifywait)
-if [ "${SCREENSAVER}" = "yes" ] && systemctl --user start tty2rpi-screensaver.timer
-#mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
+#if [ "${SCREENSAVER}" = "yes" ] && systemctl --user start tty2rpi-screensaver.timer
+mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
 #KILLPID feh
 #[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom "${TMPDIR}/pic.png" &
 #echo "${LASTENTRY}" > "${SOCKET}"
