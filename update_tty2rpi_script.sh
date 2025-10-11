@@ -50,8 +50,9 @@ fi
 
 systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
-echo "${LASTENTRY}" > "${SOCKET}"
-[ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
+[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom ${TMPDIR}/pic.png &
+#echo "${LASTENTRY}" > "${SOCKET}"
+#[ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
 
 # cp ${TMPDIR}/pic.png ${TMPDIR}/tmp/actpic.png
 # ${IMconvert} ${TMPDIR}/pic.png -undercolor Black -fill white -pointsize $((${WIDTH}/20)) -gravity South -draw "text 0,$((${HEIGHT}/10)) ' ...Update in progress... '" ${TMPDIR}/tmp/pictmp.png
