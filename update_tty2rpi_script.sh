@@ -4,14 +4,10 @@
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 
-#LASTENTRY=$(grep "CMDCOR" "${SOCKET}" | tail -n1)
-#systemctl --user stop tty2rpi-inotify.service
-#[ $(systemctl is-active --user tty2rpi-screensaver.timer) = "active" ] && systemctl --user stop tty2rpi-screensaver.timer
+LASTENTRY=$(grep "CMDCOR" "${SOCKET}" | tail -n1)
 kill -SIGSTOP $(pidof inotifywait)
-#KILLPID feh
 cp "${TMPDIR}/pic.png" "${TMPDIR}/tmp/pictmp.png"
 cp "${TTY2RPIPICS}/update.png" "${TMPDIR}/pic.png"
-#feh --quiet --fullscreen --auto-zoom "${TTY2RPIPICS}/pic.png" &
 
 # Fetch -apt install- line from GitHub and silently install possible new packages
 echo "Checking for and installing missing packages..."
@@ -58,12 +54,8 @@ systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
 sleep 0.2
 kill -SIGCONT $(pidof inotifywait)
-#if [ "${SCREENSAVER}" = "yes" ] && systemctl --user start tty2rpi-screensaver.timer
 mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
-#KILLPID feh
-#[ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom "${TMPDIR}/pic.png" &
-#echo "${LASTENTRY}" > "${SOCKET}"
-#[ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
+echo "${LASTENTRY}" > "${SOCKET}"
 
 # cp ${TMPDIR}/pic.png ${TMPDIR}/tmp/actpic.png
 # ${IMconvert} ${TMPDIR}/pic.png -undercolor Black -fill white -pointsize $((${WIDTH}/20)) -gravity South -draw "text 0,$((${HEIGHT}/10)) ' ...Update in progress... '" ${TMPDIR}/tmp/pictmp.png
