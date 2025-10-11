@@ -56,7 +56,7 @@ fi
 
 systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
-sleep 10.2
+sleep 0.2
 kill -SIGCONT $(pidof inotifywait)
 #if [ "${SCREENSAVER}" = "yes" ] && systemctl --user start tty2rpi-screensaver.timer
 mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
