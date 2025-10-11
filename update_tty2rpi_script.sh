@@ -4,8 +4,10 @@
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 
-LASTENTRY=$(<${SOCKET})
+LASTENTRY=$(tail -n1 <${SOCKET})
 systemctl --user stop tty2rpi-inotify.service
+KILLPID feh
+feh --quiet --fullscreen --auto-zoom "${TTY2RPIPICS}/update.png" &
 
 # Fetch -apt install- line from GitHub and silently install possible new packages
 echo "Checking for and installing missing packages..."
@@ -50,6 +52,7 @@ fi
 
 systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
+KILLPID feh
 [ -z "$(pidof feh)" ] && feh --quiet --fullscreen --auto-zoom ${TMPDIR}/pic.png &
 #echo "${LASTENTRY}" > "${SOCKET}"
 #[ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
