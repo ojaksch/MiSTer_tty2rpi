@@ -4,6 +4,7 @@
 source ~/tty2rpi.ini
 source ~/tty2rpi-user.ini
 
+LASTENTRY=$(<${SOCKET})
 systemctl --user stop tty2rpi-inotify.service
 
 # Fetch -apt install- line from GitHub and silently install possible new packages
@@ -46,8 +47,10 @@ if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
   sudo cp /etc/systemd/system/splashscreen-shutdown.service.template /etc/systemd/system/splashscreen-shutdown.service
   sudo systemctl --quiet enable splashscreen-shutdown.service
 fi
+
 systemctl --user daemon-reload
 systemctl --user start tty2rpi-inotify.service
+echo "${LASTENTRY}" > "${SOCKET}"
 [ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
 
 # cp ${TMPDIR}/pic.png ${TMPDIR}/tmp/actpic.png
