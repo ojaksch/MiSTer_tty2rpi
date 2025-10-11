@@ -1,6 +1,7 @@
 #!/bin/bash
 
-REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main"
+#REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main"
+REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/refs/heads/testing"
 REPOSITORY_URL2="https://www.tty2tft.de/MiSTer_tty2rpi"
 NODEBUG="-q -o /dev/null"
 [ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
