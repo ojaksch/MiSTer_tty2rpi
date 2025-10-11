@@ -60,6 +60,7 @@ if [ "${?}" -gt "0" ]; then
 fi
 
 ! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini
+[ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
 
 wget ${NODEBUG} ${REPOSITORY_URL2}/MAC.html?${MAC} -O /dev/null
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi_script.sh" -O "${SCRIPTNAME}"
