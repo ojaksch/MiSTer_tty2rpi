@@ -20,7 +20,7 @@ sleep 0.2
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
 [ "${SERIALSOCKET}" = "yes" ] && systemctl --user start tty2rpi-serialinput.service
 until [ $(systemctl is-active --user tty2rpi-inotify.service) = "active" ]; do sleep 0.2; done
-sleep 0.2
+sleep 1
 
 # Show IP addresses
 [ "${SHOWIPS}" = "yes" ] && echo "CMDSHOWIPS" > "${SOCKET}"
@@ -30,4 +30,4 @@ sleep ${IPTIMEOUT}
 tee ${TMPDIR}/pic.png ${TMPDIR}/tty2rpi.png < "${TTY2RPIPICS}/tty2rpi.png"
 
 # Initial user database for plocate
-updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb &
+updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb
