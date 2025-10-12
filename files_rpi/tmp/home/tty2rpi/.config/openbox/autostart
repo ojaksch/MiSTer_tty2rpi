@@ -15,6 +15,8 @@ KILLPID fim
 
 cp ~/tty2rpi-pics/black.png ${TMPDIR}/pic.png
 feh --quiet --fullscreen --auto-zoom ${TMPDIR}/pic.png &
+${IMconvert} -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/25)) -fill white -gravity center -draw "text 0,0 'Initializing...'" "${TMPDIR}/pictmp.png"
+mv "${TMPDIR}/pictmp.png" "${TMPDIR}/pic.png"
 sleep 0.2
 
 systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
