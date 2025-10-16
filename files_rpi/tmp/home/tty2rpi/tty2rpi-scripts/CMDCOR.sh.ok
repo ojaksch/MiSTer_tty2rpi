@@ -22,24 +22,17 @@ logger "Socket got GAME »${MEDIA}«"
 echo "${MEDIA}" > "${TMPDIR}/corename"
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 
-ALTFILES="$(find "${TMPDIR}" -name "*_alt*")"
-if [ "${SCREENSAVER}" = "yes" ] && [ -n "${ALTFILES}" ]; then
-  rm ${TMPDIR}/*_alt*
-fi
-
-if [ "${VIDEOARCADE}" = "yes" ]; then
-  GETFNAM "${PATHVID}" "${MEDIAVID}"
-  if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDMENU}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
-  if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
-  if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
-  if [ "${PLAYVIDEO}" = "yes" ]; then
-    if [ -f "${MEDIA}" ]; then
-      case "${VIDEOPLAYER}" in
-	"vlc")		cvlc --verbose 0 --no-lua -f --no-video-title-show --play-and-exit --vout "${VLCVIDEO}" --aout alsa "${AUDIOYESNO}" "${VLCPREFEETCH}" "${MEDIA}" ;;
-	"mpv")		mpv --no-config --really-quiet --fullscreen "${AUDIOYESNO}" "${MEDIA}" ;;
-	"mplayer")	AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw "${AUDIOYESNO}" "${MEDIA}" ;;
-      esac
-    fi
+GETFNAM "${PATHVID}" "${MEDIAVID}"
+if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDMENU}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
+if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
+if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
+if [ "${PLAYVIDEO}" = "yes" ]; then
+  if [ -f "${MEDIA}" ]; then
+    case "${VIDEOPLAYER}" in
+      "vlc")		cvlc --verbose 0 --no-lua -f --no-video-title-show --play-and-exit --vout "${VLCVIDEO}" --aout alsa "${AUDIOYESNO}" "${VLCPREFEETCH}" "${MEDIA}" ;;
+      "mpv")		mpv --no-config --really-quiet --fullscreen "${AUDIOYESNO}" "${MEDIA}" ;;
+      "mplayer")	AUDIOYESNO="-nosound" ; mplayer -really-quiet -nolirc -fs -vo gl_nosw "${AUDIOYESNO}" "${MEDIA}" ;;
+    esac
   fi
 fi
 
@@ -77,23 +70,6 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
     fi
   fi
 fi
-
-
-
-if [ "${SCREENSAVER}" = "yes" ] && [ -n "${ALTENTRYS}" ]; then
-  if [ -n "${FNAMFOUND}" ]; then
-    #logger "fnamfound:$FNAMFOUND"
-    #logger "altentrys:$ALTENTRYS"
-    cp "${FNAMFOUND}" "${TMPDIR}"
-    readarray -t ALTFILES <<<"${ALTENTRYS}"
-    for ALTFILE in "${ALTFILES[@]}"; do
-#      echo "${ALTFILE}"
-      cp "${ALTFILE[@]}" "${TMPDIR}"
-    done
-  fi
-fi
-
-
 
 # Wait for the completion of the convert process
 if [ -e "${TMPDIR}/tmp/convert.pid" ]; then
