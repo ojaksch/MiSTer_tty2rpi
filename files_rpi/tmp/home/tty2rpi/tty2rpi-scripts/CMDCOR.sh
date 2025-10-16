@@ -84,7 +84,7 @@ if [ "${SCREENSAVER}" = "yes" ] && [ -n "${ALTENTRYS}" ]; then
   if [ -n "${FNAMFOUND}" ]; then
     #logger "fnamfound:$FNAMFOUND"
     #logger "altentrys:$ALTENTRYS"
-    cp "${FNAMFOUND}" "${TMPDIR}"
+    cp "${FNAMFOUND}" "${TMPDIR}/pic.png"
     readarray -t ALTFILES <<<"${ALTENTRYS}"
     for ALTFILE in "${ALTFILES[@]}"; do
 #      echo "${ALTFILE}"
