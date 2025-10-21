@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source ~/tty2rpi.ini
-source ~/tty2rpi-user.ini
-source ~/tty2rpi-screens.ini
+. ~/tty2rpi.ini
+. ~/tty2rpi-user.ini
+. ~/tty2rpi-screens.ini
+. ~/tty2rpi-functions.ini
+#. <(cat ~/tty2rpi*.ini)
 
 echo "Raspberrys CPU:" > /tmp/cpu-info
 TEMPC=`awk '{printf "%3.1f°C\n", $1/1000}' /sys/class/thermal/thermal_zone0/temp`

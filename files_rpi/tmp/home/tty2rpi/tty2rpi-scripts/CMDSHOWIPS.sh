@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source ~/tty2rpi.ini
-source ~/tty2rpi-user.ini
-source ~/tty2rpi-screens.ini
+. ~/tty2rpi.ini
+. ~/tty2rpi-user.ini
+. ~/tty2rpi-screens.ini
+. ~/tty2rpi-functions.ini
+#. <(cat ~/tty2rpi*.ini)
 
 ${IMconvert} -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/20)) -fill white -gravity center -draw "text 0,0 'Waiting for network...'" "${TMPDIR}/pictmp.png"
 mv "${TMPDIR}/pictmp.png" "${TMPDIR}/pic.png"

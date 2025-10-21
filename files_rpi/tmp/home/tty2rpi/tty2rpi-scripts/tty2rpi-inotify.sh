@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source ~/tty2rpi.ini
-source ~/tty2rpi-user.ini
-source ~/tty2rpi-screens.ini
+. ~/tty2rpi.ini
+. ~/tty2rpi-user.ini
+. ~/tty2rpi-screens.ini
+. ~/tty2rpi-functions.ini
+#. <(cat ~/tty2rpi*.ini)
 
 if [ "${SCREENSAVER}" = "yes" ]; then
   SCREENSAVER_START=$((SCREENSAVER_START*60))
@@ -26,15 +28,15 @@ if [ "${SCREENSAVER}" = "no" ] && [ $(systemctl is-active --user tty2rpi-screens
 fi
 
 while true; do
-#  inotifywait -qq -e modify ${SOCKET}
   INOCHANGE=$(inotifywait --quiet --event modify,close_write,delete,moved_to --recursive --csv "${SOCKET}" "${PATHPIC}" "${PATHVID}")
   INOFILE="$(echo ${INOCHANGE} | cut -d "," -f 1)"
-  sync
-  [ "${DEBUG}" = "yes" ] && logger "inotify: something has changed: $INOCHANGE -- (${INOFILE%/})"
+  sync "${SOCKET}"
+  [ "${DEBUG}" = "yes" ] && logger "inotify: something has changed: ${INOCHANGE} -- (${INOFILE%/})"
   [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
   [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
-  if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "${TMPDIR}/tty2rpi.socket" ]; then
+  if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "${SOCKET}" ]; then
     COMMAND=$(tail -n1 "${SOCKET}" | tr -d '\0')
+    [ "${COMMAND}" != "tty2rpi-screensaver" ] && systemctl --user stop tty2rpi-screensaver.timer
     if [ "${COMMAND}" != "NIL" ]; then					# NIL is a "hello?" command
       KILLPID "${VIDEOPLAYER}"
       sync "${SOCKET}"

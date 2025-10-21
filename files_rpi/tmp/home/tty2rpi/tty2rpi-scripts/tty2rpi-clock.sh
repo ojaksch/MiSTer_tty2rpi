@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source ~/tty2rpi.ini
-source ~/tty2rpi-user.ini
-source ~/tty2rpi-screens.ini
+. ~/tty2rpi.ini
+. ~/tty2rpi-user.ini
+. ~/tty2rpi-screens.ini
+. ~/tty2rpi-functions.ini
+#. <(cat ~/tty2rpi*.ini)
 
 if [ "${SCREENSAVER_CLOCK}" = "no" ] && [ -f "${TMPDIR}/tty2rpi-clock.png" ]; then
   rm "${TMPDIR}/tty2rpi-clock.png"
@@ -29,5 +31,8 @@ if [ "${SCREENSAVER}" = "yes" ] && [ "${SCREENSAVER_CLOCK}" = "yes" ]; then
   mv "${CLOCKPNGTMP}" "${CLOCKPNG}"
 fi
 
-[ "${COMMANDLINE}" != "tty2rpi-screensaver" ] && echo "tty2rpi-screensaver" >> "${SOCKET}"
+if ! [ -e "${TMPDIR}/tmp/screesaver.pid" ];then
+  echo "tty2rpi-screensaver" >> "${SOCKET}"
+  sync "${SOCKET}"
+fi
 exit 0

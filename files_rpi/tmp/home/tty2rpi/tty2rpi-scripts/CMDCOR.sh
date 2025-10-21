@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source ~/tty2rpi.ini
-source ~/tty2rpi-user.ini
-source ~/tty2rpi-screens.ini
+. ~/tty2rpi.ini
+. ~/tty2rpi-user.ini
+. ~/tty2rpi-screens.ini
+. ~/tty2rpi-functions.ini
+#. <(cat ~/tty2rpi*.ini)
 
 MEDIAPIC="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
 MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
@@ -19,7 +21,7 @@ MEDIAVID="$(echo ${COMMANDLINE[@]} | cut -d " " -f 3-)"
 
 MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 3-)"
 logger "Socket got GAME »${MEDIA}«"
-echo "${MEDIA}" > "${TMPDIR}/corename"
+echo "${MEDIA}" > "${TMPDIR}/tmp/corename"
 [ "${SCREENSAVER}" = "yes" ] && systemctl --user stop --quiet tty2rpi-screensaver.timer
 
 ALTFILES="$(find "${TMPDIR}" -name "*_alt*")"
