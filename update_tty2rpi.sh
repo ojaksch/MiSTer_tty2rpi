@@ -6,6 +6,7 @@ REPOSITORY_URL2="https://www.tty2tft.de/MiSTer_tty2rpi"
 NODEBUG="-q -o /dev/null"
 [ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
 [ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
+[ -e ~/tty2rpi-functions.ini ] && . ~/tty2rpi-functions.ini
 
 echo -e "\n +---------+";
 echo -e " | ${fblue}tty2rpi${freset} |---[]";
