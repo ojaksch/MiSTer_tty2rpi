@@ -32,8 +32,8 @@ while true; do
   INOFILE="$(echo ${INOCHANGE} | cut -d "," -f 1)"
   sync "${SOCKET}"
   [ "${DEBUG}" = "yes" ] && logger "inotify: something has changed: ${INOCHANGE} -- (${INOFILE%/})"
-  [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
-  [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
+#  [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
+#  [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
   if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "${SOCKET}" ]; then
     COMMAND=$(tail -n1 "${SOCKET}" | tr -d '\0')
     [ "${COMMAND}" != "tty2rpi-screensaver" ] && systemctl --user stop tty2rpi-screensaver.timer
@@ -42,5 +42,7 @@ while true; do
       sync "${SOCKET}"
       ~/tty2rpi-scripts/tty2rpi.sh & echo $! > "${PID_TTY2RPI}"
     fi
+  else
+    updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
   fi
 done
