@@ -66,6 +66,7 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
       fi
     else
       cp "${MEDIA}" "${TMPDIR}/pic.png"
+      for ALTMEDIA in "${MEDIA%.*}_alt"*; do [ -e "${ALTMEDIA}" ] && cp "${ALTMEDIA}" "${TMPDIR}" ; done
     fi
   else
     if [ "${SHOWMISSPIC}" = "yes" ]; then
