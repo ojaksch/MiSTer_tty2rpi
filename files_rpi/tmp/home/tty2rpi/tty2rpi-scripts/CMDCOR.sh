@@ -64,6 +64,7 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
       elif [ "${KEEPASPECTRATIO}" = "y" ]; then
 	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
       fi
+      for ALTMEDIA in "${MEDIA%.*}_alt"*; do [ -e "${ALTMEDIA}" ] && cp "${ALTMEDIA}" "${TMPDIR}" ; done
     else
       cp "${MEDIA}" "${TMPDIR}/pic.png"
       for ALTMEDIA in "${MEDIA%.*}_alt"*; do [ -e "${ALTMEDIA}" ] && cp "${ALTMEDIA}" "${TMPDIR}" ; done
