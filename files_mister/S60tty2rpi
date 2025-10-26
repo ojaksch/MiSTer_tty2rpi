@@ -40,6 +40,8 @@ start() {
 	echo "Starting ${DAEMONNAME} in ${DAEMONSTARTDELAY} seconds..."
 	sleep ${DAEMONSTARTDELAY}
 	${DAEMONSCRIPT} & echo $! > /run/tty2rpi-daemon.pid
+	sleep 0.2
+	echo $(</tmp/CORENAME) > ${CORENAMEFILE}
       fi
     else
       echo "${DAEMONSCRIPT} not found!"
