@@ -81,6 +81,7 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
     fi
   fi
 fi
+! [ -s  "${TMPDIR}/pic.png.tmp" ] && rm "${TMPDIR}/pic.png.tmp"
 
 
 
