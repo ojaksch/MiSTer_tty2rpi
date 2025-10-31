@@ -54,14 +54,14 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
   if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FNAMSEARCH}" = "MISTER-MENU" ]); then cp "${MEDIA}" "${TMPDIR}/pic.png"; fi
   if [ -f "${MEDIA}" ]; then
     PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
-    if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ "${KEEPASPECTRATIO}" != "no" ]; then
-      if [ "${KEEPASPECTRATIO}" = "yes" ]; then
+    if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ "${RESCALE}" != "no" ]; then
+      if [ "${RESCALE}" = "keep-ar" ]; then
 	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
-      elif [ "${KEEPASPECTRATIO}" = "no" ]; then
+      elif [ "${RESCALE}" = "yes" ]; then
 	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
-      elif [ "${KEEPASPECTRATIO}" = "x" ]; then
+      elif [ "${RESCALE}" = "x" ]; then
 	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=-1:${HEIGHT} "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
-      elif [ "${KEEPASPECTRATIO}" = "y" ]; then
+      elif [ "${RESCALE}" = "y" ]; then
 	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
       fi
       for ALTMEDIA in "${MEDIA%.*}_alt"*; do [ -e "${ALTMEDIA}" ] && cp "${ALTMEDIA}" "${TMPDIR}" ; done
