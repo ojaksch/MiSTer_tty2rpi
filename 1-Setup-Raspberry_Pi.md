@@ -242,7 +242,7 @@ Don't panic! We're on Linux here, not Windows or MacOS and your tty2rpi system i
 Regular updates are helping in updating software in general, fixing bugs, broken programs or libraries and the underlying OS itself, which could bring new or better device drivers to you. I don't want to delve too deeply into the subject here. You're running an operating system, so you should take care of it and familiarize yourself with it. But in short, and this is usual way, open a console on your device and enter
 
 ```
-sudo apt update && sudo apt dist-upgrade.
+sudo apt update && sudo apt dist-upgrade
 ```
 
 "&&" is a separator and means that if "apt update" (freshen up software libraries) ran successfully, continue with "apt dist-upgrade" and start the actual update. Carefully read messages and prompts, press Enter and let it roll. When it's done and no errors were reported, you should (optionally) reboot the device. That's all.
