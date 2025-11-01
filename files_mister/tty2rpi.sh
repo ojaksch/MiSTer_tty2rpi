@@ -49,8 +49,8 @@ fi										# end if command line Parameter
       #
       dbug "Read CORENAME: -${NEWCORE}-"
       if [ "${NEWCORE}" != "${OLDCORE}" ]; then					# proceed only if Core has changed
-	dbug "Send -${NEWCORE}- to ${TTYDEV}."
-	if [ -n "${CN}" ]; then
+	dbug "Send newcore -${NEWCORE}- to ${TTYDEV} - oldcore:${OLDCORE}"
+	if [ -n "${CN}" ] && [ "${CN}" != "${NEWCORE}" ]; then
 	  senddata "CMDCOR§${CN}§${NEWCORE}"
 	else
 	  senddata "CMDCOR§-§${NEWCORE}"						# The "Magic"
