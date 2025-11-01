@@ -1,3 +1,15 @@
+20251101:
+- _alt pictures are now also rescaled, if enabled
+
+20251031:
+- Rename KEEPASPECTRATIO to RESCALE with changed values
+
+20251016:
+- Also show _alt pictures when screensaver enabled
+
+20251006:
+- Moving from /dev/shm to tmpfs in ~/.tmp
+
 20251005:
 - New variable DEBUG and only use logger when DEBUG=yes
 - Network access / SMB

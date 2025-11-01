@@ -55,16 +55,16 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
   if [ -f "${MEDIA}" ]; then
     PICSIZE=$(identify -format '%wx%h' "${MEDIA}")
     if [ "${PICSIZE}" != "${WIDTH}x${HEIGHT}" ] && [ "${RESCALE}" != "no" ]; then
-      if [ "${RESCALE}" = "keep-ar" ]; then
-	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
-      elif [ "${RESCALE}" = "yes" ]; then
-	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:${HEIGHT} "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
-      elif [ "${RESCALE}" = "x" ]; then
-	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=-1:${HEIGHT} "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
-      elif [ "${RESCALE}" = "y" ]; then
-	ffmpeg -y -loglevel quiet -i "${MEDIA}" -vf scale=${WIDTH}:-1 "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
-      fi
       for ALTMEDIA in "${MEDIA%.*}_alt"*; do [ -e "${ALTMEDIA}" ] && cp "${ALTMEDIA}" "${TMPDIR}" ; done
+      [ "${RESCALE}" = "keep-ar" ] && FFMPARAMS="-vf scale=w=${WIDTH}:h=${HEIGHT}:force_original_aspect_ratio=increase"
+      [ "${RESCALE}" = "yes" ] && FFMPARAMS="-vf scale=${WIDTH}:${HEIGHT}"
+      [ "${RESCALE}" = "x" ] && FFMPARAMS="-vf scale=-1:${HEIGHT}"
+      [ "${RESCALE}" = "y" ] && FFMPARAMS="-vf scale=${WIDTH}:-1"
+      ffmpeg -y -loglevel quiet -i "${MEDIA}" ${FFMPARAMS} "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
+      for BLA in "${TMPDIR}/"*"_alt"*; do
+	ffmpeg -y -loglevel quiet -i "${BLA}" ${FFMPARAMS} "${TMPDIR}/$(basename ${BLA%.*}-rescaled.png)"
+	rm "${BLA}"
+      done
     else
       cp "${MEDIA}" "${TMPDIR}/pic.png"
       for ALTMEDIA in "${MEDIA%.*}_alt"*; do [ -e "${ALTMEDIA}" ] && cp "${ALTMEDIA}" "${TMPDIR}" ; done
