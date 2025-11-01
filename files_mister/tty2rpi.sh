@@ -41,21 +41,21 @@ fi										# end if command line Parameter
   while true; do								# main loop
     if [ -r ${CORENAMEFILE} ]; then						# proceed if file exists and is readable (-r)
       if [ -z "${GAMESELECT}" ]; then
-	newcore=$(<${CORENAMEFILE})						# get CORENAME if GAMESELECT is empty
+	NEWCORE=$(<${CORENAMEFILE})						# get CORENAME if GAMESELECT is empty
       else
-	newcore="${GAMESELECT}"
+	NEWCORE="${GAMESELECT}"
 	[ "${DEBUG}" = "true" ] && logger "new core: ${GAMESELECT}"
       fi
       #
-      dbug "Read CORENAME: -${newcore}-"
-      if [ "${newcore}" != "${oldcore}" ]; then					# proceed only if Core has changed
-	dbug "Send -${newcore}- to ${TTYDEV}."
+      dbug "Read CORENAME: -${NEWCORE}-"
+      if [ "${NEWCORE}" != "${OLDCORE}" ]; then					# proceed only if Core has changed
+	dbug "Send -${NEWCORE}- to ${TTYDEV}."
 	if [ -n "${CN}" ]; then
-	  senddata "CMDCOR§${CN}§${newcore}"
+	  senddata "CMDCOR§${CN}§${NEWCORE}"
 	else
-	  senddata "CMDCOR§-§${newcore}"						# The "Magic"
+	  senddata "CMDCOR§-§${NEWCORE}"						# The "Magic"
 	fi
-	oldcore="${newcore}"							# update oldcore variable
+	OLDCORE="${NEWCORE}"							# update OLDCORE variable
       fi									# end if core check
       #
       if [ $(grep -c "log_file_entry=1" /media/fat/mister.ini) = 1 ] && [ -e /tmp/CURRENTPATH ] && [ -e /tmp/FILESELECT ]; then 
