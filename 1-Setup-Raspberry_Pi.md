@@ -102,7 +102,7 @@ If your going **not** to use WiFi (or whatever your intention is), you can use a
 
 ![Connection scheme](/images/serial-connection.jpg)
 
-- Edit RPi's */boot/firmware/cmdline.txt* and change the part ```console=serial0,115200``` to ```console=tty1```
+- Edit RPi's */boot/firmware/cmdline.txt* and change the part ```console=serial0,115200``` to ```console=tty3```
 - Edit */boot/firmware/config.txt* and enable the last two line so they're reading  
 ```
 [all]
