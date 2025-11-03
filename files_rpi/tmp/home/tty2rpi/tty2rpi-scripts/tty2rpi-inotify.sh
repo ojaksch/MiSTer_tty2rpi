@@ -32,10 +32,8 @@ while true; do
   INOFILE="$(echo ${INOCHANGE} | cut -d "," -f 1)"
   sync "${SOCKET}"
   [ "${DEBUG}" = "yes" ] && logger "inotify: something has changed: ${INOCHANGE} -- (${INOFILE%/})"
-#  [ "${INOFILE%/}" = "${PATHPIC}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
-#  [ "${INOFILE%/}" = "${PATHVID}" ] && updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
   if [ "$(echo "${INOCHANGE}" | cut -d "," -f 1)" = "${SOCKET}" ]; then
-    COMMAND=$(tail -n1 "${SOCKET}" | tr -d '\0')
+    COMMAND=$(tail -n1 "${SOCKET}" | tr -d '\0' | sed 's/\x55\xFF\x02\xFE\xD4\x02\*//g')		# Remove NULL and some "MiSTer reboot" character
     [ "${COMMAND}" != "tty2rpi-screensaver" ] && systemctl --user stop tty2rpi-screensaver.timer
     if [ "${COMMAND}" != "NIL" ]; then					# NIL is a "hello?" command
       KILLPID "${VIDEOPLAYER}"
