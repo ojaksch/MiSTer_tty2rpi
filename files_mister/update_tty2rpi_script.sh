@@ -83,6 +83,8 @@ fi
 
 # daemon
 wget ${NODEBUG} "${REPOSITORY_URL}/${DAEMONNAME}" -O /tmp/${DAEMONNAME}
+wget ${NODEBUG} "${REPOSITORY_URL}/tty2rpi-reboot.sh" -O /media/fat/Scripts/tty2rpi-reboot.sh
+wget ${NODEBUG} "${REPOSITORY_URL}/tty2rpi-shutdown.sh" -O /media/fat/Scripts/tty2rpi-shutdown.sh
 if  ! [ -f ${DAEMONSCRIPT} ]; then
   echo -e "${fyellow}Installing daemon script ${fmagenta}tty2rpi${freset}"
   mv -f /tmp/${DAEMONNAME} ${DAEMONSCRIPT}
@@ -91,7 +93,7 @@ elif ! cmp -s /tmp/${DAEMONNAME} ${DAEMONSCRIPT}; then
   if [ "${SCRIPT_UPDATE}" = "yes" ]; then
     echo -e "${fyellow}Updating daemon script ${fmagenta}tty2rpi${freset}"
     mv -f /tmp/${DAEMONNAME} ${DAEMONSCRIPT}
-    chmod +x ${DAEMONSCRIPT}
+    chmod +x ${DAEMONSCRIPT} /media/fat/Scripts/tty2rpi-reboot.sh /media/fat/Scripts/tty2rpi-shutdown.sh
   else
     echo -e "${fblink}Skipping${fyellow} available daemon script update because of the ${fcyan}SCRIPT_UPDATE${fyellow} INI-Option${freset}"
   fi
