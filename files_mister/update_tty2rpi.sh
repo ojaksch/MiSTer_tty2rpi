@@ -19,13 +19,13 @@
 # https://github.com/ojaksch/MiSTer_tty2rpi
 
 
-[ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && . /media/fat/tty2rpi/tty2rpi-user.ini
-
 freset="\e[0m\033[0m"
 fblue="\e[1;34m"
 
 REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/files_mister"
 #REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/refs/heads/testing"
+
+[ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && . /media/fat/tty2rpi/tty2rpi-user.ini
 
 SCRIPTNAME="/tmp/update_tty2rpi_script.sh"
 NODEBUG="-q -o /dev/null"
