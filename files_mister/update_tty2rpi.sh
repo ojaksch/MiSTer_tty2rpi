@@ -19,14 +19,13 @@
 # https://github.com/ojaksch/MiSTer_tty2rpi
 
 
-
-# Changelog:
+[ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && . /media/fat/tty2rpi/tty2rpi-user.ini
 
 freset="\e[0m\033[0m"
 fblue="\e[1;34m"
 
 REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/files_mister"
-#REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/Testing"    # Testing branch
+#REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/refs/heads/testing"
 
 SCRIPTNAME="/tmp/update_tty2rpi_script.sh"
 NODEBUG="-q -o /dev/null"
@@ -68,11 +67,13 @@ fi
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/tty2rpi-system.ini" -O /tmp/tty2rpi-system.ini
 check4error "${?}"
 . /tmp/tty2rpi-system.ini
+[ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && . /media/fat/tty2rpi/tty2rpi-user.ini
 [[ -d "${TTY2RPI_PATH}" ]] || mkdir "${TTY2RPI_PATH}"
 cmp -s /tmp/tty2rpi-system.ini "${TTY2RPI_PATH}/tty2rpi-system.ini"
 if [ "${?}" -gt "0" ]; then
     mv /tmp/tty2rpi-system.ini "${TTY2RPI_PATH}/tty2rpi-system.ini"
     . "${TTY2RPI_PATH}/tty2rpi-system.ini"
+    [ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && . /media/fat/tty2rpi/tty2rpi-user.ini
 fi
 
 ! [ -e /media/fat/tty2rpi/tty2rpi-user.ini ] && wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/tty2rpi-user.ini" -O /media/fat/tty2rpi/tty2rpi-user.ini
