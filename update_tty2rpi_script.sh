@@ -51,6 +51,9 @@ if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
   sudo systemctl --quiet enable splashscreen-shutdown.service
 fi
 
+# Create Backup
+tar -C ~/ --exclude='./.MiSTer_tty2rpi.git' --exclude='./.cache' --exclude='./.fontconfig' --exclude='./.local/share/fonts' --exclude='./.ssh' --exclude='./.tmp' --exclude='./fbcp-ili9341' --exclude='./marquee-pictures' --exclude='./marquee-videos' --exclude='./tty2rpi-pics' --zstd -cvf "${TMPDIR}/tmp/tty2rpi-backup.tar.zst" .
+
 systemctl --user daemon-reload
 kill -SIGCONT $(pidof inotifywait)
 mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
