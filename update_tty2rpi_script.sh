@@ -57,7 +57,8 @@ cp /usr/lib/os-release /tmp/tty2rpi-info/
 cp "${TMPDIR}/tmp/tty2rpi.socket" /tmp/tty2rpi-info/
 ip a > /tmp/tty2rpi-info/network
 [ -e /usr/local/bin/showrpimodel ] && cat /proc/cpuinfo | grep Model | cut -d ":" -f 2 > /tmp/tty2rpi-info/pi-model
-tar -C ~/ --exclude='./.MiSTer_tty2rpi.git' --exclude='./.cache' --exclude='./.fontconfig' --exclude='./.local/share/fonts' --exclude='./.ssh' --exclude='./.tmp' --exclude='./fbcp-ili9341' --exclude='./marquee-pictures' --exclude='./marquee-videos' --exclude='./tty2rpi-pics' --zstd -cvf "${TMPDIR}/tmp/tty2rpi-backup.tar.zst" . /tmp/tty2rpi-info/.
+TAREXCLUDES=(--exclude='./.MiSTer_tty2rpi.git' --exclude='./.cache' --exclude='./.fontconfig' --exclude='./.local/share/fonts' --exclude='./.ssh' --exclude='./.tmp' --exclude='./fbcp-ili9341' --exclude='./marquee-pictures' --exclude='./marquee-videos' --exclude='./tty2rpi-pics' --exclude="${MAMEMARQUEES}" --exclude="${PATHPIC}" --exclude="${PATHVID}" --exclude="${TTY2RPIPICS}")
+tar -C ~/ "${TAREXCLUDES[@]}" --zstd -cvf "${TMPDIR}/tmp/tty2rpi-backup.tar.zst" . /tmp/tty2rpi-info/.
 
 systemctl --user daemon-reload
 kill -SIGCONT $(pidof inotifywait)
