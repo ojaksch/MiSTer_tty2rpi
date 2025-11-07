@@ -1,3 +1,6 @@
+20251107:
+- Create a backup for debugging after update
+
 20251101:
 - _alt pictures are now also rescaled, if enabled
 
