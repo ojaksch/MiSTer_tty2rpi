@@ -52,13 +52,13 @@ if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
 fi
 
 # Create Backup
-[[ -d /tmp/tty2rpi-info ]] || mkdir /tmp/tty2rpi-info
+[[ -d /tmp/tty2rpi-info ]] || mkdir -p /tmp/tty2rpi-info/tty2rpi
 cp /usr/lib/os-release /tmp/tty2rpi-info/
 cp "${TMPDIR}/tmp/tty2rpi.socket" /tmp/tty2rpi-info/
 ip a > /tmp/tty2rpi-info/network
 [ -e /usr/local/bin/showrpimodel ] && cat /proc/cpuinfo | grep Model | cut -d ":" -f 2 > /tmp/tty2rpi-info/pi-model
-TAREXCLUDES=(--exclude='./.MiSTer_tty2rpi.git' --exclude='./.cache' --exclude='./.fontconfig' --exclude='./.local/share/fonts' --exclude='./.ssh' --exclude='./.tmp' --exclude='./fbcp-ili9341' --exclude='./marquee-pictures' --exclude='./marquee-videos' --exclude='./tty2rpi-pics' --exclude="${MAMEMARQUEES}" --exclude="${PATHPIC}" --exclude="${PATHVID}" --exclude="${TTY2RPIPICS}")
-tar -C ~/ "${TAREXCLUDES[@]}" --zstd -cvf "${TMPDIR}/tmp/tty2rpi-backup.tar.zst" . /tmp/tty2rpi-info/.
+rsync -rv --include="*/" --include=".bashrc" --include=".bash_profile" --include=".xinitrc*" --include="*.ini" --include="last_update" --include=".config/**" --include="tty2rpi-scripts/**"    --exclude="*" ~/ /tmp/tty2rpi-info/tty2rpi/
+tar -C /tmp/tty2rpi-info/ --zstd -cvf "${TMPDIR}/tmp/tty2rpi-backup.tar.zst" .
 
 systemctl --user daemon-reload
 kill -SIGCONT $(pidof inotifywait)
