@@ -85,6 +85,7 @@ fi
 wget ${NODEBUG} "${REPOSITORY_URL}/${DAEMONNAME}" -O /tmp/${DAEMONNAME}
 wget ${NODEBUG} "${REPOSITORY_URL}/tty2rpi-reboot.sh" -O /media/fat/Scripts/tty2rpi-reboot.sh
 wget ${NODEBUG} "${REPOSITORY_URL}/tty2rpi-shutdown.sh" -O /media/fat/Scripts/tty2rpi-shutdown.sh
+wget ${NODEBUG} "${REPOSITORY_URL}/tty2rpi-backup.sh" -O /media/fat/Scripts/tty2rpi-backup.sh
 if  ! [ -f ${DAEMONSCRIPT} ]; then
   echo -e "${fyellow}Installing daemon script ${fmagenta}tty2rpi${freset}"
   mv -f /tmp/${DAEMONNAME} ${DAEMONSCRIPT}
