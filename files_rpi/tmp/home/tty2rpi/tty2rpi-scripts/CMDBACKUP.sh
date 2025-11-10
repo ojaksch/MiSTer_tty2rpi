@@ -1,7 +1,9 @@
 #!/bin/bash
 
-. /media/fat/tty2rpi/tty2rpi-system.ini
-. /media/fat/tty2rpi/tty2rpi-user.ini
+. ~/tty2rpi.ini
+. ~/tty2rpi-user.ini
+. ~/tty2rpi-screens.ini
+. ~/tty2rpi-functions.ini
 
 # Create Backup
 [[ -d /tmp/tty2rpi-info ]] || mkdir -p /tmp/tty2rpi-info/tty2rpi
