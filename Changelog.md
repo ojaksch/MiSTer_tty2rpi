@@ -1,5 +1,14 @@
+20251112:
+- New MiSTer script: stop the update time for this session
+
+20251110:
+- New MiSTer script: initiate an update on the tty2rpi device
+
 20251107:
-- Create a backup for debugging after update
+- Create a backup for debugging after update - reworked, see above
+
+20251104:
+- New MiSTer scripts: reboot and shutdown the tty2rpi device
 
 20251101:
 - _alt pictures are now also rescaled, if enabled
