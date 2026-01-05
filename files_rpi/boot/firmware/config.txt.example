@@ -49,55 +49,13 @@
 #dtoverlay=gc9a01,rotate=90
 
 # ----------- displays
-# GC9A01 240x240 Round Display
-# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb1"
-#dtoverlay=gc9a01,rotate=90
 
-# NoName MHS 3.5" 480x320 (SKU: MHS3528) (waveshare dto)
-# - Using https://github.com/juj/fbcp-ili9341
-#   Install needed packages: 'sudo apt-get install libraspberrypi-dev raspberrypi-kernel-headers cmake'
-#   Compile fbcp-ili9341 with 'cmake -DSPI_BUS_CLOCK_DIVISOR=6 -DWAVESHARE35B_ILI9486=ON -DDISPLAY_ROTATE_180_DEGREES=ON -DSTATISTICS=0 ..'
-# - Set FBUFDEV="yes", FBDEVICE="/dev/fb0" and USEFBCP="yes" in tty2rpi-user.ini
-#dtoverlay=waveshare35a,rotate=270
-#hdmi_group=2
-#hdmi_mode=87
-#hdmi_cvt=480 320 60 1 0 0 0
-#hdmi_force_hotplug=1
-
-# Adafruit 2.8" 320x240 CAP (SKU: 1947)
-# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb1" in tty2rpi-user.ini
-#dtoverlay=fbtft,spi0-0,adafruit28,dc_pin=24,reset_pin=25,rotate=270
-
-# Adafruit PiTFT+ 2.8" 320x240 CAP (SKU: 2423)
-# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb1" in tty2rpi-user.ini
-#dtoverlay=pitft28-capacitive
-#hdmi_group=2
-#hdmi_mode=87
-#hdmi_cvt=320 240 60 1 0 0 0
-#hdmi_force_hotplug=1
-
-# waveshare 3.5" 640x480 CAP (SKU: 19173) (waveshare dto)
-# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb0" in tty2rpi-user.ini
-#dtoverlay=vc4-kms-v3d
-#dtoverlay=vc4-kms-DPI-35inch
-#dtoverlay=waveshare-35dpi-3b-4b
-#dtoverlay=waveshare-35dpi-3b
-#dtoverlay=waveshare-35dpi-4b
-
-# waveshare 3.5" 640x480 CAP (SKU: 19173) - Framebuffer mode
-# - Set FBUFDEV="yes" and FBDEVICE="/dev/fb0" in tty2rpi-user.ini
-#dtoverlay=vc4-kms-v3d
-#dtoverlay=vc4-kms-dpi-generic
-#dtparam=hactive=640,vactive=480,rgb666-padhi,hsync-invert=1
-
-# waveshare 3.5" 640x480 CAP (SKU: 19173) - Xorg mode
-# - Set FBUFDEV="no"
+# waveshare 3.5" 640x480 CAP (SKU: 19173)
 #dtoverlay=vc4-kms-v3d
 #dtoverlay=vc4-kms-dpi-generic
 #dtparam=hactive=640,vactive=480,rgb666-padhi,hsync-invert=1
 
 # Adafruit/Pimoroni HyperPixel 4" 800x480 CAP (SKU: 3578)
-# Set FBUFDEV="no"
 #dtoverlay=vc4-kms-v3d
 #dtoverlay=vc4-kms-dpi-hyperpixel4
 
@@ -146,3 +104,7 @@ disable_splash=1
 # and "sudo systemctl disable hciuart" to be executed once. Reboot required.
 #enable_uart=1
 #dtoverlay=disable-bt
+# Enable the next lines (by removing the leading #) when using a RPi5 and the GPIO based serial connection.
+# Do not enable when using the RPi5 specific 3-Pin UART cable.
+#dtparam=uart0           # Enable UART0/ttyAMA0 on GPIO 14 & 15
+#dtparam=uart0_console   # Enable UART0/ttyAMA0 on GPIO 14 & 15 and make it the console UART

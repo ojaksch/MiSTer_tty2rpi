@@ -1,5 +1,47 @@
+20251112:
+- New MiSTer script: stop the update time for this session
+
+20251110:
+- New MiSTer script: initiate an update on the tty2rpi device
+
+20251107:
+- Create a backup for debugging after update - reworked, see above
+
+20251104:
+- New MiSTer scripts: reboot and shutdown the tty2rpi device
+
+20251101:
+- _alt pictures are now also rescaled, if enabled
+
+20251031:
+- Rename KEEPASPECTRATIO to RESCALE with changed values
+
+20251016:
+- Also show _alt pictures when screensaver enabled
+
+20251006:
+- Moving from /dev/shm to tmpfs in ~/.tmp
+
+20251005:
+- New variable DEBUG and only use logger when DEBUG=yes
+- Network access / SMB
+
+20251004:
+- Scripts updated for the new DB based search routine (plocate)
+- Updated Batocera script */userdata/system/scripts/tty2rpi.sh*
+
 20250928:
 - Documentaion updated regarding OS updates
+
+20250921:
+- Including the plocate package
+
+20250905:
+- On startup ensure that all scripts are executable
+
+20250903:
+- Support for framebuffer devices removed
+- feh (the picture viewer) got more attention and reacts faster w/o blacking out the previous picture
 
 20250901:
 - New variable SHOWMISSPIC to turn on/off whether to display a notice if no media found

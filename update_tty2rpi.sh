@@ -5,6 +5,7 @@ REPOSITORY_URL2="https://www.tty2tft.de/MiSTer_tty2rpi"
 NODEBUG="-q -o /dev/null"
 [ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
 [ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
+[ -e ~/tty2rpi-functions.ini ] && . ~/tty2rpi-functions.ini
 
 echo -e "\n +---------+";
 echo -e " | ${fblue}tty2rpi${freset} |---[]";
@@ -59,6 +60,7 @@ if [ "${?}" -gt "0" ]; then
 fi
 
 ! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini
+[ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
 
 wget ${NODEBUG} ${REPOSITORY_URL2}/MAC.html?${MAC} -O /dev/null
 wget ${NODEBUG} --no-cache "${REPOSITORY_URL}/update_tty2rpi_script.sh" -O "${SCRIPTNAME}"

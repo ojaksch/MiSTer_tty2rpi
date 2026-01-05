@@ -1,8 +1,14 @@
 #!/bin/bash
 
 ! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini
-source ~/tty2rpi.ini
-source ~/tty2rpi-user.ini
+. ~/tty2rpi.ini
+. ~/tty2rpi-user.ini
+. ~/tty2rpi-functions.ini
+
+LASTENTRY=$(grep "CMDCOR" "${SOCKET}" | tail -n1)
+kill -SIGSTOP $(pidof inotifywait)
+cp "${TMPDIR}/pic.png" "${TMPDIR}/tmp/pictmp.png"
+cp "${TTY2RPIPICS}/update.png" "${TMPDIR}/pic.png"
 
 # Fetch -apt install- line from GitHub and silently install possible new packages
 echo "Checking for and installing missing packages..."
@@ -44,10 +50,13 @@ if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
   sudo cp /etc/systemd/system/splashscreen-shutdown.service.template /etc/systemd/system/splashscreen-shutdown.service
   sudo systemctl --quiet enable splashscreen-shutdown.service
 fi
-# The next block can be remove in some months
-if [ -f /etc/systemd/system/splashscreen.service ]; then
-  sudo systemctl --quiet disable splashscreen.service
-  [ -f /etc/systemd/system/splashscreen.service ] && sudo rm /etc/systemd/system/splashscreen.service
-  [ -f /etc/systemd/system/splashscreen.service.template ] && sudo rm /etc/systemd/system/splashscreen.service.template
-fi
-[ -z "${SSH_TTY}" ] && echo -e "${fgreen}Press any key to continue\n${freset}"
+
+systemctl --user daemon-reload
+kill -SIGCONT $(pidof inotifywait)
+mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
+sleep 2
+echo "${LASTENTRY}" >> "${SOCKET}"
+
+# cp ${TMPDIR}/pic.png ${TMPDIR}/tmp/actpic.png
+# ${IMconvert} ${TMPDIR}/pic.png -undercolor Black -fill white -pointsize $((${WIDTH}/20)) -gravity South -draw "text 0,$((${HEIGHT}/10)) ' ...Update in progress... '" ${TMPDIR}/tmp/pictmp.png
+# mv ${TMPDIR}/tmp/actpic.png ${TMPDIR}/pic.png

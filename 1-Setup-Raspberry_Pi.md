@@ -7,6 +7,7 @@ Table of Contents
 [Media](#media)  
 [Commands](#commands)  
 [NetworkManager](#networkmanager)  
+[Network Access](#network-access)  
 [OS updates](#os-updates)  
 [Bugs and things to do](#bugs-and-things-still-to-do)  
 [License](#license)  
@@ -29,14 +30,14 @@ A new feature was added at the end of 2023: You can now use almost any SPI, DSI 
 
 # Setting up the Raspberry Pi
 
-I assume that you are already familiar with setting up a Raspberry Pi. We are going to using Debian Bookworm, the current version of Debian
+I assume that you are already familiar with setting up a Raspberry Pi. We are going to using Debian Trixie, the current version of Debian.
 
 Obviously you need a Raspberry Pi. Any model except the Pico will do, but remember that - even a RPi1 will
 do a fine job - the faster the RPi is, the more responsive your experience will be.
 From my personal experience a good minimum is the RPi2, better would be a RPi3. A good choice regarding
 price/power a RPi 3A+
 
-[Download and start the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) insert a SD card, choose your Raspberry Pi Model, the OS version (standard 32- or 64-bit w/o desktop ("Lite") recommended) and the SD card you want to write to. Click on the button **Next**.  
+[Download and start the Raspberry Pi Imager,](https://www.raspberrypi.com/software/) insert a SD card, choose your Raspberry Pi Model, the OS version (standard 32- or 64-bit w/o desktop ("Lite") recommended) and the SD card you want to write to. If you are using Raspberry Pi 3 or newer, choose the 64-bit OS. 32-bit is "legacy", old and rusted. Now click on the button **Next**.  
 Click on the first button to edit settings as shown below, but be sure to set **your own** WiFi credentials & country and time zone 😉  
 General Settings           |  Services Settings
 :-------------------------:|:-------------------------:
@@ -51,12 +52,17 @@ Update your Raspberry Pi OS and install the following packages:
 sudo apt update
 ```
 ```
-sudo apt install mc dos2unix rsync git bc inotify-tools netcat-openbsd flex bison p7zip-full readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc ffmpeg feh fim mplayer mpv
+sudo apt install mc dos2unix rsync git bc inotify-tools netcat-openbsd flex bison p7zip-full readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc ffmpeg feh fim mplayer mpv plocate ksmbd-tools
 ```
 
-Disable avahi (optional):
+Optional: Disable some services to save some memory and to speed up boot time:
 ```
-sudo systemctl disable avahi-daemon.service avahi-daemon.socket
+sudo systemctl disable avahi-daemon.service avahi-daemon.socket bluetooth.service ModemManager.service
+```
+
+Optional: Disable cloud things
+```
+sudo touch /etc/cloud/cloud-init.disabled
 ```
 
 Enable SSH (it not already done in the RPi imager):
@@ -96,7 +102,7 @@ If your going **not** to use WiFi (or whatever your intention is), you can use a
 
 ![Connection scheme](/images/serial-connection.jpg)
 
-- Edit RPi's */boot/firmware/cmdline.txt* and change the part ```console=serial0,115200``` to ```console=tty1```
+- Edit RPi's */boot/firmware/cmdline.txt* and change the part ```console=serial0,115200``` to ```console=tty3```
 - Edit */boot/firmware/config.txt* and enable the last two line so they're reading  
 ```
 [all]
@@ -175,7 +181,7 @@ Available commands:
 
 # NetworkManager
 
-Debian Bookworm is now the actual version for our Raspberry's. If you are going to upgrade to Bookworm, you may stumble about a change how networking is done now as they are using NetworkManager for managing networks.
+Debian Trixie is now the actual version for our Raspberry's. If you are going to upgrade to Trixie, you may stumble about a change how networking is done now as they are using NetworkManager for managing networks.
 
 For WiFi setups: After upgrading but before rebooting, create a file named /etc/NetworkManager/system-connections/wlan.nmconnection and copy and edit this code snipped
 
@@ -220,6 +226,14 @@ Reboot and all should work.
 
 ---
 
+# Network Access
+
+To access you tty2rpi device you can use *ssh, scp* or just any SMB based network tool.  
+
+Keep in mind that if you have used another user than *tty2rpi* while creating your SD card or setting up your OS otherwise, that you have to adjust the file */etc/ksmbd/ksmbd.conf* accordingly.
+
+---
+
 # OS updates
 
 It is always a good idea to keep you OS updated. This could be automated as known with Windows, but then you are missing any detail what has been updated and could be reported if anything breaks (unlikely, but possible). Updates should be done regularly, but not necessarily every day or week. This is an advice, not a must.  
@@ -228,7 +242,7 @@ Don't panic! We're on Linux here, not Windows or MacOS and your tty2rpi system i
 Regular updates are helping in updating software in general, fixing bugs, broken programs or libraries and the underlying OS itself, which could bring new or better device drivers to you. I don't want to delve too deeply into the subject here. You're running an operating system, so you should take care of it and familiarize yourself with it. But in short, and this is usual way, open a console on your device and enter
 
 ```
-sudo apt update && sudo apt dist-upgrade 
+sudo apt update && sudo apt dist-upgrade
 ```
 
 "&&" is a separator and means that if "apt update" (freshen up software libraries) ran successfully, continue with "apt dist-upgrade" and start the actual update. Carefully read messages and prompts, press Enter and let it roll. When it's done and no errors were reported, you should (optionally) reboot the device. That's all.

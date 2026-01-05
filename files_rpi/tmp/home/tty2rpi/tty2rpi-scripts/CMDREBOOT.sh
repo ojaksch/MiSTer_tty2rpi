@@ -6,6 +6,4 @@
 . ~/tty2rpi-functions.ini
 #. <(cat ~/tty2rpi*.ini)
 
-if [ -e ~/tty2rpi-scripts/"${COMMANDLINE[0]}.sh" ]; then
-  ~/tty2rpi-scripts/"${COMMANDLINE[0]}.sh" &
-fi
+sudo systemctl reboot

@@ -4,7 +4,10 @@ After=network.target syslog.target
 
 [Service]
 Type=simple
-ExecStart=/bin/bash -c '/bin/nc -k -l 6666 > /dev/shm/tty2rpi.socket'
+EnvironmentFile=-%h/tty2rpi.ini
+EnvironmentFile=-%h/tty2rpi-user.ini
+#ExecStart=/bin/bash -c '/bin/nc -k -l 6666 > %h/.tmp/tty2rpi.socket'
+ExecStart=/bin/bash -c '/bin/nc -k -l 6666 >> "${TMPDIR}/tmp/tty2rpi.socket"'
 
 [Install]
 WantedBy=multi-user.target

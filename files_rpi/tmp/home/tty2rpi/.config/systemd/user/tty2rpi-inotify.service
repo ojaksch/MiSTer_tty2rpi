@@ -1,5 +1,5 @@
 [Unit]
-Description="Watch for changes in /dev/shm/tty2rpi.socket (systemd service)"
+Description="Watch for changes in TMPDIR/tty2rpi.socket (systemd service)"
 After=network.target syslog.target tty2rpi-socket.service change.login.tty.service
 
 [Service]

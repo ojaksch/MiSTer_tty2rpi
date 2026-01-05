@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. /etc/profile
+
+RPIMODEL=$(cat /proc/cpuinfo | grep Model | cut -d ":" -f 2)
+
+/boot/firmware/cmdline.txt
+/boot/firmware/config.txt
+/etc/os-release
+
+/home/tty2rpi/
+/home/tty2rpi/.xinitrc-extra
+/home/tty2rpi/tty2rpi-user.ini
+/home/tty2rpi/last_update
+/home/tty2rpi/
+/home/tty2rpi/
+/home/tty2rpi/
+/home/tty2rpi/

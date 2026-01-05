@@ -11,12 +11,12 @@ cd /tmp
 
 # Debug function
 dbug() {
-  if [ "${debug}" = "true" ]; then
+  if [ "${DEBUG}" = "true" ]; then
     echo "${1}"
-    if [ ! -e ${debugfile} ]; then						# log file not (!) exists (-e) create it
-      echo "---------- tty2rpi Debuglog ----------" > ${debugfile}
+    if [ ! -e ${DEBUGFILE} ]; then						# log file not (!) exists (-e) create it
+      echo "---------- tty2rpi Debuglog ----------" > ${DEBUGFILE}
     fi
-    echo "${1}" >> ${debugfile}							# output debug text
+    echo "${1}" >> ${DEBUGFILE}							# output debug text
   fi
 }
 
@@ -39,34 +39,34 @@ fi										# end if command line Parameter
   dbug "${TTYDEV} detected, setting Parameters."
   sleep ${WAITSECS}
   while true; do								# main loop
-    if [ -r ${corenamefile} ]; then						# proceed if file exists and is readable (-r)
+    if [ -r ${CORENAMEFILE} ]; then						# proceed if file exists and is readable (-r)
       if [ -z "${GAMESELECT}" ]; then
-	newcore=$(<${corenamefile})						# get CORENAME if GAMESELECT is empty
+	NEWCORE=$(<${CORENAMEFILE})						# get CORENAME if GAMESELECT is empty
       else
-	newcore="${GAMESELECT}"
-	[ "${debug}" = "true" ] && logger "new core: ${GAMESELECT}"
+	NEWCORE="${GAMESELECT}"
+	[ "${DEBUG}" = "true" ] && logger "new core: ${GAMESELECT}"
       fi
       #
-      dbug "Read CORENAME: -${newcore}-"
-      if [ "${newcore}" != "${oldcore}" ]; then					# proceed only if Core has changed
-	dbug "Send -${newcore}- to ${TTYDEV}."
-	if [ -n "${CN}" ]; then
-	  senddata "CMDCOR§${CN}§${newcore}"
+      dbug "Read CORENAME: -${NEWCORE}-"
+      if [ "${NEWCORE}" != "${OLDCORE}" ]; then					# proceed only if Core has changed
+	dbug "Send newcore -${NEWCORE}- to ${TTYDEV} - oldcore:${OLDCORE}"
+	if [ -n "${CN}" ] && [ "${CN}" != "${NEWCORE}" ]; then
+	  senddata "CMDCOR§${CN}§${NEWCORE}"
 	else
-	  senddata "CMDCOR§-§${newcore}"						# The "Magic"
+	  senddata "CMDCOR§-§${NEWCORE}"						# The "Magic"
 	fi
-	oldcore="${newcore}"							# update oldcore variable
+	OLDCORE="${NEWCORE}"							# update OLDCORE variable
       fi									# end if core check
       #
       if [ $(grep -c "log_file_entry=1" /media/fat/mister.ini) = 1 ] && [ -e /tmp/CURRENTPATH ] && [ -e /tmp/FILESELECT ]; then 
-	inotifywait -qq -e modify "${corenamefile}" /tmp/CURRENTPATH /tmp/FILESELECT
+	inotifywait -qq -e modify "${CORENAMEFILE}" /tmp/CURRENTPATH /tmp/FILESELECT
 	CN="$(</tmp/CORENAME)"
 	CP="$(</tmp/CURRENTPATH)"
 	FP="$(</tmp/FULLPATH)"
 	FS="$(</tmp/FILESELECT)"
 	if ! [ "${FP%%/*}" = "_Arcade" ] && [ "${FS}" = "selected" ] && [ $(echo ${FP} | awk -F "/" '{print NF-1}') -ge 1 ]; then	# only when NOT on "Arcade", a game is selected and path has a depth greater than 1
 	  GAMESELECT="${CN}/${CP%.*}"
-	  if [ "${debug}" = "true" ]; then
+	  if [ "${DEBUG}" = "true" ]; then
 	    logger "============================="
 	    logger "CORENAME: $CN"
 	    logger "CURRENTPATH: $CP"
@@ -77,15 +77,15 @@ fi										# end if command line Parameter
 	else
 	  [ /tmp/CORENAME -nt /tmp/CURRENTPATH ] && GAMESELECT=""
 	fi
-      elif [ "${debug}" = "false" ]; then
+      elif [ "${DEBUG}" = "false" ]; then
 	# wait here for next change of corename, -qq for quietness
-	inotifywait -qq -e modify "${corenamefile}"
-      elif [ "${debug}" = "true" ]; then
+	inotifywait -qq -e modify "${CORENAMEFILE}"
+      elif [ "${DEBUG}" = "true" ]; then
 	# but not -qq when debugging
-	inotifywait -e modify "${corenamefile}"
+	inotifywait -e modify "${CORENAMEFILE}"
       fi
     else									# CORENAME file not found
-     dbug "File ${corenamefile} not found!"
+     dbug "File ${CORENAMEFILE} not found!"
     fi										# end if /tmp/CORENAME check
   done										# end while
 # ** End Main **

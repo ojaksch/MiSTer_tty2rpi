@@ -2,8 +2,8 @@
 Description=Run the tty2rpi screensaver
 
 [Timer]
-OnActiveSec=120
-OnUnitActiveSec=10
+OnActiveSec=60
+OnUnitActiveSec=8
 AccuracySec=1ms
 
 [Install]
