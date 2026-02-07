@@ -15,7 +15,8 @@ Table of Contents
 ---
 
 ## Deprecation warning(s)
-- fbcp-ili9341 for SPI displays. Will be removed 2026/01, also any support for these displays types. A more modern display driver [is available](https://github.com/notro/panel-mipi-dbi/wiki) but due its complexity you are on your own activating and using it (but I still accept "issues" about it)
+- Removed as announced  
+~~fbcp-ili9341 for SPI displays. Will be removed 2026/01, also any support for these displays types. A more modern display driver [is available](https://github.com/notro/panel-mipi-dbi/wiki) but due its complexity you are on your own activating and using it (but I still accept "issues" about it)~~
 
 ---
 
@@ -41,7 +42,7 @@ price/power a RPi 3A+
 Click on the first button to edit settings as shown below, but be sure to set **your own** WiFi credentials & country and time zone 😉  
 General Settings           |  Services Settings
 :-------------------------:|:-------------------------:
-![](/images/rpi-imager-settings1.png)   |  ![](/images/rpi-imager-settings2.png)
+![](images/rpi-imager-settings1.png)   |  ![](images/rpi-imager-settings2.png)
 
 Insert the SD into your RPi, connect all needed cables and devices and boot up your RPi.  
 <ins>If not already done with the Raspberry Pi Imager:</ins> Follow the instruction shown on the screen and setup your user and password. For simplicity you can create a user **tty2rpi** (see also at end of this paragraph). Enable and setup WiFi if you want to use it.
@@ -49,7 +50,7 @@ Insert the SD into your RPi, connect all needed cables and devices and boot up y
 Update your Raspberry Pi OS and install the following packages:
 
 ```
-sudo apt update
+sudo apt update && sudo apt dist-upgrade
 ```
 ```
 sudo apt install mc dos2unix rsync git bc inotify-tools netcat-openbsd flex bison p7zip-full readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc ffmpeg feh fim mplayer mpv plocate ksmbd-tools
@@ -77,15 +78,15 @@ wget https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main/update_tty2rp
 Files that will be created;
 - /boot/firmware/cmdline.txt.example -- compare with your existing cmdline.txt. The only relevant changes here are the parameters *quiet* and *cfg80211.ieee80211_regdom=COUNTRYCODE*. [See here](https://www.arubanetworks.com/techdocs/InstantWenger_Mobile/Advanced/Content/Instant%20User%20Guide%20-%20volumes/Country_Codes_List.htm) for a list of WiFi regulatory domains.
 - /boot/firmware/config.txt.example -- compare with and edit your existing config.txt. Changes are:
-```
-...
-#dtoverlay=vc4-kms-v3d
-...
-[all]
-disable_splash=1
-```
-
-Use ```dtoverlay=vc4-kms-v3d``` for a standard HDMI setup or ```#dtoverlay=vc4-kms-v3d``` for other display types and have a look above the ```# -----------``` line for examples.
+	```
+	...
+	#dtoverlay=vc4-kms-v3d
+	...
+	[all]
+	disable_splash=1
+	```
+	
+	Use ```dtoverlay=vc4-kms-v3d``` for a standard HDMI setup or ```#dtoverlay=vc4-kms-v3d``` for other display types and have a look above the ```# -----------``` line for examples.
 
 - /etc/X11/xorg.conf.d/10-monitor.conf -- Monitor config file that disables DPMS
 - /tmp/home/tty2rpi/ -- User files that will be copied to the user you have created - this is "the engine"
@@ -104,24 +105,23 @@ If your going **not** to use WiFi (or whatever your intention is), you can use a
 
 - Edit RPi's */boot/firmware/cmdline.txt* and change the part ```console=serial0,115200``` to ```console=tty3```
 - Edit */boot/firmware/config.txt* and enable the last two line so they're reading  
-```
-[all]
-enable_uart=1
-dtoverlay=disable-bt
-# Enable the next lines (by removing the leading #) when using a RPi5 and the GPIO based serial connection.
-# Do not enable when using the RPi5 specific 3-Pin UART cable.
-#dtparam=uart0           # Enable UART0/ttyAMA0 on GPIO 14 & 15
-#dtparam=uart0_console   # Enable UART0/ttyAMA0 on GPIO 14 & 15 and make it the console UART
-
-```
+	```
+	[all]
+	enable_uart=1
+	dtoverlay=disable-bt
+	# Enable the next lines (by removing the leading #) when using a RPi5 and the 	GPIO based serial connection.
+	# Do not enable when using the RPi5 specific 3-Pin UART cable.
+	#dtparam=uart0           # Enable UART0/ttyAMA0 on GPIO 14 & 15
+	#dtparam=uart0_console   # Enable UART0/ttyAMA0 on GPIO 14 & 15 and make it 	the console UART
+	```
 - In *~/tty2rpi-user.ini* set SERIALSOCKET="yes" or "gpio" (RPi up to 4 or RPi 5 with GPIO based connection), "uart" (RPi 5 UART connection)
 - Disable Bluetooth modems which are connected via UART  
 ```sudo systemctl disable hciuart```
 - Don't forget to set two parameters in MiSTer's ```/media/fat/tty2rpi/tty2rpi-user.ini```:  
-```
-TTYDEV="/dev/ttyUSB0"
-TTYPARAM="115200 cs8 raw -parenb -cstopb -hupcl -echo"
-```
+	```
+	TTYDEV="/dev/ttyUSB0"
+	TTYPARAM="115200 cs8 raw -parenb -cstopb -hupcl -echo"
+	```
 
 ---
 
@@ -258,12 +258,40 @@ Again, no deep dive into the subject here, read the following articles to get an
 
 # Bugs and things still to do
 
-- If your are getting a blank screen only after booting, you could try to set one or all HDMI related settings in *config.txt*: __hdmi_safe__, __hdmi_force_hotplug__ and __hdmi_drive__
+- If your are getting a <ins>blank screen only</ins> after booting, you could try to set one or all HDMI related settings in *config.txt*: __hdmi_safe__, __hdmi_force_hotplug__ and __hdmi_drive__
 Another hint, especially when using a RPi5, could be to set __vc4.force_hotplug=3__ in *cmdline.txt* - see [that issue](https://github.com/ojaksch/MiSTer_tty2rpi/issues/5) we had in the past.
+- If you end up getting a <ins>blank screen with a blinking cursor</ins> in the top left corner, login to another console at tty2 (by pressing ALT + F2) or ssh to your RPi and start an editor by typing in
+	
+	```
+	sudo pico /etc/X11/xorg.conf.d/99-vc4.conf
+	```
+	
+	In the editor copy & paste the following text:
+	
+	```
+	Section "OutputClass"
+	  Identifier "vc4"
+	  MatchDriver "vc4"
+	  Driver "modesetting"
+	  Option "PrimaryGPU" "true"
+	EndSection
+	```
+	
+	Press CTRL + O, then Enter to save the file, press CTRL + X to leave the editor. Reboot your RPi by either hitting CTRL + ALT + DEL, by typing
+	
+	```
+	sudo systemctl reboot
+	```
+	
+	or by typing
+	
+	```
+	killall openbox
+	```
 
 ---
 
 # License
 
-![CC BY-NC-SA 4.0](/images/by-nc-sa.eu.png)  
+![CC BY-NC-SA 4.0](images/by-nc-sa.eu.png)  
 [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
