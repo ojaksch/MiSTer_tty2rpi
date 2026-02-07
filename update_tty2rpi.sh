@@ -57,7 +57,7 @@ check4error "${?}"
 cmp -s /tmp/tty2rpi.ini ~/tty2rpi.ini
 if [ "${?}" -gt "0" ]; then
     mv /tmp/tty2rpi.ini ~/tty2rpi.ini
-    . ~/tty2rpi.ini
+    [ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
 fi
 
 ! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini

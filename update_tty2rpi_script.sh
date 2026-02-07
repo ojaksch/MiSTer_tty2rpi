@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ! [ -e ~/tty2rpi-user.ini ] && touch ~/tty2rpi-user.ini
-. ~/tty2rpi.ini
-. ~/tty2rpi-user.ini
-. ~/tty2rpi-functions.ini
+[ -e ~/tty2rpi.ini ] && . ~/tty2rpi.ini
+[ -e ~/tty2rpi-user.ini ] && . ~/tty2rpi-user.ini
+[ -e ~/tty2rpi-functions.ini ] && . ~/tty2rpi-functions.ini
 
 LASTENTRY=$(grep "CMDCOR" "${SOCKET}" | tail -n1)
 kill -SIGSTOP $(pidof inotifywait)
