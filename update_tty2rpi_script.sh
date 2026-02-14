@@ -53,6 +53,18 @@ if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
   sudo systemctl --quiet enable splashscreen-shutdown.service
 fi
 
+# Create a needed xorg dependency for VC4 (Raspberry)
+# https://github.com/ojaksch/MiSTer_tty2rpi/blob/main/1-Setup-Raspberry_Pi.md#bugs-and-things-still-to-do
+. /usr/local/bin/showrpimodel > /dev/null 2>&1
+if [ -n "${RPIMODEL}" ] && ! [ -a /etc/X11/xorg.conf.d/99-vc4.conf ]; then
+sudo echo "Section \"OutputClass\"
+  Identifier \"vc4\"
+  MatchDriver \"vc4\"
+  Driver \"modesetting\"
+  Option \"PrimaryGPU\" \"true\"
+EndSection" > /etc/X11/xorg.conf.d/99-vc4.conf
+fi
+
 systemctl --user daemon-reload
 kill -SIGCONT $(pidof inotifywait)
 mv "${TMPDIR}/tmp/pictmp.png" "${TMPDIR}/pic.png"
