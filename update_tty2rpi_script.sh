@@ -63,6 +63,7 @@ sudo bash -c 'echo "Section \"OutputClass\"
   Driver \"modesetting\"
   Option \"PrimaryGPU\" \"true\"
 EndSection" > /etc/X11/xorg.conf.d/99-vc4.conf'
+fi
 
 systemctl --user daemon-reload
 kill -SIGCONT $(pidof inotifywait)
