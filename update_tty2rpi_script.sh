@@ -57,13 +57,12 @@ fi
 # https://github.com/ojaksch/MiSTer_tty2rpi/blob/main/1-Setup-Raspberry_Pi.md#bugs-and-things-still-to-do
 . /usr/local/bin/showrpimodel > /dev/null 2>&1
 if [ -n "${RPIMODEL}" ] && ! [ -a /etc/X11/xorg.conf.d/99-vc4.conf ]; then
-sudo echo "Section \"OutputClass\"
+sudo bash -c 'echo "Section \"OutputClass\"
   Identifier \"vc4\"
   MatchDriver \"vc4\"
   Driver \"modesetting\"
   Option \"PrimaryGPU\" \"true\"
-EndSection" > /etc/X11/xorg.conf.d/99-vc4.conf
-fi
+EndSection" > /etc/X11/xorg.conf.d/99-vc4.conf'
 
 systemctl --user daemon-reload
 kill -SIGCONT $(pidof inotifywait)
