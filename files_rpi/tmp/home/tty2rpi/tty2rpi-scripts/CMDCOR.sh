@@ -62,7 +62,7 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
       [ "${RESCALE}" = "y" ] && FFMPARAMS="-vf scale=${WIDTH}:-1"
       ffmpeg -y -loglevel quiet -i "${MEDIA}" ${FFMPARAMS} "${TMPDIR}/pic.png" & echo $! > "${TMPDIR}/tmp/convert.pid"
       for BLA in "${TMPDIR}/"*"_alt"*; do
-	ffmpeg -y -loglevel quiet -i "${BLA}" ${FFMPARAMS} "${TMPDIR}/$(basename ${BLA%.*}-rescaled.png)"
+	ffmpeg -y -loglevel quiet -hide_banner -i "${BLA}" ${FFMPARAMS} "${TMPDIR}/$(basename "${BLA%.*}")-rescaled.png"
 	rm "${BLA}"
       done
     else
