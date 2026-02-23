@@ -1,3 +1,19 @@
+20260223:
+- New variables UPDATESONSHUTDOWN and UPDATESCLEANUP, used by script CMDSHUTDOWN.sh
+
+20260216:
+- Fixup for _alt fils with space(s) in filename
+- Permission fixup for -Auto-add missing vc4 xorg module for fresh created RPi SD's/images-
+
+20260214:
+- Auto-add missing vc4 xorg module for fresh created RPi SD's/images
+
+20260207:
+- Reformat some paragraphs in 1-Setup-Raspberry_Pi.md, beautify update scripts
+
+20260105:
+- New release - Support for SPI displays removed (deprecated upstream)
+
 20251112:
 - New MiSTer script: stop the update time for this session
 
