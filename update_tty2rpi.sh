@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check which user is running this script
+if [ "${SUDO_USER:-${USER}}" = "root" ]; then
+  echo -e "\e[1;31mDO NOT RUN THIS AS ROOT! Aborting installation/update...\e[0m"
+  exit 255
+fi
+
 REPOSITORY_URL="https://raw.githubusercontent.com/ojaksch/MiSTer_tty2rpi/main"
 REPOSITORY_URL2="https://www.tty2tft.de/MiSTer_tty2rpi"
 NODEBUG="-q -o /dev/null"
