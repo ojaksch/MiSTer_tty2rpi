@@ -10,7 +10,7 @@ MEDIAPIC="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
 MEDIA="$(echo ${COMMANDLINE[@]} | cut -d " " -f 2)"
 if [ "${MEDIA}" != "-" ]; then
   logger "Socket got CORE »${MEDIA}«"
-  GETFNAM "${PATHPIC}" "${MEDIAPIC}"
+  GETFNAM "picture" "${PATHPIC}" "${MEDIAPIC}"
   [ "${SCREENSAVER}" = "yes" ] && cp "${MEDIA}" "${TMPDIR}/CORE.png"
 else
   [ -f "${TMPDIR}/CORE.png" ] && rm "${TMPDIR}/CORE.png"
@@ -30,7 +30,7 @@ if [ "${SCREENSAVER}" = "yes" ] && [ -n "${ALTFILES}" ]; then
 fi
 
 if [ "${VIDEOARCADE}" = "yes" ]; then
-  GETFNAM "${PATHVID}" "${MEDIAVID}"
+  GETFNAM  "video" "${PATHVID}" "${MEDIAVID}"
   if ([ "${MEDIA%.*}" = "MENU" ] || [ "${MEDIA%.*}" = "MAME-MENU" ] || [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDMENU}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
   if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${SOUNDARCADE}" = "no" ]; then AUDIOYESNO="--no-audio"; fi
   if (! [ "${MEDIA%.*}" = "MENU" ] && ! [ "${MEDIA%.*}" = "MAME-MENU" ] && ! [ "${MEDIA%.*}" = "MISTER-MENU" ]) && [ "${VIDEOARCADE}" = "no" ]; then PLAYVIDEO="no"; fi
@@ -50,7 +50,7 @@ if [ -s "${MAMEMARQUEES}" ]; then
   [ -s "${TMPDIR}/pic.png.tmp" ] && logger "Found a picture »${MEDIAPIC}« in MAME Marquees"
 fi
 if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
-  GETFNAM "${PATHPIC}" "${MEDIAPIC}"
+  GETFNAM  "picture" "${PATHPIC}" "${MEDIAPIC}"
   if ([ "${FNAMSEARCH}" = "MENU" ] || [ "${FNAMSEARCH}" = "MAME-MENU" ] || [ "${FNAMSEARCH}" = "MISTER-MENU" ]); then cp "${MEDIA}" "${TMPDIR}/pic.png"; fi
   if [ -f "${MEDIA}" ]; then
     PICSIZE=$(identify -format '%wx%h' "${MEDIA}")

@@ -41,6 +41,7 @@ while true; do
       ~/tty2rpi-scripts/tty2rpi.sh & echo $! > "${PID_TTY2RPI}"
     fi
   else
-    updatedb -l 0 -U "${HOME}" -o "${TMPDIR}/tmp/mediadb" &
+    updatedb -l 0 -U "${PATHPIC}" -o ${TMPDIR}/tmp/mediadbpic
+    updatedb -l 0 -U "${PATHVID}" -o ${TMPDIR}/tmp/mediadbvid
   fi
 done
