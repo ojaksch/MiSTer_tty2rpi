@@ -34,4 +34,5 @@ sleep ${IPTIMEOUT}
 tee ${TMPDIR}/pic.png ${TMPDIR}/tty2rpi.png < "${TTY2RPIPICS}/tty2rpi.png"
 
 # Initial user database for plocate
-updatedb -l 0 -U ${HOME} -o ${TMPDIR}/tmp/mediadb
+updatedb -l 0 -U "${PATHPIC}" -o ${TMPDIR}/tmp/mediadbpic
+updatedb -l 0 -U "${PATHVID}" -o ${TMPDIR}/tmp/mediadbvid
