@@ -1,3 +1,13 @@
+20260315:
+- Optimise mediadb's by splitting them into two and to prevent all other files than media
+
+20260313:
+- VLC parameter file-caching was removed upstream
+
+20260310:
+- Prevent running install/update as root
+- Use apt-get instead of apt when sudo'ing
+
 20260223:
 - New variables UPDATESONSHUTDOWN and UPDATESCLEANUP, used by script CMDSHUTDOWN.sh
 
