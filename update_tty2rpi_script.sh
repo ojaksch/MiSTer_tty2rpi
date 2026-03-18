@@ -44,13 +44,15 @@ if [ "$(ls -A /etc/NetworkManager/system-connections/ )" ]; then
 fi
 sudo ln -sf ~/update_tty2rpi.sh /usr/local/bin/
 sudo chmod 777 /tmp
-if ! [ -s /etc/systemd/system/splashscreen-startup.service ]; then
-  sudo cp /etc/systemd/system/splashscreen-startup.service.template /etc/systemd/system/splashscreen-startup.service
-  sudo systemctl --quiet enable splashscreen-startup.service
+
+# Remove obsolete splash screen
+if [ -s /etc/systemd/system/splashscreen-startup.service ]; then
+  sudo systemctl --quiet disable splashscreen-startup.service
+  sudo rm /etc/systemd/system/splashscreen-startup.service.template /etc/systemd/system/splashscreen-startup.service
 fi
-if ! [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
-  sudo cp /etc/systemd/system/splashscreen-shutdown.service.template /etc/systemd/system/splashscreen-shutdown.service
-  sudo systemctl --quiet enable splashscreen-shutdown.service
+if [ -s /etc/systemd/system/splashscreen-shutdown.service ]; then
+  sudo systemctl --quiet disable splashscreen-shutdown.service
+  sudo rm /etc/systemd/system/splashscreen-shutdown.service.template /etc/systemd/system/splashscreen-shutdown.service
 fi
 
 # Create a needed xorg dependency for VC4 (Raspberry)
