@@ -1,3 +1,7 @@
+20260318:
+- Remove old and not working splash screen
+- Prepare for the new splash screen
+
 20260315:
 - Optimise mediadb's by splitting them into two and to prevent all other files than media
 
