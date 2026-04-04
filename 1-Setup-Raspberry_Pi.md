@@ -175,7 +175,14 @@ Available commands:
 | CMDCOR§PARAM§PARAM              | Shows a video and/or picture named PARAM |
 | CMDSHOWCPU                      | Shows CPU informations                   |
 | CMDSHOWIPS                      | Shows RPi's IP address(es)               |
-| CMDSHUTDOWN                     | Shutdown the RPi                         |
+| CMDSHUTDOWN                     | Shutdown the RPi, optionally with updating OS |
+| CMDBACKUP                       | Creates an archive of useful information for debug purposes in */home/tty2rpi/tmp* |
+| CMDNOUPDATE                     | Stop the *tty2rpi-update* script timer temporary |
+| CMDREBOOT                       | Reboot the tty2rpi device |
+| CMDSLIDESHOW                    | Slideshow of all available pictures      |
+| CMDSNAM                         | Show undertitle of shown picture         |
+
+You create your own command scripts! Just create a bash script in */home/tty2rpi/tty2rpi-scripts* and a corresponding counterpart in MiSTer's */media/fat/Scripts* (or elsewhere you want to control your tty2rpi device). No reboot necessary.
 
 ---
 

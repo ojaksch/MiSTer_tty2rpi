@@ -1,3 +1,6 @@
+20260404:
+- Description for more scripts added
+
 20260318:
 - Remove old and not working splash screen
 - Prepare for the new splash screen
