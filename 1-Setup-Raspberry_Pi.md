@@ -47,6 +47,15 @@ General Settings           |  Services Settings
 Insert the SD into your RPi, connect all needed cables and devices and boot up your RPi.  
 <ins>If not already done with the Raspberry Pi Imager:</ins> Follow the instruction shown on the screen and setup your user and password. For simplicity you can create a user **tty2rpi** (see also at end of this paragraph). Enable and setup WiFi if you want to use it.
 
+Run the *Raspberry Pi Software Configuration Tool (raspi-config)*
+```
+sudo raspi-config
+```
+and enable "passwordless sudo":
+
+![](images/raspi-config-sudo.png)
+
+
 Update your Raspberry Pi OS and install the following packages:
 
 ```
