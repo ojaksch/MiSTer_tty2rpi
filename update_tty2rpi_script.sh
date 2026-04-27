@@ -34,6 +34,7 @@ fi
 ! [ -f ~/.xinitrc-extra ] && touch ~/.xinitrc-extra
 TTY2RPIUSER="$(id -un 1000)"
 TTY2RPIUSERDIR="$(getent passwd "1000" | awk -F ":" '{print $6}')"
+[ "${UPDATEKSMB}" != "yes" ] && mv ${LOCALGITDIR}/files_rpi/etc/ksmbd/ksmbd.conf ${LOCALGITDIR}/files_rpi/etc/ksmbd/ksmbd.conf.example
 sudo rsync -aq --usermap=*:root --groupmap=*:root ${LOCALGITDIR}/files_rpi/ / > /dev/null 2>&1
 sudo rsync -aq --usermap=*:${TTY2RPIUSER} --groupmap=*:${TTY2RPIUSER} /tmp/home/tty2rpi/ ~/
 sudo chown -R "${TTY2RPIUSER}:" "${TTY2RPIUSERDIR}"

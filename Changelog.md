@@ -1,3 +1,6 @@
+20260427:
+- New variable UPDATEKSMB (defaults to "yes") to keep /etc/ksmbd/ksmbd.conf updated or not
+
 20260404:
 - Description for more scripts added
 
