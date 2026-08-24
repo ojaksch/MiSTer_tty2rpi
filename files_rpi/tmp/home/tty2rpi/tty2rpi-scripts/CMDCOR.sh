@@ -80,6 +80,8 @@ if ! [ -s "${TMPDIR}/pic.png.tmp" ]; then
       [ -s "${TMPDIR}/pic.png.tmp" ] && mv "${TMPDIR}/pic.png.tmp" "${TMPDIR}/pic.png"
     fi
   fi
+else
+  mv "${TMPDIR}/pic.png.tmp" "${TMPDIR}/pic.png"
 fi
 
 
