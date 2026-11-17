@@ -62,7 +62,7 @@ Update your Raspberry Pi OS and install the following packages:
 sudo apt update && sudo apt dist-upgrade
 ```
 ```
-sudo apt install mc dos2unix rsync git bc inotify-tools netcat-openbsd flex bison p7zip-full readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc ffmpeg feh fim mplayer mpv plocate ksmbd-tools rpi-splash-screen-support
+sudo apt install mc dos2unix rsync git bc inotify-tools netcat-openbsd flex bison p7zip-full readline-common ncurses-base xorg xserver-xorg-video-fbdev openbox imagemagick vlc ffmpeg feh fim mplayer mpv plocate ksmbd-tools rpi-splash-screen-support labwc wlr-randr xwayland wtype libxml2-utils
 ```
 
 Optional: Disable some services to save some memory and to speed up boot time:

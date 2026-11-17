@@ -1,0 +1,4 @@
+# Example file of .xinitrc-extra
+#
+# Command to rotate a DPI display
+#wlr-randr --output DPI-1 --transform 270

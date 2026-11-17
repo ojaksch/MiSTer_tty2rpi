@@ -1,0 +1,41 @@
+wtype -M alt -M logo -P h
+[ -e ~/.winitrc-extra ] && source ~/.winitrc-extra
+
+dos2unix -k -q ~/tty*.ini
+source ~/tty2rpi.ini
+source ~/tty2rpi-user.ini
+source ~/tty2rpi-screens.ini
+source ~/tty2rpi-functions.ini
+# source <(cat ~/tty2rpi*.ini)
+
+[ -d ${TMPDIR} ] || mkdir -p ${TMPDIR}
+if ! [ -d ${TMPDIR}/tmp ]; then
+  sudo mount -t tmpfs tmpfs ${TMPDIR}
+  mkdir -p -m 777 ${TMPDIR}/tmp
+fi
+
+#xset -b
+
+KILLPID fim
+
+cp ~/tty2rpi-pics/black.png ${TMPDIR}/pic.png
+feh --quiet --fullscreen --auto-zoom ${TMPDIR}/pic.png &
+${IMconvert} -size ${RESOLUTION} xc:black -pointsize $((${WIDTH}/25)) -fill white -gravity center -draw "text 0,0 'Initializing...'" "${TMPDIR}/pictmp.png"
+mv "${TMPDIR}/pictmp.png" "${TMPDIR}/pic.png"
+sleep 0.2
+
+systemctl --user start tty2rpi-socket.service tty2rpi-inotify.service tty2rpi-update.timer
+[ "${SERIALSOCKET}" = "yes" ] && systemctl --user start tty2rpi-serialinput.service
+until [ $(systemctl is-active --user tty2rpi-inotify.service) = "active" ]; do sleep 0.2; done
+sleep 1
+
+# Show IP addresses
+[ "${SHOWIPS}" = "yes" ] && echo "CMDSHOWIPS" > "${SOCKET}"
+sleep ${IPTIMEOUT}
+
+# Show Welcome screen
+tee ${TMPDIR}/pic.png ${TMPDIR}/tty2rpi.png < "${TTY2RPIPICS}/tty2rpi.png"
+
+# Initial user database for plocate
+updatedb -l 0 -U "${PATHPIC}" -o ${TMPDIR}/tmp/mediadbpic
+updatedb -l 0 -U "${PATHVID}" -o ${TMPDIR}/tmp/mediadbvid

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<labwc_config>
+<keyboard>
+<keybind key ="A-W-h">
+  <action name="HideCursor"/>
+</keybind>
+</keyboard>
+</labwc_config>
